@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import Main from './layout/Main';
+import Home from './components/MainSection/Home/Home'
+import UpComingTours from './components/MainSection/UpComingTours/UpComingTours'
+import TourAgencies from './components/MainSection/TourAgencies/TourAgencies'
+import RecentEvent from './components/MainSection/RecentEvent/RecentEvent'
+import Profile from './components/MainSection/Profile/Profile'
+import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
+import MyAgency from './components/MainSection/MyAgency/MyAgency'
+import Settings from './components/MainSection/Settings/Settings'
+import LogOut from './components/MainSection/LogOut/LogOut'
 
 function App() {
+
+  const tripRouter = createBrowserRouter([
+    {
+      path: '/',
+      element: <Main></Main>,
+      children: [
+        { path: '/', element: <Home></Home>},
+        { path: '/home', element: <Home></Home> },
+        { path: '/upcoming-tours', element: <UpComingTours></UpComingTours> },
+        { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
+        { path: '/recent-event', element: <RecentEvent></RecentEvent> },
+        { path: '/profile', element: <Profile></Profile> },
+        { path: '/create-agency', element: <CreateAgency></CreateAgency> },
+        { path: '/my-agency', element: <MyAgency></MyAgency> },
+        { path: '/settings', element: <Settings></Settings> },
+        { path: '/logout', element: <LogOut></LogOut> }
+      ]
+    },
+    {
+      path: '*', element: <h1>404 not found</h1>
+    }
+  ])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <Test></Test> */}
+      <RouterProvider router={tripRouter}></RouterProvider>
     </div>
   );
 }
