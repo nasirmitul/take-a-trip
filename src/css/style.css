@@ -216,12 +216,23 @@ body {
     border-radius: 10px;
 }
 
+.react-pointer{
+    cursor: pointer;
+}
+
 /* react and comment section  */
 #post-part .react-comment {
     font-size: 15px;
     font-weight: 400;
     color: var(--text-col);
     margin: 15px 0;
+}
+
+#post-part .react{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
 }
 
 #post-part .react-comment .react p span {
