@@ -10,14 +10,31 @@ import comment from '../../../icons/comment.png'
 
 
 const SingleUserPost = () => {
-    let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy";
 
+
+    /* Check Caption length and work on see more */
+    let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. ";
+    // Let’s join in the journey and enjoy. 
+
+
+
+    let captionLengthCheck = true;
+    if(p.length>200)
+    {
+        captionLengthCheck = false;
+    }
+    else{
+        captionLengthCheck = true;
+    }
+    
+    const [captionLength, setCaptionLength] = useState(captionLengthCheck);
+
+
+    /* Change React Icon and Increase/Decrease Value */
     const [reactActive, setReactActive] = useState(false);
-
-
     let reactCountValue = 13;
     const [reactCount, setReactCount] = useState(reactCountValue)
-    
+
 
 
     return (
@@ -38,11 +55,11 @@ const SingleUserPost = () => {
                     </div>
                 </div>
 
-                <div className="caption-text">
+                <div className="caption-text" onClick={() => { setCaptionLength(!captionLength) }}>
+                    
                     {
-                        (p.length < 200) ? p : `${p.slice(0, 200)} ${<p> ... See more </p>}`
+                        captionLength ? p : `${p.slice(0, 200)} ...see more`
                     }
-                    {/* <p>We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy</p> */}
                 </div>
 
                 <div className="upload-img">
@@ -66,8 +83,8 @@ const SingleUserPost = () => {
                         <div className="react-icon" onClick={() => setReactActive(!reactActive)}>
                             {
                                 reactActive ?
-                                    <img onClick={() => setReactCount(reactCount-1)} className='react-pointer' src={react} /> :
-                                    <img onClick={() => setReactCount(reactCount+1)} className='react-pointer' src={reactStroke} />
+                                    <img onClick={() => setReactCount(reactCount - 1)} className='react-pointer' src={react} /> :
+                                    <img onClick={() => setReactCount(reactCount + 1)} className='react-pointer' src={reactStroke} />
                             }
                         </div>
 

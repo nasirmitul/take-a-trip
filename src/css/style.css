@@ -60,9 +60,18 @@ body {
     top: 25px;
 }
 
-#left-part .link{
-    display: block;
-    width: fit-content;
+#left-part ul .link{
+    padding: 12px 0;
+}
+
+#left-part .link.active{
+    width: 100%;
+    height: min-content;
+    background: rgba(64, 199, 125, 0.1);
+    border-right:10px solid #40C77C ;
+    border-radius: 0 5px 5px 0;
+    padding-left: 10px;
+    transition: .4s;
 }
 
 #left-part .menu-part ul{
@@ -70,12 +79,16 @@ body {
     flex-direction: column;
 }
 
+#left-part .menu-part li{
+    display: flex;
+    align-items: center;
+}
+
 #left-part .menu-part li a {
     font-size: 15px;
     font-weight: 400;
     color: var(--text-col);
     padding-left: 24px;
-    padding-bottom: 20px;
 }
 
 #left-part .menu-part .menu-heading {
