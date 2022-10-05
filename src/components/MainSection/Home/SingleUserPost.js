@@ -9,32 +9,27 @@ import comment from '../../../icons/comment.png'
 
 
 
-const SingleUserPost = () => {
+const SingleUserPost = ({ post }) => {
+    /* destructuring data from api */
+    const { id, name, picture, caption, profile, time, reacts, comments } = post;
 
 
     /* Check Caption length and work on see more */
-    let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. ";
-    // Let’s join in the journey and enjoy. 
-
-
+    let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy. ";
 
     let captionLengthCheck = true;
-    if(p.length>200)
-    {
+    if (caption.length > 200) {
         captionLengthCheck = false;
     }
-    else{
+    else {
         captionLengthCheck = true;
     }
-    
     const [captionLength, setCaptionLength] = useState(captionLengthCheck);
 
 
     /* Change React Icon and Increase/Decrease Value */
     const [reactActive, setReactActive] = useState(false);
-    let reactCountValue = 13;
-    const [reactCount, setReactCount] = useState(reactCountValue)
-
+    const [reactCount, setReactCount] = useState(reacts)
 
 
     return (
@@ -43,11 +38,11 @@ const SingleUserPost = () => {
                 <div className="id d-flex post-top-part">
                     <div className="id-name d-flex align-items-center">
                         <div className="id-img">
-                            <img className="post-user-img" src={man} alt="men" />
+                            <img className="post-user-img" src={profile} alt="men" />
                         </div>
                         <div className="id-text ms-4">
-                            <h6>Sharif</h6>
-                            <p>12:03pm, june 17,20</p>
+                            <h6>{name}</h6>
+                            <p>{time}</p>
                         </div>
                     </div>
                     <div className="post-menu">
@@ -56,9 +51,9 @@ const SingleUserPost = () => {
                 </div>
 
                 <div className="caption-text" onClick={() => { setCaptionLength(!captionLength) }}>
-                    
+
                     {
-                        captionLength ? p : `${p.slice(0, 200)} ...see more`
+                        captionLength ? caption : `${caption.slice(0, 200)} ...see more`
                     }
                 </div>
 
@@ -66,13 +61,13 @@ const SingleUserPost = () => {
                     <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
                         <div className="carousel-inner">
                             <div className="carousel-item active">
-                                <img className="d-block w-100" src={globe} alt="First slide" />
+                                <img className="d-block w-100" src={picture} alt="First slide" />
                             </div>
                             <div className="carousel-item">
-                                <img className="d-block w-100" src={globe} alt="Second slide" />
+                                <img className="d-block w-100" src={picture} alt="Second slide" />
                             </div>
                             <div className="carousel-item">
-                                <img className="d-block w-100" src={globe} alt="Third slide" />
+                                <img className="d-block w-100" src={picture} alt="Third slide" />
                             </div>
                         </div>
                     </div>
@@ -91,7 +86,7 @@ const SingleUserPost = () => {
                         <span>{reactCount}</span>
                     </div>
                     <div className="comment">
-                        <p>27 <span>comment</span><img src={comment} alt="" /></p>
+                        <p>{comments}<span>comment</span><img src={comment} alt="" /></p>
                     </div>
                 </div>
 

@@ -18,8 +18,17 @@ function App() {
       path: '/',
       element: <Main></Main>,
       children: [
-        { path: '/', element: <Home></Home>},
-        { path: '/home', element: <Home></Home> },
+        {
+          path: '/',
+          loader : async() => {
+            return fetch('fakePosts.json');
+          },
+          element: <Home></Home>
+        },
+        { 
+          path: '/home', 
+          element: <Home></Home> 
+        },
         { path: '/upcoming-tours', element: <UpComingTours></UpComingTours> },
         { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
         { path: '/recent-event', element: <RecentEvent></RecentEvent> },

@@ -54,32 +54,78 @@ body {
 
 
 /* =================== Navigation Section =================== */
-#left-part, .left-part {
+#left-part,
+.left-part {
     margin-top: 25px;
     position: sticky;
     top: 25px;
 }
 
-#left-part ul .link{
+#left-part .logo img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+#left-part .search-bar{
+    display: flex;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+#left-part .search-bar .search{
+    padding: 8px 45px 8px 15px;
+    width: 100%;
+    position: relative;
+    border-radius: 25px;
+    outline: none;
+    border: 1px solid rgba(56, 56, 56, 0.363);
+    background: transparent;
+    transition: .4s;
+}
+
+#left-part .search-bar .search:focus{
+    border: 1px solid #40C77C;
+}
+
+#left-part .search-bar i{
+    position:absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #40C77C;
+    border-radius: 50%;
+    color: var(--body-bg);
+}
+
+#left-part ul .link {
     padding: 12px 0;
 }
 
-#left-part .link.active{
+#left-part .link.active {
     width: 100%;
     height: min-content;
     background: rgba(64, 199, 125, 0.1);
-    border-right:10px solid #40C77C ;
+    border-right: 10px solid #40C77C;
     border-radius: 0 5px 5px 0;
     padding-left: 10px;
     transition: .4s;
 }
 
-#left-part .menu-part ul{
+#left-part .menu-part ul {
     display: flex;
     flex-direction: column;
 }
 
-#left-part .menu-part li{
+#left-part .menu-part li {
     display: flex;
     align-items: center;
 }
@@ -127,10 +173,13 @@ body {
     color: var(--text-col);
 }
 
+#left-part .other{
+    margin-top: 48px !important;
+}
 
 
 /* =================== News Feed Section =================== */
-#middle-section{
+#middle-section {
     padding-top: 25px;
 }
 
@@ -138,14 +187,141 @@ body {
     padding: 0 20px;
 }
 
-.post-button {
+.update-post {
     height: 60px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     background: transparent;
     border-radius: 30px;
     color: rgba(0, 0, 0, 0.6);
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 8px;
+    cursor: pointer;
 }
+
+.update-post img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.modal-background {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(3px);
+}
+
+.modal-body{
+    position: relative;
+    width: 500px;
+    height:fit-content;
+    /* padding: 30px; */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid rgba(64, 199, 125, 0.7);
+}
+
+.modal-title{
+    display: flex;
+    align-items: center;
+}
+
+.modal-title .title{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #40C77C;
+    padding: 30px !important;
+}
+
+.modal-title .title::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(44, 44, 44, 0.4);
+}
+
+.modal-title .close-icon{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(44, 44, 44, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-input{
+    padding: 30px 0px 10px 0px;
+}
+
+.user-input .tour-caption{
+    padding: 0 30px;
+}
+
+
+.user-input textarea{
+    width: 100%;
+    height: 200px;
+    resize: none;
+    border: none;
+    outline: none;
+    padding-bottom: 50px;
+}
+
+.user-input .upload-image{
+    border-top: 1px solid rgba(44, 44, 44, 0.15);
+    border-bottom: 1px solid rgba(44, 44, 44, 0.15);
+    padding: 10px 30px;
+}
+
+.user-input .upload-image #tour-image{
+    display: none;
+}
+
+.user-input .upload-image .tour-image-upload{
+    border: 1px solid #40C77C;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.modal-body .upload-button{
+    padding: 0 30px 10px 30px;
+    width: 100%;
+}
+
+.modal-body .upload-button button{
+    padding: 8px;
+    width: 100%;
+    background: var(--btn-col);
+    color: var(--body-bg);
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 
 #post-part {
     margin: 0 25px;
@@ -171,7 +347,6 @@ body {
 
 #post-part .make_post {
     margin-bottom: 30px;
-    position: relative;
 }
 
 #post-part .make_post .post-id-img img {
@@ -184,7 +359,7 @@ body {
     top: 7px;
 }
 
-#post-part .make_post input {
+/* #post-part .make_post input {
     padding: 22px;
     border-radius: 50px;
     border: 1px solid rgba(0, 0, 0, 0.13);
@@ -194,7 +369,7 @@ body {
     color: var(--placeholder);
     font-size: 14px;
     padding-left: 60px;
-}
+} */
 
 /* id name and post time css */
 #post-part .id .id-text h6 {
@@ -229,7 +404,7 @@ body {
     border-radius: 10px;
 }
 
-.react-pointer{
+.react-pointer {
     cursor: pointer;
 }
 
@@ -241,7 +416,7 @@ body {
     margin: 15px 0;
 }
 
-#post-part .react{
+#post-part .react {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -328,15 +503,26 @@ body {
 
 #notification-part .notifications h3 {
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 00;
     color: var(--text-col);
 }
+
+
 
 #notification-part .notification {
     margin: 20px 0;
     display: flex;
     align-items: center;
 }
+
+#notification-part .user-profile-img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
 
 #notification-part .notification .text h5 {
     font-size: 14px;
@@ -353,12 +539,4 @@ body {
 
 #notification-part .notification .text {
     position: relative;
-}
-
-#notification-part .user-profile-img {
-    height: 50px;
-    width: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 15px;
 }

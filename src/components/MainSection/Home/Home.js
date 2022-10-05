@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../../css/style.css'
 
 import man from '../../../images/man.jpg'
@@ -12,19 +12,33 @@ import going from '../../../icons/going.png'
 import moreInfo from '../../../icons/more info.png' */
 import SingleUserPost from './SingleUserPost';
 import SingleAgencyPost from './SingleAgencyPost';
+import Modal from '../../Modal/Modal';
+import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
+
+    const [openModal, setOpenModal] = useState(false);
+
+    const posts = useLoaderData();
+
     return (
+        
         <div>
             <section id="post-part" className="">
                 <div className="make_post d-flex">
+                    <div className='w-100 update-post' onClick={() => setOpenModal(true)}>
+                        <img className="img-fluid user-profile-img" src={man} alt="" />
+                        <p>How was your recent tour?</p>
+                    </div>
 
-                    <button type="button" className="w-100 post-button" data-bs-toggle="modal" data-bs-target="#exampleModal">How
-                        was your recent tour?
-                        <div className="post-id-img">
-                            <img className="img-fluid user-profile-img" src={man} alt="" />
-                        </div>
-                    </button>
+                    <div className='post-modal'>
+                        {openModal && <Modal closeModal={setOpenModal}/>}
+                    </div>
+
+                    {/* <div className='w-100 update-post' data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img className="img-fluid user-profile-img" src={man} alt="" />
+                        <p>How was your recent tour?</p>
+                    </div>
 
                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -43,15 +57,20 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+
                 </div>
-            <SingleUserPost></SingleUserPost>
-            <SingleAgencyPost></SingleAgencyPost>
-            <SingleUserPost></SingleUserPost>
-            <SingleAgencyPost></SingleAgencyPost>
-            <SingleUserPost></SingleUserPost>
-            <SingleAgencyPost></SingleAgencyPost>
-        
+
+                {
+                    posts.map(post => <SingleUserPost
+                    key={posts.id}
+                    post={post}
+                    ></SingleUserPost>)
+                }
+                {/* <SingleUserPost posts={posts}></SingleUserPost> */}
+                <SingleAgencyPost></SingleAgencyPost>
+
+
             </section>
         </div>
     );

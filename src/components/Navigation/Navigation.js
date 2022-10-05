@@ -2,6 +2,8 @@ import React from 'react';
 import '../../css/style.css'
 import { Link, NavLink } from 'react-router-dom';
 
+import logo from '../../images/logo.png';
+
 import home from '../../icons/home.png'
 import upcomingTours from '../../icons/upcoming tours.png'
 import tourAgencies from '../../icons/tour agencies.png'
@@ -14,13 +16,23 @@ import logout from '../../icons/logout.png'
 
 import man from '../../images/man.jpg'
 
+
 const Navigation = () => {
     return (
         <div>
             <section id="left-part">
                 <div className="menu-part">
-                    <h5 className="menu-heading">Menu</h5>
-                    
+
+                    <div className="logo">
+                        <img src={logo} alt="" />
+                    </div>
+
+                    <div className="search-bar">
+                        <input className='search' type="text" name="" id="" placeholder='search' />
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <h5 className="menu-heading menu">Menu</h5>    
                     <ul>
                         <NavLink className='link' to='/home'><li><img src={home} alt="" /><a href="/">Home</a></li></NavLink>
                         <NavLink className='link' to='/upcoming-tours'><li><img src={upcomingTours} alt="" /><a href="/">Upcoming Tours</a></li></NavLink>
@@ -31,7 +43,7 @@ const Navigation = () => {
                         <NavLink className='link' to='/my-agency'><li><img src={myAgency} alt="" /><a href="/">My Agency</a></li></NavLink>
                     </ul>
 
-                    <h5 className="menu-heading">Other</h5>
+                    <h5 className="menu-heading other">Other</h5>
                     <ul>
                         <NavLink className='link' to='/settings'><li><img src={settings} alt="" /><a href="/" >Settings</a></li></NavLink>
                         <NavLink className='link' to='/logout'><li id="logout"><img src={logout} alt="" /><a href="/">Log Out</a></li></NavLink>
