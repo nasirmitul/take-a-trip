@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../../../css/style.css'
 
 import man from '../../../images/man.jpg'
+
+import notification from '../../../icons/notification.png'
 /* import globe from '../../../images/t.png'
 import travel from '../../../images/space-travel.jpg'
 import menu from '../../../icons/menu.png'
@@ -22,18 +24,34 @@ const Home = () => {
     const posts = useLoaderData();
 
     return (
-        
+
         <div>
-            <section id="post-part" className="">
+            <section id="middle-section" className="middle-section">
+                <div className="search-notification">
+                    <div className="search-bar">
+                        <input className='search' type="text" name="" id="" placeholder='search' />
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div className="notification-icon">
+                        <img src={notification} alt="" />
+                    </div>
+                </div>
+
+
+
                 <div className="make_post d-flex">
                     <div className='w-100 update-post' onClick={() => setOpenModal(true)}>
                         <img className="img-fluid user-profile-img" src={man} alt="" />
                         <p>How was your recent tour?</p>
                     </div>
 
+
+
                     <div className='post-modal'>
-                        {openModal && <Modal closeModal={setOpenModal}/>}
+                        {openModal && <Modal closeModal={setOpenModal} />}
                     </div>
+
+
 
                     {/* <div className='w-100 update-post' data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <img className="img-fluid user-profile-img" src={man} alt="" />
@@ -61,15 +79,15 @@ const Home = () => {
 
                 </div>
 
+
                 {
                     posts.map(post => <SingleUserPost
-                    key={posts.id}
-                    post={post}
+                        key={posts.id}
+                        post={post}
                     ></SingleUserPost>)
                 }
                 {/* <SingleUserPost posts={posts}></SingleUserPost> */}
                 <SingleAgencyPost></SingleAgencyPost>
-
 
             </section>
         </div>

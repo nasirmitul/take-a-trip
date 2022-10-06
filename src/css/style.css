@@ -43,17 +43,26 @@ body {
     background: var(--body-bg) !important;
 }
 
+.my-container {
+    width: min(1320px, 95%);
+    margin: auto;
+}
+navigation
 .custom-btn {
     font-size: 13px;
     font-weight: 400;
     color: var(--text-col);
     padding: 10px 23px;
-    border-radius: 50px;
+    border-radius: 5px;
     border: none;
 }
 
-
 /* =================== Navigation Section =================== */
+.main-menu {
+    padding: 25px;
+    background: #fff;
+}
+
 #left-part,
 .left-part {
     margin-top: 25px;
@@ -61,50 +70,20 @@ body {
     top: 25px;
 }
 
-#left-part .logo img{
+#left-part .logo {
+    background: #fff;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+}
+
+#left-part .logo img {
     width: 40px;
     height: 40px;
     object-fit: cover;
-    margin-bottom: 25px;
     cursor: pointer;
 }
 
-#left-part .search-bar{
-    display: flex;
-    position: relative;
-    margin-bottom: 60px;
-}
 
-#left-part .search-bar .search{
-    padding: 8px 45px 8px 15px;
-    width: 100%;
-    position: relative;
-    border-radius: 25px;
-    outline: none;
-    border: 1px solid rgba(56, 56, 56, 0.363);
-    background: transparent;
-    transition: .4s;
-}
-
-#left-part .search-bar .search:focus{
-    border: 1px solid #40C77C;
-}
-
-#left-part .search-bar i{
-    position:absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #40C77C;
-    border-radius: 50%;
-    color: var(--body-bg);
-}
 
 #left-part ul .link {
     padding: 12px 0;
@@ -141,6 +120,7 @@ body {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 20px !important;
+    color: var(--text-col);
 }
 
 #left-part .menu-part #logout a {
@@ -173,15 +153,76 @@ body {
     color: var(--text-col);
 }
 
-#left-part .other{
+#left-part .other {
     margin-top: 48px !important;
 }
 
 
 /* =================== News Feed Section =================== */
+
 #middle-section {
-    padding-top: 25px;
+    padding-top: 15px;
 }
+
+.middle-section {
+    margin: 0 25px;
+}
+
+.search-notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 25px !important;
+}
+
+.search-bar {
+    width: calc(100% - 80px);
+    display: flex;
+    position: relative;
+}
+
+.search-bar .search {
+    padding: 12px 60px 12px 15px;
+    width: 100% !important;
+    position: relative;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgba(56, 56, 56, 0.35);
+    background: transparent;
+    transition: .4s;
+}
+
+.search-bar .search:focus {
+    border: 1px solid #40C77C;
+}
+
+.search-bar i {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #40C77C;
+    border-radius: 3px;
+    color: var(--body-bg);
+}
+
+.notification-icon {
+    border: 1px solid rgba(56, 56, 56, 0.35);
+    height: 50px !important;
+    width: 50px !important;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 #post {
     padding: 0 20px;
@@ -191,7 +232,7 @@ body {
     height: 60px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     background: transparent;
-    border-radius: 30px;
+    border-radius: 5px;
     color: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
@@ -204,7 +245,7 @@ body {
     width: 45px;
     height: 45px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 5px;
 }
 
 .modal-background {
@@ -218,10 +259,10 @@ body {
     backdrop-filter: blur(3px);
 }
 
-.modal-body{
+.modal-body {
     position: relative;
     width: 500px;
-    height:fit-content;
+    height: fit-content;
     /* padding: 30px; */
     left: 50%;
     top: 50%;
@@ -232,12 +273,12 @@ body {
     border: 2px solid rgba(64, 199, 125, 0.7);
 }
 
-.modal-title{
+.modal-title {
     display: flex;
     align-items: center;
 }
 
-.modal-title .title{
+.modal-title .title {
     position: relative;
     width: 100%;
     text-align: center;
@@ -247,7 +288,7 @@ body {
     padding: 30px !important;
 }
 
-.modal-title .title::after{
+.modal-title .title::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -257,7 +298,7 @@ body {
     background: rgba(44, 44, 44, 0.4);
 }
 
-.modal-title .close-icon{
+.modal-title .close-icon {
     position: absolute;
     top: 24px;
     right: 24px;
@@ -271,16 +312,16 @@ body {
     cursor: pointer;
 }
 
-.user-input{
+.user-input {
     padding: 30px 0px 10px 0px;
 }
 
-.user-input .tour-caption{
+.user-input .tour-caption {
     padding: 0 30px;
 }
 
 
-.user-input textarea{
+.user-input textarea {
     width: 100%;
     height: 200px;
     resize: none;
@@ -289,28 +330,28 @@ body {
     padding-bottom: 50px;
 }
 
-.user-input .upload-image{
+.user-input .upload-image {
     border-top: 1px solid rgba(44, 44, 44, 0.15);
     border-bottom: 1px solid rgba(44, 44, 44, 0.15);
     padding: 10px 30px;
 }
 
-.user-input .upload-image #tour-image{
+.user-input .upload-image #tour-image {
     display: none;
 }
 
-.user-input .upload-image .tour-image-upload{
+.user-input .upload-image .tour-image-upload {
     border: 1px solid #40C77C;
     border-radius: 3px;
     padding: 5px 10px;
 }
 
-.modal-body .upload-button{
+.modal-body .upload-button {
     padding: 0 30px 10px 30px;
     width: 100%;
 }
 
-.modal-body .upload-button button{
+.modal-body .upload-button button {
     padding: 8px;
     width: 100%;
     background: var(--btn-col);
@@ -323,10 +364,6 @@ body {
 }
 
 
-#post-part {
-    margin: 0 25px;
-}
-
 .post-top-part {
     display: flex;
     align-items: center;
@@ -338,18 +375,18 @@ body {
     cursor: pointer;
 }
 
-#post-part .post {
+#middle-section .post {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #FFFFFF;
     border-radius: 10px;
 }
 
-#post-part .make_post {
+#middle-section .make_post {
     margin-bottom: 30px;
 }
 
-#post-part .make_post .post-id-img img {
+#middle-section .make_post .post-id-img img {
     position: absolute;
     border-radius: 50%;
     width: 45px;
@@ -359,26 +396,26 @@ body {
     top: 7px;
 }
 
-/* #post-part .make_post input {
+/* #middle-section .make_post input {
     padding: 22px;
     border-radius: 50px;
     border: 1px solid rgba(0, 0, 0, 0.13);
 }
 
-#post-part .make_post input::placeholder {
+#middle-section .make_post input::placeholder {
     color: var(--placeholder);
     font-size: 14px;
     padding-left: 60px;
 } */
 
 /* id name and post time css */
-#post-part .id .id-text h6 {
+#middle-section .id .id-text h6 {
     color: var(--id-name-col);
     font-size: 16px;
     font-weight: 600;
 }
 
-#post-part .id .id-text p {
+#middle-section .id .id-text p {
     color: var(--text-col);
     margin-top: -5px;
     font-size: 10px;
@@ -386,14 +423,15 @@ body {
 }
 
 /* post caption css */
-#post-part .caption-text {
+#middle-section .caption-text {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-col);
     padding-bottom: 5px;
+    cursor: pointer;
 }
 
-#post-part .id-img {
+#middle-section .id-img {
     width: 7%;
     margin-right: 10px;
 }
@@ -409,45 +447,50 @@ body {
 }
 
 /* react and comment section  */
-#post-part .react-comment {
+#middle-section .react-comment {
     font-size: 15px;
     font-weight: 400;
     color: var(--text-col);
     margin: 15px 0;
 }
 
-#post-part .react {
+#middle-section .react {
     display: flex;
     align-items: center;
     gap: 10px;
 
 }
 
-#post-part .react-comment .react p span {
+#middle-section .react-comment .react p span {
     padding-left: 7px;
 }
 
-#post-part .react-comment .comment span {
+#middle-section .react-comment .comment span {
     color: #4e4f4f9c;
     padding: 5px;
 }
 
 /* comment section  */
-#post-part .comment {
+#middle-section .comment {
     position: relative;
 }
 
-#post-part .comment input {
+#middle-section .comment input {
     padding: 16px;
-    border-radius: 50px;
+    border-radius: 5px;
+    outline: none;
 }
 
-#post-part .comment input::placeholder {
+input:focus {
+    outline: none;
+}
+
+#middle-section .comment input::placeholder {
     color: var(--placeholder);
     font-size: 14px;
 }
 
-#post-part .comment button {
+#middle-section .comment button {
     position: absolute;
     content: '';
     top: 8px;
@@ -456,30 +499,30 @@ body {
     color: var(--post);
 }
 
-#post-part .post .agency-text {
+#middle-section .post .agency-text {
     margin-top: 20px;
 }
 
-#post-part .post .agency-text #time {
+#middle-section .post .agency-text #time {
     font-size: 14px;
     font-weight: 500;
     color: #FF0000;
 }
 
-#post-part .post .agency-text h4 {
+#middle-section .post .agency-text h4 {
     font-weight: 600;
     font-size: 20px;
     color: var(--text-col);
     letter-spacing: 2px;
 }
 
-#post-part .post .agency-text p {
+#middle-section .post .agency-text p {
     font-weight: 400;
     font-size: 15px;
     color: var(--text-col);
 }
 
-#post-part .post .agency-icons p span {
+#middle-section .post .agency-icons p span {
     font-size: 15px;
     font-weight: 400;
     color: var(--text-col);
@@ -494,7 +537,29 @@ body {
 }
 
 
-/* =================== notification section  =================== */
+
+/* =================== Right Panel  =================== */
+
+.right-panel {
+    margin: 25px 0;
+}
+
+.right-panel .section-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px !important;
+    color: var(--text-col);
+}
+
+.content {
+    background: #fff;
+    height: 100vh;
+    padding: 25px;
+    width: 100%;
+}
+
+/* =================== Notification Part  =================== */
+
 #notification-part {
     margin-top: 25px;
     position: sticky;
@@ -539,4 +604,12 @@ body {
 
 #notification-part .notification .text {
     position: relative;
+}
+
+
+/* ================= Responsive Design ================= */
+@media only screen and (max-width: 1150px) {
+    body {
+        display: none;
+    }
 }

@@ -2,17 +2,28 @@ import React from 'react';
 import './Main.css';
 import { Outlet } from 'react-router-dom';
 import Navigation from '../components/Navigation/Navigation';
-import Notifications from '../components/Notifications/Notifications';
+
+import RightPanel from '../components/RightPanel/RightPanel';
 
 const Main = () => {
     return (
         <div>
             <main>
-                <div className="container">
+                <div className="my-container">
                     <div className="row">
-                        <div className='col-lg-3'><Navigation></Navigation></div>
-                        <div id='middle-section' className='col-lg-6 border-end border-start'><Outlet></Outlet></div>
-                        <div className='col-lg-3 notification-Part'><Notifications></Notifications></div>
+
+                        <div className='col-lg-3 navigation'>
+                            <Navigation></Navigation>
+                        </div>
+
+                        <div id='middle-section' className='col-lg-6'>
+                            <Outlet></Outlet>
+                        </div>
+
+                        <div className='col-lg-3 right-panel-main'>
+                            <RightPanel></RightPanel>
+                        </div>
+
                     </div>
                 </div>
             </main>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import man from '../../../images/man.jpg'
 import globe from '../../../images/t.png'
@@ -15,16 +15,25 @@ const SingleUserPost = ({ post }) => {
 
 
     /* Check Caption length and work on see more */
-    let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy. ";
+    /* let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy. "; */
+    const [captionLength, setCaptionLength] = useState(true);
 
-    let captionLengthCheck = true;
-    if (caption.length > 200) {
-        captionLengthCheck = false;
+    useEffect(() => {
+        /* let captionLengthCheck = true; */
+        if (caption.length > 200) {
+            setCaptionLength(false);
+        }
+        else {
+            setCaptionLength(true);
+        }
+    }, [caption])
+
+    const captionCharCount = () => {
+        if (caption.length > 200) {
+            setCaptionLength(!captionLength)
+        }
     }
-    else {
-        captionLengthCheck = true;
-    }
-    const [captionLength, setCaptionLength] = useState(captionLengthCheck);
+
 
 
     /* Change React Icon and Increase/Decrease Value */
@@ -50,7 +59,7 @@ const SingleUserPost = ({ post }) => {
                     </div>
                 </div>
 
-                <div className="caption-text" onClick={() => { setCaptionLength(!captionLength) }}>
+                <div className="caption-text" onClick={captionCharCount}>
 
                     {
                         captionLength ? caption : `${caption.slice(0, 200)} ...see more`

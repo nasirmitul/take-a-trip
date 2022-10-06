@@ -27,6 +27,9 @@ function App() {
         },
         { 
           path: '/home', 
+          loader : async() => {
+            return fetch('fakePosts.json');
+          },
           element: <Home></Home> 
         },
         { path: '/upcoming-tours', element: <UpComingTours></UpComingTours> },
