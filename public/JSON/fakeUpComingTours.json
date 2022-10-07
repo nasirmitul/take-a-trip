@@ -1,0 +1,86 @@
+[
+    {
+        "id": "633c7c29c1aa4c9bd301",
+        "image": "https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/blogxwRO3V6jNF2AnBmAHG77dl-PuQn16ETd.jpg",
+        "locationName": "Rangamati",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Sunshine Travels",
+        "totalRating": 1733,
+        "ratings": 4.3,
+        "totalCost": 5000,
+        "time": "13 sep, 2022 at 5:00pm",
+        "totalTravelers": 25
+    },
+    {
+        "id": "633c7c29c1aa4c9bd302",
+        "image": "https://www.amazingtoursbd.com/tour_image/16071485353b.jpg",
+        "locationName": "Sajek Valley",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "The Royal Seat.",
+        "totalRating": 1033,
+        "ratings": 3.9,
+        "totalCost": 3030,
+        "time": "09 sep, 2021 at 9:00am",
+        "totalTravelers": 40
+    },
+    {
+        "id": "633c7c29c1aa4c9bd303",
+        "image": "https://sgp1.digitaloceanspaces.com/cosmosgroup/news/y8eC0WBzPEEVyKIGGjcM3zKIgirEYLTLvioF3GaP.jpeg",
+        "locationName": "Bandarban",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Travel Sense",
+        "totalRating": 9090,
+        "ratings": 4.4,
+        "totalCost": 2999,
+        "time": "09 Dec, 2022 at 5:00pm",
+        "totalTravelers": 19
+    },
+    {
+        "id": "633c7c29c1aa4c9bd304",
+        "image": "https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357__480.jpg",
+        "locationName": "Cox's Bazar",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Liberty Tours",
+        "totalRating": 1000,
+        "ratings": 4.0,
+        "totalCost": 2000,
+        "time": "13 june, 2022 at 6:00pm",
+        "totalTravelers": 20
+    },
+    {
+        "id": "633c7c29c1aa4c9bd305",
+        "image": "https://images.unsplash.com/photo-1599137248983-e6061c27ec80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3lsaGV0JTJDJTIwYmFuZ2xhZGVzaHxlbnwwfHwwfHw%3D&w=1000&q=80",
+        "locationName": "Sylhet",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Terrific Travels",
+        "totalRating": 1033,
+        "ratings": 4.1,
+        "totalCost": 1000,
+        "time": "13 Feb, 2022 at 11:00pm",
+        "totalTravelers": 30
+    },
+    {
+        "id": "633c7c29c1aa4c9bd306",
+        "image": "https://www.sunderbannationalpark.in/wp-content/uploads/2020/02/banner7.jpg",
+        "locationName": "Sundarbans",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Adventure Travels",
+        "totalRating": 933,
+        "ratings": 3.3,
+        "totalCost": 1000,
+        "time": "13 sep, 2022 at 5:00pm",
+        "totalTravelers": 14
+    },
+    {
+        "id": "633c7c29c1aa4c9bd307",
+        "image": "https://live.staticflickr.com/5013/5570832698_d4179d850b_b.jpg",
+        "locationName": "Jaflong",
+        "details": "Travel isn’t always pretty. It isn’t always comfortable. Sometimes it hurts, it even breaks your heart. But that’s okay. The journey changes you;",
+        "agencyName": "Sky's the Limit",
+        "totalRating": 693,
+        "ratings": 4.0,
+        "totalCost": 2069,
+        "time": "10 Aug, 2022 at 7:00pm",
+        "totalTravelers": 5
+    }
+]

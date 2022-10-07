@@ -78,8 +78,6 @@ const Home = () => {
                     </div> */}
 
                 </div>
-
-
                 {
                     posts.map(post => <SingleUserPost
                         key={posts.id}

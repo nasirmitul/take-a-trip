@@ -10,6 +10,7 @@ import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
 import MyAgency from './components/MainSection/MyAgency/MyAgency'
 import Settings from './components/MainSection/Settings/Settings'
 import LogOut from './components/MainSection/LogOut/LogOut'
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
 
@@ -20,26 +21,33 @@ function App() {
       children: [
         {
           path: '/',
-          loader : async() => {
-            return fetch('fakePosts.json');
+          loader: async () => {
+            return fetch('JSON/fakePosts.json');
           },
           element: <Home></Home>
         },
-        { 
-          path: '/home', 
-          loader : async() => {
-            return fetch('fakePosts.json');
+        {
+          path: '/home',
+          loader: async () => {
+            return fetch('JSON/fakePosts.json');
           },
-          element: <Home></Home> 
+          element: <Home></Home>
         },
-        { path: '/upcoming-tours', element: <UpComingTours></UpComingTours> },
+        {
+          path: '/upcoming-tours',
+          loader: async () => {
+            return fetch('JSON/fakeUpComingTours.json');
+          },
+          element: <UpComingTours></UpComingTours>
+        },
         { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
         { path: '/recent-event', element: <RecentEvent></RecentEvent> },
         { path: '/profile', element: <Profile></Profile> },
         { path: '/create-agency', element: <CreateAgency></CreateAgency> },
         { path: '/my-agency', element: <MyAgency></MyAgency> },
         { path: '/settings', element: <Settings></Settings> },
-        { path: '/logout', element: <LogOut></LogOut> }
+        { path: '/logout', element: <LogOut></LogOut> },
+        { path: '/menu', element: <Navigation></Navigation> }
       ]
     },
     {

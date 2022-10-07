@@ -1,7 +1,7 @@
 :root {
     --btn-col: linear-gradient(135deg, #14BD9D 0%, #40C77C 100%);
     --id-name-col: #3E3E3E;
-    --text-col: #4E4F4F;
+    --text-color: #4E4F4F;
     --placeholder: #4e4f4f9c;
     --body-bg: #F9FBFB;
     --post: #FFFFFF;
@@ -44,18 +44,126 @@ body {
 }
 
 .my-container {
-    width: min(1320px, 95%);
+    width: min(1520px, 95%);
     margin: auto;
 }
-navigation
+
 .custom-btn {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     padding: 10px 23px;
     border-radius: 5px;
     border: none;
 }
+
+
+
+/* ============== Responsive Site Layout ================ */
+.main-content {
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr;
+    grid-gap: 25px;
+}
+
+@media only screen and (max-width: 1150px) {
+    .right-panel-main {
+        display: none;
+    }
+
+    .main-content {
+        grid-template-columns: 4fr 8fr;
+    }
+
+    @media only screen and (max-width: 1150px) {
+        .my-container {
+            width: min(1320px, 95%);
+        }
+    }
+
+    @media only screen and (max-width: 750px) {
+        #left-part .logo {
+            display: none;
+            margin-bottom: 0;
+        }
+
+        #middle-section {
+            padding-top: 0px;
+        }
+
+        .main-menu {
+            position: relative;
+            top: -40px;
+        }
+
+        .bottom-navigation {
+            padding: 30px;
+        }
+
+
+        .my-container {
+            width: min(1320px, 85%);
+        }
+
+        .navigation-main {
+            display: none;
+        }
+
+        .main-content {
+            grid-template-columns: 1fr;
+            grid-gap: 0px;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .my-container {
+            width: min(1320px, 95%);
+        }
+    }
+
+    @media only screen and (max-width: 490px) {
+        .my-container {
+            width: min(1320px, 99%);
+        }
+    }
+
+    @media only screen and (max-width: 420px) {
+        /* Do major changes here */
+    }
+}
+
+
+
+
+/* =================== Bottom Navigation Section =================== */
+.bottom-navigation-route {
+    display: none;
+    margin-top: 45px;
+}
+
+.small-device {
+    display: block;
+    margin-top: 45px;
+}
+
+
+.bottom-navigation {
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    background: #1BBE97;
+    box-shadow: 0px 7px 20px 5px rgba(51, 216, 125, .4);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+
+.bottom-navigation a img {
+    width: 15px;
+}
+
 
 /* =================== Navigation Section =================== */
 .main-menu {
@@ -83,8 +191,6 @@ navigation
     cursor: pointer;
 }
 
-
-
 #left-part ul .link {
     padding: 12px 0;
 }
@@ -93,7 +199,7 @@ navigation
     width: 100%;
     height: min-content;
     background: rgba(64, 199, 125, 0.1);
-    border-right: 10px solid #40C77C;
+    border-right: 10px solid #1BBE97;
     border-radius: 0 5px 5px 0;
     padding-left: 10px;
     transition: .4s;
@@ -112,7 +218,7 @@ navigation
 #left-part .menu-part li a {
     font-size: 15px;
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     padding-left: 24px;
 }
 
@@ -120,7 +226,7 @@ navigation
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 20px !important;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
 #left-part .menu-part #logout a {
@@ -150,7 +256,7 @@ navigation
 #left-part .log-profile .text p {
     font-weight: 400;
     font-size: 12px;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
 #left-part .other {
@@ -194,7 +300,7 @@ navigation
 }
 
 .search-bar .search:focus {
-    border: 1px solid #40C77C;
+    border: 1px solid #1BBE97;
 }
 
 .search-bar i {
@@ -208,7 +314,7 @@ navigation
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #40C77C;
+    background: #1BBE97;
     border-radius: 3px;
     color: var(--body-bg);
 }
@@ -416,7 +522,7 @@ navigation
 }
 
 #middle-section .id .id-text p {
-    color: var(--text-col);
+    color: var(--text-color);
     margin-top: -5px;
     font-size: 10px;
     font-weight: 400;
@@ -426,7 +532,7 @@ navigation
 #middle-section .caption-text {
     font-size: 16px;
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     padding-bottom: 5px;
     cursor: pointer;
 }
@@ -450,7 +556,7 @@ navigation
 #middle-section .react-comment {
     font-size: 15px;
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     margin: 15px 0;
 }
 
@@ -512,20 +618,20 @@ input:focus {
 #middle-section .post .agency-text h4 {
     font-weight: 600;
     font-size: 20px;
-    color: var(--text-col);
+    color: var(--text-color);
     letter-spacing: 2px;
 }
 
 #middle-section .post .agency-text p {
     font-weight: 400;
     font-size: 15px;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
 #middle-section .post .agency-icons p span {
     font-size: 15px;
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     padding-left: 7px;
 }
 
@@ -536,7 +642,68 @@ input:focus {
     object-fit: cover;
 }
 
+/* =================== Section Heading  =================== */
+.section-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    background: #fff;
+    padding: 15px;
+}
 
+.section-head .section-title p{
+    font-size: 20px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.filter-search{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-search .section-search{
+    position: relative;
+}
+
+.filter-search .filter select{
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.filter-search .filter select option{
+    color: #119A7C;
+}
+
+.filter-search .section-search input{
+    padding: 5px 40px 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(79, 79, 79, 0.7);
+    outline: none;
+    width: 200px;
+}
+
+.filter-search .section-search input:focus{
+    border: 1px solid #119A7C;
+}
+
+.filter-search .section-search i{
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    width: 30px;
+    display: grid;
+    place-items: center;
+    background: var(--btn-col);
+    border-radius: 3px;
+    color: var(--body-bg);
+    cursor: pointer;
+}
 
 /* =================== Right Panel  =================== */
 
@@ -548,14 +715,88 @@ input:focus {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 20px !important;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
-.content {
+
+/* =================== Upcoming Tour  =================== */
+.up-coming-tour{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+}
+
+.tour-card {
     background: #fff;
-    height: 100vh;
-    padding: 25px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.tour-card .image img {
     width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.tour-card .name-description {
+    margin-bottom: 15px;
+}
+
+.tour-card .name-description h3 {
+    color: var(--text-color);
+    font-size: 18px;
+    margin-bottom: 5px !important;
+}
+
+.tour-card .name-description p {
+    font-size: 14px;
+    color: rgba(78, 79, 79, 0.9);
+}
+
+.info-part{
+    margin-bottom: 15px;
+}
+
+.info-part .info-title h4{
+    font-size: 16px;
+    margin-bottom: 10px !important;
+}
+
+.info-part .info-row .row-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(51, 216, 125, 0.07);
+    margin-bottom: 5px;
+    padding: 5px 8px;
+}
+
+.info-part .info-row .row-1 p{
+    font-size: 14px;
+}
+
+.info-part .info-row .row-1 .info-name{
+    color: rgba(78, 79, 79, 0.9);
+}
+
+.info-part .info-row .row-1 .info-data{
+    color: #119A7C;
+    font-weight: 500;
+}
+
+.info-row .row-1 .ratings span{
+    font-size: 10px;
+}
+
+.tour-card .upcoming-tour-button{
+    margin-top: 10px;
+    width: 100%;
+    background: var(--btn-col);
+    color:var(--post);
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
 }
 
 /* =================== Notification Part  =================== */
@@ -569,7 +810,7 @@ input:focus {
 #notification-part .notifications h3 {
     font-size: 17px;
     font-weight: 00;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
 
@@ -592,12 +833,12 @@ input:focus {
 #notification-part .notification .text h5 {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-col);
+    color: var(--text-color);
 }
 
 #notification-part .notification .text p {
     font-weight: 400;
-    color: var(--text-col);
+    color: var(--text-color);
     font-size: 13px;
     margin-top: -7px;
 }
@@ -608,8 +849,46 @@ input:focus {
 
 
 /* ================= Responsive Design ================= */
-@media only screen and (max-width: 1150px) {
-    body {
-        display: none;
+@media only screen and (max-width: 1300px) {
+    .section-head{
+        display: block;
+        background: transparent;
+        align-items:flex-start;
+        padding: 0;
+    }
+
+    .section-head .section-title p{
+        background: #fff;
+        width: 100%;
+        margin-bottom: 10px !important;
+        padding: 15px !important;
+    }
+    
+    .filter-search{
+        padding: 15px;
+        background: #fff;
+    }
+
+    .filter-search .section-search{
+        width: 100%;
+    }
+
+    .filter-search .section-search input{
+        width: 100%;
+    }
+
+    .tour-card .image img {
+        height: 140px;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+    .up-coming-tour{
+        grid-template-columns: 1fr;
+    }
+
+    .tour-card .image img {
+        height: 180px;
     }
 }
