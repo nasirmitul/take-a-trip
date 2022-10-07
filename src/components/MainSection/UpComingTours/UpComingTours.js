@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import UpComingTour from './UpComingTour';
 
 const UpComingTours = () => {
 
     const upComingTourData = useLoaderData();
+
+    const [searchLocation, setSearchLocation] = useState('')
+    // console.log(searchLocation);
+
+    let locationData = upComingTourData.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
+    // console.log(locationData);
+
+    let newString = '';
+    for (let char of searchLocation) {
+        if(char === ' ')
+        {
+            continue;
+        }
+        else{
+            newString = newString + char;
+        }
+    }
+
 
     return (
         <div>
@@ -23,21 +41,21 @@ const UpComingTours = () => {
                         </select>
                     </div>
                     <div className="section-search">
-                        <input type="text" placeholder='search' />
+                        <input type="text" placeholder='search by location' onChange={event => setSearchLocation(event.target.value)} />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
             </div>
 
             <div className="up-coming-tour">
-            {
-                upComingTourData.map(upComingTour => <UpComingTour
-                key={upComingTour.id}
-                upComingTour = {upComingTour}
-                ></UpComingTour>)
-            }
+                {
+                    locationData.map(upComingTour => <UpComingTour
+                        key={upComingTour.id}
+                        upComingTour={upComingTour}
+                    ></UpComingTour>)
+                }
             </div>
-            
+
         </div>
 
     );
