@@ -11,6 +11,7 @@ import MyAgency from './components/MainSection/MyAgency/MyAgency'
 import Settings from './components/MainSection/Settings/Settings'
 import LogOut from './components/MainSection/LogOut/LogOut'
 import Navigation from './components/Navigation/Navigation';
+import Notifications from './components/Notifications/Notifications'
 
 function App() {
 
@@ -47,7 +48,8 @@ function App() {
         { path: '/my-agency', element: <MyAgency></MyAgency> },
         { path: '/settings', element: <Settings></Settings> },
         { path: '/logout', element: <LogOut></LogOut> },
-        { path: '/menu', element: <Navigation></Navigation> }
+        { path: '/menu', element: <Navigation></Navigation> },
+        { path: '/notification', element: <Notifications></Notifications> }
       ]
     },
     {

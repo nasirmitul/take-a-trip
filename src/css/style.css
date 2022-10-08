@@ -1,10 +1,15 @@
 :root {
-    --btn-col: linear-gradient(135deg, #14BD9D 0%, #40C77C 100%);
+    --btn-color: linear-gradient(135deg, #14BD9D 0%, #40C77C 100%);
     --id-name-col: #3E3E3E;
     --text-color: #4E4F4F;
     --placeholder: #4e4f4f9c;
-    --body-bg: #F9FBFB;
-    --post: #FFFFFF;
+    --body-bg: #f7f7f7;
+    --white: #ffffff;
+    --post: var(--white)FFF;
+    --primary-color: #119A7C;
+    --primary-color-light: #40C77C;
+    /* --body-bg: #F9FBFB; */
+
 }
 
 * {
@@ -168,7 +173,7 @@ body {
 /* =================== Navigation Section =================== */
 .main-menu {
     padding: 25px;
-    background: #fff;
+    background: var(--white);
 }
 
 #left-part,
@@ -179,7 +184,7 @@ body {
 }
 
 #left-part .logo {
-    background: #fff;
+    background: var(--white);
     padding: 20px 25px;
     margin-bottom: 25px;
 }
@@ -374,7 +379,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    background: #fff;
+    background: var(--white);
     border-radius: 8px;
     border: 2px solid rgba(64, 199, 125, 0.7);
 }
@@ -460,7 +465,7 @@ body {
 .modal-body .upload-button button {
     padding: 8px;
     width: 100%;
-    background: var(--btn-col);
+    background: var(--btn-color);
     color: var(--body-bg);
     border: none;
     outline: none;
@@ -484,7 +489,7 @@ body {
 #middle-section .post {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #FFFFFF;
+    background-color: var(--white)FFF;
     border-radius: 10px;
 }
 
@@ -601,7 +606,7 @@ input:focus {
     content: '';
     top: 8px;
     right: 11px;
-    background: var(--btn-col);
+    background: var(--btn-color);
     color: var(--post);
 }
 
@@ -643,42 +648,42 @@ input:focus {
 }
 
 /* =================== Section Heading  =================== */
-.section-head{
+.section-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
     margin-top: 10px;
-    background: #fff;
+    background: var(--white);
     padding: 15px;
 }
 
-.section-head .section-title p{
+.section-head .section-title p {
     font-size: 20px;
     color: var(--text-color);
     font-weight: 500;
 }
 
-.filter-search{
+.filter-search {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.filter-search .section-search{
+.filter-search .section-search {
     position: relative;
 }
 
-.filter-search .filter select{
+.filter-search .filter select {
     padding: 5px 10px;
     border-radius: 5px;
 }
 
-.filter-search .filter select option{
+.filter-search .filter select option {
     color: #119A7C;
 }
 
-.filter-search .section-search input{
+.filter-search .section-search input {
     padding: 5px 40px 5px 10px;
     border-radius: 5px;
     border: 1px solid rgba(79, 79, 79, 0.7);
@@ -686,11 +691,11 @@ input:focus {
     width: 200px;
 }
 
-.filter-search .section-search input:focus{
+.filter-search .section-search input:focus {
     border: 1px solid #119A7C;
 }
 
-.filter-search .section-search i{
+.filter-search .section-search i {
     position: absolute;
     right: 3px;
     top: 50%;
@@ -699,7 +704,7 @@ input:focus {
     width: 30px;
     display: grid;
     place-items: center;
-    background: var(--btn-col);
+    background: var(--btn-color);
     border-radius: 3px;
     color: var(--body-bg);
     cursor: pointer;
@@ -720,14 +725,14 @@ input:focus {
 
 
 /* =================== Upcoming Tour  =================== */
-.up-coming-tour{
+.up-coming-tour {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 15px;
 }
 
 .tour-card {
-    background: #fff;
+    background: var(--white);
     padding: 15px;
     margin-bottom: 15px;
 }
@@ -754,16 +759,16 @@ input:focus {
     color: rgba(78, 79, 79, 0.9);
 }
 
-.info-part{
+.info-part {
     margin-bottom: 15px;
 }
 
-.info-part .info-title h4{
+.info-part .info-title h4 {
     font-size: 16px;
     margin-bottom: 10px !important;
 }
 
-.info-part .info-row .row-1{
+.info-part .info-row .row-1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -772,32 +777,104 @@ input:focus {
     padding: 5px 8px;
 }
 
-.info-part .info-row .row-1 p{
+.info-part .info-row .row-1 p {
     font-size: 14px;
 }
 
-.info-part .info-row .row-1 .info-name{
+.info-part .info-row .row-1 .info-name {
     color: rgba(78, 79, 79, 0.9);
 }
 
-.info-part .info-row .row-1 .info-data{
+.info-part .info-row .row-1 .info-data {
     color: #119A7C;
     font-weight: 500;
 }
 
-.info-row .row-1 .ratings span{
+.info-row .row-1 .ratings span {
     font-size: 10px;
 }
 
-.tour-card .upcoming-tour-button{
+.tour-card .upcoming-tour-button {
     margin-top: 10px;
     width: 100%;
-    background: var(--btn-col);
-    color:var(--post);
+    background: var(--btn-color);
+    color: var(--white);
     padding: 8px;
     border: none;
     border-radius: 5px;
+
 }
+
+/* =================== Tour Agencies  =================== */
+.tour-agency {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--white);
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 7px 1px rgba(51, 216, 125, .04);
+    margin-bottom: 10px;
+}
+
+.tour-agency .image img{
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.tour-agency .agency-info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.tour-agency .agency-info .name-tourArranged .name{
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.tour-agency .agency-info .name-tourArranged .tour-arranged{
+    font-size: 13px;
+    color: var(--primary-color-light);
+}
+
+
+.tour-agency .agency-info .ratings{
+    text-align: center;
+}
+
+.tour-agency .agency-info .ratings .rating-count{
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.tour-agency .agency-info .ratings .rating-count span{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.tour-agency .agency-info .ratings .total-ratings{
+    font-size: 13px;
+    color: var(--primary-color-light);
+}
+
+.tour-agency .agency-info .button button{
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    background: var(--btn-color);
+    color: var(--white);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
 
 /* =================== Notification Part  =================== */
 
@@ -850,30 +927,30 @@ input:focus {
 
 /* ================= Responsive Design ================= */
 @media only screen and (max-width: 1300px) {
-    .section-head{
+    .section-head {
         display: block;
         background: transparent;
-        align-items:flex-start;
+        align-items: flex-start;
         padding: 0;
     }
 
-    .section-head .section-title p{
-        background: #fff;
+    .section-head .section-title p {
+        background: var(--white);
         width: 100%;
         margin-bottom: 10px !important;
         padding: 15px !important;
     }
-    
-    .filter-search{
+
+    .filter-search {
         padding: 15px;
-        background: #fff;
+        background: var(--white);
     }
 
-    .filter-search .section-search{
+    .filter-search .section-search {
         width: 100%;
     }
 
-    .filter-search .section-search input{
+    .filter-search .section-search input {
         width: 100%;
     }
 
@@ -883,8 +960,8 @@ input:focus {
 }
 
 
-@media only screen and (max-width: 900px){
-    .up-coming-tour{
+@media only screen and (max-width: 900px) {
+    .up-coming-tour {
         grid-template-columns: 1fr;
     }
 

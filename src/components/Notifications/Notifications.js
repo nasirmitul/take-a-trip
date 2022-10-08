@@ -12,7 +12,6 @@ const Notifications = () => {
                     <h3>Notifications</h3>
                     <hr />
                 </div>
-
                 <Notification></Notification>
                 <Notification></Notification>
                 <Notification></Notification>
