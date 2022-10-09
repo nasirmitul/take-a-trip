@@ -12,6 +12,9 @@ import Settings from './components/MainSection/Settings/Settings'
 import LogOut from './components/MainSection/LogOut/LogOut'
 import Navigation from './components/Navigation/Navigation';
 import Notifications from './components/Notifications/Notifications'
+import Signup from './components/SignUp/Signup';
+import SignIn from './components/SignIn/SignIn';
+import ForgetPass from './components/ForgetPass/ForgetPass';
 
 function App() {
 
@@ -51,6 +54,15 @@ function App() {
         { path: '/menu', element: <Navigation></Navigation> },
         { path: '/notification', element: <Notifications></Notifications> }
       ]
+    },
+    {
+      path: '/signup', element: <Signup></Signup>
+    },
+    {
+      path: '/signin', element: <SignIn></SignIn>
+    },
+    {
+      path: '/forget-password', element: <ForgetPass></ForgetPass>
     },
     {
       path: '*', element: <h1>404 not found</h1>

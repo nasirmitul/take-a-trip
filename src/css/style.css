@@ -5,11 +5,16 @@
     --placeholder: #4e4f4f9c;
     --body-bg: #f7f7f7;
     --white: #ffffff;
-    --post: var(--white)FFF;
     --primary-color: #119A7C;
     --primary-color-light: #40C77C;
+    --black: #3E3D3E;
+    --black-light: rgba(77, 77, 77, 0.4);
+    --green: #33D87C;
+    --green-dark: #00bd74;
+    --text-color-one: #7B88A8;
+    --shadow: rgba(51, 206, 147, 0.6);
+    --primary: #23CB8B;
     /* --body-bg: #F9FBFB; */
-
 }
 
 * {
@@ -53,6 +58,11 @@ body {
     margin: auto;
 }
 
+.sign-container{
+    width: min(1320px, 85%);
+    margin: auto;
+}
+
 .custom-btn {
     font-size: 14px;
     font-weight: 400;
@@ -61,7 +71,6 @@ body {
     border-radius: 5px;
     border: none;
 }
-
 
 
 /* ============== Responsive Site Layout ================ */
@@ -137,7 +146,300 @@ body {
     }
 }
 
+/* ================================ SignUp, SignIn, Forget Password Style  ================================ */
 
+.signup {
+    min-height: 100vh;
+}
+
+.layer1 {
+    background-image: linear-gradient(135deg, rgba(51, 216, 125, 0.1), rgba(176, 239, 204, 0.15));
+    min-height: 100vh;
+}
+
+.layer2 {
+    background: rgba(255, 255, 255, 0.25);
+    border: 3px solid #fff;
+    min-height: 100vh;
+}
+
+.layer3 {
+    height: 450px;
+    width: 450px;
+    background: rgba(51, 216, 125, 0.12);
+    border-radius: 50%;
+    filter: blur(80px);
+    -webkit-filter: blur(80px);
+    position: absolute;
+    right: 200px;
+    top: 400px;
+    z-index: -1;
+}
+
+nav a .logo {
+    width: 45px;
+    height: auto;
+    object-fit: cover;
+    padding: 40px 0;
+}
+
+.signup .signup-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.signup-main .signup-left img {
+    width: 340px;
+    height: 100%;
+}
+
+.signup-main .signup-right form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-main .signup-right form h1 {
+    color: var(--black);
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 5px !important;
+}
+
+.signup-main .signup-right form h1 span {
+    color: var(--primary);
+}
+
+.signup-main .signup-right form p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--black);
+    padding-bottom: 10px !important;
+}
+
+.signup-main .signup-right form p a {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.signup-main .signup-right form .common {
+    margin-bottom: 10px;
+    width: 400px;
+    padding: 13px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid #fff;
+    outline: none;
+    font-size: .9rem;
+    color: var(--black);
+    transition: all .4s ease;
+}
+
+.signup-main .signup-right form .common:focus {
+    border: 2px solid rgba(35, 203, 139, 0.7);
+    box-shadow: 0 5px 9px 1px rgba(0, 0, 0, 0.02);
+
+}
+
+.signup-main .signup-right form .dob {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-main .signup-right form .dob span select {
+    width: calc((400px / 3) - 6px);
+    margin-bottom: 10px;
+    padding: 13px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid #fff;
+    outline: none;
+    font-size: .9rem;
+    color: var(--black);
+}
+
+.signup-main .signup-right form .gender .items {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-main .signup-right form .gender .items .item {
+    width: calc((400px / 3) - 6px);
+    margin-bottom: 10px;
+    padding: 13px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid #fff;
+    outline: none;
+    font-size: .9rem;
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.signup-main .signup-right form .gender .items .item input[type=radio] {
+    position: relative;
+    top: 4px;
+    -ms-transform: scale(.8);
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+}
+
+.signup-main .signup-right form .gender .items .item input[type=radio]:checked:after {
+    width: 14px;
+    height: 13px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: var(--primary);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+
+.signup-main .signup-right form .submit-button {
+    width: 400px;
+    padding: 13px;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid var(--white);
+    background: linear-gradient(140deg, #14BD9D, #40C77C);
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(20, 189, 158, 0.2);
+    cursor: pointer;
+    transition: all .7s ease;
+    margin-top: 12px;
+}
+
+.signup-main .signup-right form .submit-button:hover {
+    background: linear-gradient(-140deg, #14BD9D, #40C77C);
+}
+
+.with-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 400px;
+    padding: 12px;
+    border: 2px solid var(--white);
+    background: #F6F9F9;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px 0 rgba(20, 189, 158, 0.1);
+    cursor: pointer;
+    transition: all .7s ease;
+    margin-top: 20px;
+}
+
+.with-google i {
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.with-google p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary);
+    position: relative;
+    top: 0px;
+}
+
+
+@media only screen and (max-width: 850px) {
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .layer3 {
+        top: 100px;
+    }
+
+    .signup .signup-main {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .signup-main .signup-left {
+        display: none;
+    }
+
+}
+
+
+/* ============== SignIn Extra Part ================ */
+
+.signup-main .signup-right form .remember-forget {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.signup-main .signup-right form .remember-forget .remember-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--black);
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.signup-main .signup-right form .remember-forget .forget-password a {
+    color: var(--primary);
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.signup-main .signup-right form .remember-forget input[type="checkbox"]:checked {
+    accent-color: var(--primary);
+}
+
+
+/* ============== Forget Password Part ================ */
+.signup-main .signup-right form .forget-title {
+    line-height: 35px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 30px !important;
+}
+
+.signup-main .signup-right form .go-back {
+    margin-top: 20px !important;
+}
+
+
+
+@media only screen and (max-width: 450px) {
+
+    .signup-main .signup-right form .common,
+    .signup-main .signup-right form .submit-button,
+    .with-google,
+    .signup-main .signup-right form .remember-forget,
+    .signup-main .signup-right form .dob,
+    .signup-main .signup-right form .gender .items {
+        width: 320px;
+    }
+
+    .signup-main .signup-right form .dob span select {
+        width: calc((320px / 3) - 6px);
+    }
+
+    .signup-main .signup-right form .gender .items .item {
+        width: calc((320px / 3) - 6px);
+    }
+}
 
 
 /* =================== Bottom Navigation Section =================== */
