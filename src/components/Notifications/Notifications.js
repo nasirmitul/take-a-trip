@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../css/style.css'
 
-import man from '../../images/man.jpg'
 import Notification from './Notification';
 
 const Notifications = () => {
@@ -14,20 +13,25 @@ const Notifications = () => {
                 </div>
                 <Notification></Notification>
                 <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                <Notification></Notification>
-                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
+                <Notification></Notification>                
             </section>
         </div>
     );

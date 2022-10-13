@@ -16,10 +16,12 @@ import SingleUserPost from './SingleUserPost';
 import SingleAgencyPost from './SingleAgencyPost';
 import Modal from '../../Modal/Modal';
 import { useLoaderData } from 'react-router-dom';
+import Notifications from '../../Notifications/Notifications';
 
 const Home = () => {
 
     const [openModal, setOpenModal] = useState(false);
+    const [notifications, setNotifications] = useState(true);
 
     const posts = useLoaderData();
 
@@ -27,16 +29,20 @@ const Home = () => {
 
         <div>
             <section id="middle-section" className="middle-section">
+
                 <div className="search-notification">
                     <div className="search-bar">
                         <input className='search' type="text" name="" id="" placeholder='search' />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <div className="notification-icon">
+                    <div className="notification-icon" onClick={() => setNotifications(!notifications)}>
                         <img src={notification} alt="" />
                     </div>
                 </div>
 
+                <div className="show-notification">
+                    {notifications && <Notifications></Notifications>}    
+                </div>
 
 
                 <div className="make_post d-flex">
@@ -45,37 +51,10 @@ const Home = () => {
                         <p>How was your recent tour?</p>
                     </div>
 
-
-
                     <div className='post-modal'>
                         {openModal && <Modal closeModal={setOpenModal} />}
                     </div>
 
-
-
-                    {/* <div className='w-100 update-post' data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img className="img-fluid user-profile-img" src={man} alt="" />
-                        <p>How was your recent tour?</p>
-                    </div>
-
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    ...
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
 
                 </div>
                 {
