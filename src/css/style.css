@@ -664,6 +664,8 @@ nav a .logo {
     border-radius: 5px;
 }
 
+/* =================== Post Modal Design =================== */
+
 .modal-background {
     position: fixed;
     height: 100vh;
@@ -686,7 +688,7 @@ nav a .logo {
     z-index: 10;
     background: var(--white);
     border-radius: 8px;
-    border: 2px solid rgba(64, 199, 125, 0.7);
+    border: 2px solid rgba(64, 199, 125, 0.1);
 }
 
 .modal-title {
@@ -746,20 +748,29 @@ nav a .logo {
     padding-bottom: 50px;
 }
 
-.user-input .upload-image {
+.add-also{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-top: 1px solid rgba(44, 44, 44, 0.15);
     border-bottom: 1px solid rgba(44, 44, 44, 0.15);
     padding: 10px 30px;
 }
 
-.user-input .upload-image #tour-image {
-    display: none;
+.add-also .items-to-add{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.user-input .upload-image .tour-image-upload {
-    border: 1px solid #40C77C;
-    border-radius: 3px;
-    padding: 5px 10px;
+.add-also .items-to-add i{
+    font-size: 1.3rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.user-input .upload-image #tour-image {
+    display: none;
 }
 
 .modal-body .upload-button {
@@ -777,6 +788,7 @@ nav a .logo {
     border-radius: 30px;
     font-size: 1rem;
     font-weight: 500;
+    margin: 5px 0;
 }
 
 
@@ -1210,13 +1222,13 @@ input:focus {
 
 /* Handle */
 #notification-part::-webkit-scrollbar-thumb {
-    background: rgba(35, 203, 139, 0.8);
+    background: rgba(197, 197, 197, 0.8);
     border-radius: 20px;
 }
 
 /* Handle on hover */
 #notification-part::-webkit-scrollbar-thumb:hover {
-    background:rgba(35, 203, 139, 1);
+    background:rgba(197, 197, 197, 1);
 }
 
 #notification-part::before {
@@ -1233,8 +1245,6 @@ input:focus {
     color: var(--black);
     font-weight: 500;
 }
-
-
 
 .single-notification {
     display: flex;
@@ -1271,6 +1281,11 @@ input:focus {
     font-weight: 400;
     color: var(--black);
 }
+
+.single-notification .notification-info .notification-time{
+    font-size: 10px;
+}
+
 
 /* #notification-part {
     margin-top: 25px;

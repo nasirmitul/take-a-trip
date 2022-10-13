@@ -11,8 +11,7 @@ const Main = () => {
         <div>
             <main>
                 <div className="my-container">
-
-
+                    
                     <div className="main-content">
                         <div className='navigation-main'>
                             <Navigation></Navigation>
@@ -32,25 +31,6 @@ const Main = () => {
                     <BottomNavigation></BottomNavigation>
                 </div>
             </main>
-            {/* <main>
-                <div className="my-container">
-                    <div className="row">
-
-                        <div className='col-lg-3 navigation'>
-                            <Navigation></Navigation>
-                        </div>
-
-                        <div id='middle-section' className='col-lg-6'>
-                            <Outlet></Outlet>
-                        </div>
-
-                        <div className='col-lg-3 right-panel-main'>
-                            <RightPanel></RightPanel>
-                        </div>
-
-                    </div>
-                </div>
-            </main> */}
         </div>
     );
 };

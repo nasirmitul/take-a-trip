@@ -20,6 +20,7 @@ const Notification = () => {
                 <div className="notification-info">
                     <h5 className='user'>Hasan Mahbub</h5>
                     <p className='main-notification'>Your Payment is successfully done</p>
+                    <p className='notification-time'>12:03pm, june 17,2022</p>
                 </div>
             </div>
         </div>

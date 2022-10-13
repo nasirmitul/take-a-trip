@@ -21,7 +21,7 @@ import Notifications from '../../Notifications/Notifications';
 const Home = () => {
 
     const [openModal, setOpenModal] = useState(false);
-    const [notifications, setNotifications] = useState(true);
+    const [notifications, setNotifications] = useState(false);
 
     const posts = useLoaderData();
 
