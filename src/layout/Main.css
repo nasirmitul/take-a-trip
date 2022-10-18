@@ -1,9 +1,4 @@
-/* .left-part{
-    position: sticky;
+.navigation-main{
+    position:sticky;
     top: 25px;
-} */
-
-.notification-Part{
-    position: sticky;
-    top: 0;
 }

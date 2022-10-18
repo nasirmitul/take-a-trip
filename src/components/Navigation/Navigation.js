@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../css/style.css'
 import { Link, NavLink } from 'react-router-dom';
 
@@ -15,9 +15,21 @@ import settings from '../../icons/settings.png'
 import logout from '../../icons/logout.png'
 
 import man from '../../images/man.jpg'
+import { AuthContext } from '../../contexts/UserContext';
 
 
 const Navigation = () => {
+    const { userSignOut, user } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        userSignOut()
+            .then(() => { })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+
     return (
         <div>
             <section id="left-part">
@@ -42,17 +54,17 @@ const Navigation = () => {
                         <h5 className="menu-heading other">Other</h5>
                         <ul>
                             <NavLink className='link' to='/settings'><li><img src={settings} alt="" /><a href="/" >Settings</a></li></NavLink>
-                            <NavLink className='link' to='/logout'><li id="logout"><img src={logout} alt="" /><a href="/">Log Out</a></li></NavLink>
+                            <button onClick={handleSignOut} className='logout-button link' ><li id="logout"><img src={logout} alt="" /><a href="/">Log Out</a></li></button>
                         </ul>
 
                         <div className="log-profile d-flex">
                             <Link to='/profile' className='link d-flex align-items-center'>
                                 <div className="img">
-                                    <img className="img-fluid profile-img" src={man} alt="" />
+                                    <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />
                                 </div>
                                 <div className="text">
-                                    <h2>Mr. Jhon</h2>
-                                    <p>jhon@gmail.com</p>
+                                    <h2>{user?.displayName ? user?.displayName : 'User Name'}</h2>
+                                    <p>{user?.email}</p>
                                 </div>
                             </Link>
                         </div>

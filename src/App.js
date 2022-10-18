@@ -15,13 +15,14 @@ import Notifications from './components/Notifications/Notifications'
 import Signup from './components/SignUp/Signup';
 import SignIn from './components/SignIn/SignIn';
 import ForgetPass from './components/ForgetPass/ForgetPass';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
 
   const tripRouter = createBrowserRouter([
     {
       path: '/',
-      element: <Main></Main>,
+      element: <PrivateRoute><Main></Main></PrivateRoute>,
       children: [
         {
           path: '/',

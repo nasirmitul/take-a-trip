@@ -573,6 +573,11 @@ nav a .logo {
     margin-top: 48px !important;
 }
 
+.logout-button{
+    background: transparent;
+    border: none;
+}
+
 
 /* =================== News Feed Section =================== */
 
@@ -1201,7 +1206,7 @@ input:focus {
     border-radius: 5px;
     position: absolute;
     z-index: 1;
-    right: 609px;
+    right: min(608px, 31.5%);
     height: 500px;
     width: 400px;
     top: 95px;
