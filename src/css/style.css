@@ -320,7 +320,7 @@ nav a .logo {
 
 .signup-main .signup-right form .gender .items .item input[type=radio] {
     position: relative;
-    top: 4px;
+    top: 0px !important; 
     -ms-transform: scale(.8);
     -webkit-transform: scale(.8);
     transform: scale(.8);
@@ -330,8 +330,8 @@ nav a .logo {
     width: 14px;
     height: 13px;
     border-radius: 15px;
-    top: -2px;
-    left: -1px;
+    top: 2px;
+    left: 0px;
     position: relative;
     background-color: var(--primary);
     content: '';
@@ -480,15 +480,15 @@ nav a .logo {
     .signup-main .signup-right form .remember-forget,
     .signup-main .signup-right form .dob,
     .signup-main .signup-right form .gender .items {
-        width: 320px;
+        width: 100%;
     }
 
     .signup-main .signup-right form .dob span select {
-        width: calc((320px / 3) - 6px);
+        width: calc((100% / 3) - 6px);
     }
 
     .signup-main .signup-right form .gender .items .item {
-        width: calc((320px / 3) - 6px);
+        width: calc((100% / 3) - 6px);
     }
 }
 
