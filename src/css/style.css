@@ -88,8 +88,9 @@ body {
     background: rgba(197, 197, 197, 0.8);
     border-radius: 20px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background:rgba(197, 197, 197, 1);
+    background: rgba(197, 197, 197, 1);
 }
 
 /* ============== Responsive Site Layout ================ */
@@ -147,11 +148,11 @@ body {
             grid-gap: 0px;
         }
 
-        .notification-icon-popup{
+        .notification-icon-popup {
             display: none;
         }
 
-        .search-bar{
+        .search-bar {
             width: 100% !important;
         }
 
@@ -163,7 +164,7 @@ body {
             top: 0 !important;
         }
 
-        .main-menu{
+        .main-menu {
             background: transparent !important;
         }
     }
@@ -320,7 +321,7 @@ nav a .logo {
 
 .signup-main .signup-right form .gender .items .item input[type=radio] {
     position: relative;
-    top: 0px !important; 
+    top: 0px !important;
     -ms-transform: scale(.8);
     -webkit-transform: scale(.8);
     transform: scale(.8);
@@ -339,7 +340,6 @@ nav a .logo {
     visibility: visible;
     border: 2px solid white;
 }
-
 
 .signup-main .signup-right form .submit-button {
     width: 400px;
@@ -447,13 +447,13 @@ nav a .logo {
 
 
 /* ================ Signup signin error message ================ */
-.error-message{
+.error-message {
     height: 30px;
     color: var(--error) !important;
     font-weight: 500 !important;
 }
 
-.error-border{
+.error-border {
     border: 2px solid var(--error);
 }
 
@@ -621,7 +621,7 @@ nav a .logo {
     margin-top: 48px !important;
 }
 
-.logout-button{
+.logout-button {
     background: transparent;
     border: none;
 }
@@ -682,7 +682,7 @@ nav a .logo {
     color: var(--body-bg);
 }
 
-.notification-icon-popup{
+.notification-icon-popup {
     position: relative;
 }
 
@@ -805,7 +805,7 @@ nav a .logo {
     padding-bottom: 50px;
 }
 
-.add-also{
+.add-also {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -814,13 +814,13 @@ nav a .logo {
     padding: 10px 30px;
 }
 
-.add-also .items-to-add{
+.add-also .items-to-add {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.add-also .items-to-add i{
+.add-also .items-to-add i {
     font-size: 1.3rem;
     color: var(--primary);
     cursor: pointer;
@@ -1285,7 +1285,7 @@ input:focus {
 
 /* Handle on hover */
 #notification-part::-webkit-scrollbar-thumb:hover {
-    background:rgba(197, 197, 197, 1);
+    background: rgba(197, 197, 197, 1);
 }
 
 #notification-part::before {
@@ -1339,7 +1339,7 @@ input:focus {
     color: var(--black);
 }
 
-.single-notification .notification-info .notification-time{
+.single-notification .notification-info .notification-time {
     font-size: 10px;
 }
 
