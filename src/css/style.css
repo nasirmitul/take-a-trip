@@ -146,6 +146,26 @@ body {
             grid-template-columns: 1fr;
             grid-gap: 0px;
         }
+
+        .notification-icon-popup{
+            display: none;
+        }
+
+        .search-bar{
+            width: 100% !important;
+        }
+
+        #notification-part {
+            background: transparent !important;
+            position: relative;
+            height: 100vh !important;
+            width: 100% !important;
+            top: 0 !important;
+        }
+
+        .main-menu{
+            background: transparent !important;
+        }
     }
 
     @media only screen and (max-width: 500px) {
