@@ -35,14 +35,20 @@ const Home = () => {
                         <input className='search' type="text" name="" id="" placeholder='search' />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <div className="notification-icon" onClick={() => setNotifications(!notifications)}>
-                        <img src={notification} alt="" />
+
+                    <div className="notification-icon-popup">
+                        <div className="notification-icon" onClick={() => setNotifications(!notifications)}>
+                            <img src={notification} alt="" />
+                        </div>
+                        <div className="show-notification">
+                            {notifications && <Notifications></Notifications>}
+                        </div>
                     </div>
+
+
                 </div>
 
-                <div className="show-notification">
-                    {notifications && <Notifications></Notifications>}    
-                </div>
+
 
 
                 <div className="make_post d-flex">

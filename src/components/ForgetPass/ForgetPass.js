@@ -31,7 +31,7 @@ const ForgetPass = () => {
 
                                     <button class="submit-button" type="submit">Recover Password</button>
 
-                                    <p class="go-back">Go back and <Link to='/signin'>Singin</Link> </p>
+                                    <p class="go-back">Go back and <Link to='/signin'>Signin</Link> </p>
                                 </form>
                             </div>
                         </div>

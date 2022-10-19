@@ -26,7 +26,6 @@ const UserContext = ({ children }) => {
         return signOut(auth);
     }
 
-
     /* Signup, Login with Google */
     const googleSign = () =>{
         return signInWithPopup(auth, googleProvider);

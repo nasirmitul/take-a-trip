@@ -15,11 +15,9 @@ const SingleUserPost = ({ post }) => {
 
 
     /* Check Caption length and work on see more */
-    /* let p = "We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the journey and enjoy. "; */
     const [captionLength, setCaptionLength] = useState(true);
 
     useEffect(() => {
-        /* let captionLengthCheck = true; */
         if (caption.length > 200) {
             setCaptionLength(false);
         }
@@ -33,8 +31,6 @@ const SingleUserPost = ({ post }) => {
             setCaptionLength(!captionLength)
         }
     }
-
-
 
     /* Change React Icon and Increase/Decrease Value */
     const [reactActive, setReactActive] = useState(false);
@@ -60,7 +56,6 @@ const SingleUserPost = ({ post }) => {
                 </div>
 
                 <div className="caption-text" onClick={captionCharCount}>
-
                     {
                         captionLength ? caption : `${caption.slice(0, 200)} ...see more`
                     }
@@ -103,7 +98,6 @@ const SingleUserPost = ({ post }) => {
                     <input className="form-control w-100" type="search" placeholder="Your thought on it" />
                     <button className="btn-comment custom-btn" type="comment">Comment</button>
                 </div>
-
             </div>
         </div>
     );

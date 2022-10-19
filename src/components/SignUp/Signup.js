@@ -1,17 +1,10 @@
 import React, { useContext } from 'react';
-
 import signup from '../../images/signup.png'
 import logo from '../../images/logo.png'
-
 import { Link, useNavigate } from 'react-router-dom';
-
 import { AuthContext } from '../../contexts/UserContext';
 
-
-
-
 const Signup = () => {
-
     const { createUser, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -46,13 +39,14 @@ const Signup = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                navigate('/');
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 const email = error.customData.email;
+                console.log(`errorcode: ${errorCode}, errorMessage: ${errorMessage}, email: ${email}`);
             });
     }
-
 
 
     return (
@@ -99,12 +93,14 @@ const Signup = () => {
                                         </div>
                                     </div>
 
+                                    <p className='error-message'></p>
+
                                     <button className="submit-button" type="submit">Signup</button>
 
 
                                 </form>
                                 <button className="with-google" onClick={handleGoogleSign}>
-                                    <i><i className="fa-brands fa-google"></i></i>
+                                    <i className="fa-brands fa-google"></i>
                                     <p>Signup With Google</p>
                                 </button>
                             </div>

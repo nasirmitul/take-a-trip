@@ -6,10 +6,10 @@ import { AuthContext } from '../../contexts/UserContext';
 
 const SignIn = () => {
 
-    const { signIn,  } = useContext(AuthContext);
+    const { signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         const form = event.target;
@@ -19,15 +19,30 @@ const SignIn = () => {
         console.log(email, password);
 
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log('LoggedIn user: ', user);
-            form.reset();
-            navigate('./');
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(result => {
+                const user = result.user;
+                console.log('LoggedIn user: ', user);
+                form.reset();
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+    /* Signup with Google */
+    const handleGoogleSign = () => {
+        googleSign()
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                navigate('/');
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                console.log(`errorcode: ${errorCode}, errorMessage: ${errorMessage}, email: ${email}`);
+            });
     }
 
     return (
@@ -66,14 +81,12 @@ const SignIn = () => {
                                         </div>
                                     </div>
 
-
                                     <button className="submit-button" type="submit">Signin</button>
-
-                                    <a href="#" className="with-google">
-                                        <i><i className="fa-brands fa-google"></i></i>
-                                        <p>Signin With Google</p>
-                                    </a>
                                 </form>
+                                <button className="with-google" onClick={handleGoogleSign}>
+                                    <i className="fa-brands fa-google"></i>
+                                    <p>Signup With Google</p>
+                                </button>
                             </div>
                         </div>
 
