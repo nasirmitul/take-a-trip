@@ -30,13 +30,13 @@ const Signup = () => {
 
         let avatar = '';
         if (gender === 'male') {
-            avatar = "https://i.ibb.co/XXMPKs6/male-avatar.png"
+            avatar = "https://i.ibb.co/P1ZYLSv/male-avatar.png"
         }
         else if (gender === 'female') {
-            avatar = "https://i.ibb.co/gVnQbtj/female-avatar.png"
+            avatar = "https://i.ibb.co/7g5tmc8/female-avatar.png"
         }
         else {
-            avatar = "https://i.ibb.co/kBS4KSm/avatar.png"
+            avatar = "https://i.ibb.co/0hpn9NP/avatar.png"
         }
 
         console.log(name, email, password, gender);

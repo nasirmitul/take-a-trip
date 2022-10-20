@@ -13,17 +13,6 @@ const UpComingTours = () => {
 
     let locationData = upComingTourData.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
 
-    /* let newString = '';
-    for (let char of searchLocation) {
-        if(char === ' ')
-        {
-            continue;
-        }
-        else{
-            newString = newString + char;
-        }
-    } */
-
 
     //For Sorting Data
     const sortData = (a, b) => {
