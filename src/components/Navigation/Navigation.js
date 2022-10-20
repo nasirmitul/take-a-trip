@@ -14,7 +14,6 @@ import myAgency from '../../icons/my agency.png'
 import settings from '../../icons/settings.png'
 import logout from '../../icons/logout.png'
 
-import man from '../../images/man.jpg'
 import { AuthContext } from '../../contexts/UserContext';
 
 
@@ -28,7 +27,6 @@ const Navigation = () => {
                 console.log(error);
             })
     }
-
 
     return (
         <div>
@@ -61,7 +59,7 @@ const Navigation = () => {
                             <Link to='/profile' className='link d-flex align-items-center'>
                                 <div className="img">
                                     {
-                                        user?.photoURL && <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />
+                                        user.photoURL && <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />
                                     }
                                 </div>
                                 <div className="text">
@@ -71,9 +69,7 @@ const Navigation = () => {
                             </Link>
                         </div>
                     </div>
-
                 </div>
-
             </section>
         </div>
     );

@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import signup from '../../images/signup.png'
 import logo from '../../images/logo.png'
+
+import show from '../../icons/show.svg'
+import hide from '../../icons/hide.svg'
+
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
 const SignIn = () => {
+    const [seePass, setSeePass] = useState(false)
 
     const { signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -69,7 +74,17 @@ const SignIn = () => {
 
                                     <input className="common email" type="email" name='email' placeholder="Email" required />
 
-                                    <input className="common password" type="password" name='password' placeholder="Password" required />
+                                    <div className="password-input">
+                                        <input className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+
+                                        <div className="eye-icon" onClick={() => setSeePass(!seePass)}>
+
+                                            {
+                                                seePass ? <img className='hide-pass' src={hide} alt="" /> : <img className='show-pass' src={show} alt="" />
+                                            }
+
+                                        </div>
+                                    </div>
 
                                     <div className="remember-forget">
                                         <div className="remember-me">

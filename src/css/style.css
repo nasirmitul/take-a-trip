@@ -341,6 +341,18 @@ nav a .logo {
     border: 2px solid white;
 }
 
+.password-input{
+    position: relative;
+}
+
+.eye-icon{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    transform: translateY(50%);
+    cursor: pointer;
+}
+
 .signup-main .signup-right form .submit-button {
     width: 400px;
     padding: 13px;

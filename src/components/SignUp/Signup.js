@@ -1,6 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import signup from '../../images/signup.png'
 import logo from '../../images/logo.png'
+
+import show from '../../icons/show.svg'
+import hide from '../../icons/hide.svg'
+
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
@@ -8,19 +12,32 @@ import { getAuth, updateProfile } from "firebase/auth";
 const auth = getAuth();
 
 const Signup = () => {
-    const { user, createUser, googleSign, updateUserProfile } = useContext(AuthContext);
+    const [seePass, setSeePass] = useState(false)
+
+    const { createUser, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
-
     /* Signup with Email Password */
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        
+
         const email = form.email.value;
         const password = form.password.value;
         const gender = form.gender.value;
+
+        let avatar = '';
+        if (gender === 'male') {
+            avatar = "https://i.ibb.co/XXMPKs6/male-avatar.png"
+        }
+        else if (gender === 'female') {
+            avatar = "https://i.ibb.co/gVnQbtj/female-avatar.png"
+        }
+        else {
+            avatar = "https://i.ibb.co/kBS4KSm/avatar.png"
+        }
 
         console.log(name, email, password, gender);
 
@@ -28,7 +45,7 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 updateProfile(auth.currentUser, {
-                    displayName: name, photoURL: "https://cdn.pixabay.com/photo/2015/01/27/09/58/man-613601__340.jpg"
+                    displayName: name, photoURL: avatar
                 }).then(() => {
                     console.log('profile updated');
                 }).catch((error) => {
@@ -86,7 +103,19 @@ const Signup = () => {
 
                                     <input className="common email" type="email" name="email" placeholder="Email" required />
                                     <input className="common name" type="text" name="name" placeholder="Name" required />
-                                    <input className="common password" name="password" type="password" placeholder="Password" required />
+
+                                    <div className="password-input">
+                                        <input className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+
+                                        <div className="eye-icon" onClick={() => setSeePass(!seePass)}>
+
+                                            {
+                                                seePass ? <img className='hide-pass' src={hide} alt="" /> : <img className='show-pass' src={show} alt="" />
+                                            }
+
+                                        </div>
+                                    </div>
+
 
 
                                     <div className="gender">
