@@ -4,8 +4,11 @@ import logo from '../../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
+import { getAuth, updateProfile } from "firebase/auth";
+const auth = getAuth();
+
 const Signup = () => {
-    const { createUser, googleSign } = useContext(AuthContext);
+    const { user, createUser, googleSign, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -14,6 +17,7 @@ const Signup = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        
         const email = form.email.value;
         const password = form.password.value;
         const gender = form.gender.value;
@@ -23,6 +27,13 @@ const Signup = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                updateProfile(auth.currentUser, {
+                    displayName: name, photoURL: "https://cdn.pixabay.com/photo/2015/01/27/09/58/man-613601__340.jpg"
+                }).then(() => {
+                    console.log('profile updated');
+                }).catch((error) => {
+                    console.log(error);
+                });
                 console.log('registered user: ', user);
                 form.reset();
                 navigate('/signin');
@@ -30,6 +41,8 @@ const Signup = () => {
             .catch(error => {
                 console.log(error);
             })
+
+
     }
 
 

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import app from '../firebase.init';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -13,7 +13,7 @@ const UserContext = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
 
 
-    /* Signup, Login with Email Password */
+    /* Signup, Login, Logout with Email Password */
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
@@ -22,14 +22,28 @@ const UserContext = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const userSignOut = () =>{
+    const userSignOut = () => {
         return signOut(auth);
     }
 
     /* Signup, Login with Google */
-    const googleSign = () =>{
+    const googleSign = () => {
         return signInWithPopup(auth, googleProvider);
     }
+
+    /* Update a user's profile */
+    /* const updateUserProfile = () =>{
+        return updateProfile();
+    } */
+
+
+    /* updateProfile(auth.user, {
+        displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+        console.log('profile updated');
+    }).catch((error) => {
+        console.log(error);
+    }); */
 
 
     /* Checking user current state */

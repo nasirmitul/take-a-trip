@@ -60,7 +60,9 @@ const Navigation = () => {
                         <div className="log-profile d-flex">
                             <Link to='/profile' className='link d-flex align-items-center'>
                                 <div className="img">
-                                    <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />
+                                    {
+                                        user?.photoURL && <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />
+                                    }
                                 </div>
                                 <div className="text">
                                     <h2>{user?.displayName ? user?.displayName : 'User Name'}</h2>
