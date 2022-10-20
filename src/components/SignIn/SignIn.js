@@ -7,12 +7,11 @@ import hide from '../../icons/hide.svg'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
-import MessageNavigation from '../Message/MessageNavigation';
 
 const SignIn = () => {
     /* getting data while navigation from forget pass to this component*/
     const { state } = useLocation();
-    const { message } = state || {};
+    const { message, email } = state || {};
     /* if(message === 'success'){
         // <MessageNavigation></MessageNavigation>
         console.log('done');
@@ -26,6 +25,7 @@ const SignIn = () => {
     const { signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -38,7 +38,7 @@ const SignIn = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log('LoggedIn user: ', user);
+                console.log('LoggedIn user: ', user.email);
                 form.reset();
                 navigate('/');
             })
@@ -72,7 +72,7 @@ const SignIn = () => {
     return (
         <div>
             {
-                message === 'success' ? <MessageNavigation></MessageNavigation> : ""
+                message === 'forget success' ? <p className='alert-message'>An Email has sent in your <span className='email-id'>"{email}"</span> account. Go check it out and reset your password. Don't forget to check spam folder if you can't see the mail.</p> : ""
             }
             <div className="signup layer1">
                 <div className="layer2">

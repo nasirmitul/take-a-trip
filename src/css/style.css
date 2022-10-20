@@ -1477,11 +1477,16 @@ input:focus {
 
 
 .alert-message{
-    position: fixed;
+    position: absolute;
     width: 100%;
-    background: red;
+    background: var(--primary);
     text-align: center;
-    padding: 8px;
+    padding: 5px !important;
     top: 0;
     left: 0;
+    color: var(--white);
+}
+
+.alert-message .email-id{
+    font-weight: 500;
 }

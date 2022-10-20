@@ -24,7 +24,8 @@ const ForgetPass = () => {
                     {
                         state:
                         {
-                            message: "success"
+                            message: "forget success",
+                            email : email
                         }
                     }
                 );
