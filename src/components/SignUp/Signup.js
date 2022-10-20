@@ -8,7 +8,7 @@ import hide from '../../icons/hide.svg'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
 const auth = getAuth();
 
 const Signup = () => {
@@ -60,6 +60,7 @@ const Signup = () => {
                 console.log('registered user: ', user);
                 form.reset();
                 navigate('/signin');
+                emailVerify();
             })
             .catch(error => {
                 console.log(error);
@@ -71,6 +72,13 @@ const Signup = () => {
                     setPassErrorMessage('Password should be al least 6 character long');
                 }
             })
+    }
+
+    /* User Email Verification */
+    const emailVerify = () =>{
+        sendEmailVerification(auth.currentUser)
+        .then(() => console.log('email verification sent'))
+        .catch((error) => console.log(error))
     }
 
 

@@ -5,10 +5,20 @@ import logo from '../../images/logo.png'
 import show from '../../icons/show.svg'
 import hide from '../../icons/hide.svg'
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
+import MessageNavigation from '../Message/MessageNavigation';
 
 const SignIn = () => {
+    /* getting data while navigation from forget pass to this component*/
+    const { state } = useLocation();
+    const { message } = state || {};
+    if(message === 'success'){
+        <MessageNavigation></MessageNavigation>
+        console.log('done');
+    }
+
+    /* Declaring states*/
     const [seePass, setSeePass] = useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [passErrorMessage, setPassErrorMessage] = useState('');
@@ -77,9 +87,9 @@ const SignIn = () => {
 
                             <div className="signup-right">
                                 <form action="#" onSubmit={handleSubmit}>
-                                    <h1 className="signup-title">Sign in to <span>Take A Trip</span></h1>
+                                    <h1 className="signup-title">Log in to <span>Take A Trip</span></h1>
 
-                                    <p className="signin">Don't Have A Account? <Link to='/signup'>Signup.</Link></p>
+                                    <p className="signin">Don't Have an Account? <Link to='/signup'>Signup.</Link></p>
 
                                     <input onFocus={() => setEmailErrorMessage('')} className="common email" type="email" name="email" placeholder="Email" required />
                                     <p className='email-mistake'>{emailErrorMessage}</p>
@@ -107,7 +117,7 @@ const SignIn = () => {
                                         </div>
                                     </div>
 
-                                    <button className="submit-button" type="submit">Signin</button>
+                                    <button className="submit-button" type="submit">Login</button>
                                 </form>
                                 <button className="with-google" onClick={handleGoogleSign}>
                                     <i className="fa-brands fa-google"></i>

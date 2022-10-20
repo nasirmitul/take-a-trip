@@ -1,37 +1,74 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import signup from '../../images/signup.png'
 import logo from '../../images/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/UserContext';
+import MessageNavigation from '../Message/MessageNavigation';
 
 
 const ForgetPass = () => {
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+    const { handleForgetPass } = useContext(AuthContext)
+    const navigate = useNavigate();
+
+
+    const forgetPassword = (event) => {
+        event.preventDefault();
+
+        const email = event.target.email.value;
+        handleForgetPass(email)
+            .then(() => {
+                console.log('reset password mail sent')
+                event.target.reset();
+                /* navigate('/signin',
+                    {
+                        state:
+                        {
+                            message: "success"
+                        }
+                    }
+                ); */
+                <MessageNavigation></MessageNavigation>
+            })
+            .catch((error) => {
+                console.log(error)
+
+                if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    setEmailErrorMessage('User not found.');
+                }
+            })
+
+    }
+
     return (
         <div>
-            <div class="signup layer1">
-                <div class="layer2">
-                    <div class="sign-container">
+            <div className="signup layer1">
+                <div className="layer2">
+                    <div className="sign-container">
                         <nav>
                             <a href='#'>
-                                <img class="logo" src={logo} alt="" />
+                                <img className="logo" src={logo} alt="" />
                             </a>
                         </nav>
 
-                        <div class="signup-main">
-                            <div class="signup-left">
+                        <div className="signup-main">
+                            <div className="signup-left">
                                 <img src={signup} alt="" />
                             </div>
 
-                            <div class="signup-right">
-                                <form action="#">
-                                    <h1 class="signup-title forget-title">Forget your Password? <br/><span class="no-worry">No worry.</span></h1>
+                            <div className="signup-right">
+                                <form action="#" onSubmit={forgetPassword}>
+                                    <h1 className="signup-title forget-title">Forget your Password? <br /><span className="no-worry">No worry.</span></h1>
 
-                                    <p class="signin">Put your Email below</p>
+                                    <p className="signin">Put your Email below</p>
 
-                                    <input class="common email" type="email" placeholder="Email" required />
+                                    <input onFocus={() => setEmailErrorMessage('')} className="common email" type="email" name="email" placeholder="Email" required />
+                                    <p className='email-mistake'>{emailErrorMessage}</p>
 
-                                    <button class="submit-button" type="submit">Recover Password</button>
+                                    <button className="submit-button" type="submit">Recover Password</button>
 
-                                    <p class="go-back">Go back and <Link to='/signin'>Signin</Link> </p>
+                                    <p className="go-back">Go back and <Link to='/signin'>Signin</Link> </p>
                                 </form>
                             </div>
                         </div>
@@ -39,7 +76,7 @@ const ForgetPass = () => {
                     </div>
                 </div>
 
-                <div class="layer3"></div>
+                <div className="layer3"></div>
 
             </div>
         </div>

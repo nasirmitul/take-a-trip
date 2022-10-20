@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import app from '../firebase.init';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -26,24 +26,15 @@ const UserContext = ({ children }) => {
         return signOut(auth);
     }
 
+    /* Handle Forget Pass */
+    const handleForgetPass = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    }
+
     /* Signup, Login with Google */
     const googleSign = () => {
         return signInWithPopup(auth, googleProvider);
     }
-
-    /* Update a user's profile */
-    /* const updateUserProfile = () =>{
-        return updateProfile();
-    } */
-
-
-    /* updateProfile(auth.user, {
-        displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
-    }).then(() => {
-        console.log('profile updated');
-    }).catch((error) => {
-        console.log(error);
-    }); */
 
 
     /* Checking user current state */
@@ -59,7 +50,7 @@ const UserContext = ({ children }) => {
         }
     }, [])
 
-    const authInfo = { user, loading, createUser, signIn, userSignOut, googleSign };
+    const authInfo = { user, loading, createUser, signIn, userSignOut, googleSign, handleForgetPass };
 
     return (
         <AuthContext.Provider value={authInfo}>

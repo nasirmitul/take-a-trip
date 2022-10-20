@@ -1474,3 +1474,14 @@ input:focus {
         height: 180px;
     }
 }
+
+
+.alert-message{
+    position: fixed;
+    width: 100%;
+    background: red;
+    text-align: center;
+    padding: 8px;
+    top: 0;
+    left: 0;
+}
