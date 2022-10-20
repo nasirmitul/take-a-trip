@@ -9,7 +9,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
 const SignIn = () => {
-    const [seePass, setSeePass] = useState(false)
+    const [seePass, setSeePass] = useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passErrorMessage, setPassErrorMessage] = useState('');
 
     const { signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -32,6 +34,13 @@ const SignIn = () => {
             })
             .catch(error => {
                 console.log(error);
+                if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    setEmailErrorMessage('User not found');
+                }
+
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    setPassErrorMessage('Wrong password. Please try again.');
+                }
             })
     }
 
@@ -72,10 +81,12 @@ const SignIn = () => {
 
                                     <p className="signin">Don't Have A Account? <Link to='/signup'>Signup.</Link></p>
 
-                                    <input className="common email" type="email" name='email' placeholder="Email" required />
+                                    <input onFocus={() => setEmailErrorMessage('')} className="common email" type="email" name="email" placeholder="Email" required />
+                                    <p className='email-mistake'>{emailErrorMessage}</p>
 
                                     <div className="password-input">
-                                        <input className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+                                        <input onFocus={() => setPassErrorMessage('')} className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+                                        <p className='password-mistake'>{passErrorMessage}</p>
 
                                         <div className="eye-icon" onClick={() => setSeePass(!seePass)}>
 

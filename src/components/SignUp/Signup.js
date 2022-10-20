@@ -13,12 +13,14 @@ const auth = getAuth();
 
 const Signup = () => {
     const [seePass, setSeePass] = useState(false)
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [nameErrorMessage, setNameErrorMessage] = useState('');
+    const [passErrorMessage, setPassErrorMessage] = useState('');
 
     const { createUser, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
     /* Signup with Email Password */
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -27,6 +29,10 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
         const gender = form.gender.value;
+
+        if (name.length < 2) {
+            setNameErrorMessage('Name should be at least 2 character long');
+        }
 
         let avatar = '';
         if (gender === 'male') {
@@ -57,9 +63,14 @@ const Signup = () => {
             })
             .catch(error => {
                 console.log(error);
+                if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
+                    setEmailErrorMessage('This email already in use. Please use another email');
+                }
+
+                if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+                    setPassErrorMessage('Password should be al least 6 character long');
+                }
             })
-
-
     }
 
 
@@ -101,11 +112,16 @@ const Signup = () => {
 
                                     <p className="signin">Already Have A Account? <Link to='/signin'>Sign In</Link></p>
 
-                                    <input className="common email" type="email" name="email" placeholder="Email" required />
-                                    <input className="common name" type="text" name="name" placeholder="Name" required />
+                                    <input onFocus={() => setEmailErrorMessage('')} className="common email" type="email" name="email" placeholder="Email" required />
+                                    <p className='email-mistake'>{emailErrorMessage}</p>
+
+
+                                    <input onFocus={() => setNameErrorMessage('')} className="common name" type="text" name="name" placeholder="Name" required />
+                                    <p className='name-mistake'>{nameErrorMessage}</p>
 
                                     <div className="password-input">
-                                        <input className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+                                        <input onFocus={() => setPassErrorMessage('')} className="common password" name="password" type={seePass ? 'text' : 'password'} placeholder="Password" required />
+                                        <p className='password-mistake'>{passErrorMessage}</p>
 
                                         <div className="eye-icon" onClick={() => setSeePass(!seePass)}>
 
@@ -115,7 +131,6 @@ const Signup = () => {
 
                                         </div>
                                     </div>
-
 
 
                                     <div className="gender">
