@@ -13,10 +13,10 @@ const SignIn = () => {
     /* getting data while navigation from forget pass to this component*/
     const { state } = useLocation();
     const { message } = state || {};
-    if(message === 'success'){
-        <MessageNavigation></MessageNavigation>
+    /* if(message === 'success'){
+        // <MessageNavigation></MessageNavigation>
         console.log('done');
-    }
+    } */
 
     /* Declaring states*/
     const [seePass, setSeePass] = useState(false);
@@ -71,6 +71,9 @@ const SignIn = () => {
 
     return (
         <div>
+            {
+                message === 'success' ? <MessageNavigation></MessageNavigation> : ""
+            }
             <div className="signup layer1">
                 <div className="layer2">
                     <div className="sign-container">

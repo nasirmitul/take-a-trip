@@ -3,7 +3,6 @@ import signup from '../../images/signup.png'
 import logo from '../../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
-import MessageNavigation from '../Message/MessageNavigation';
 
 
 const ForgetPass = () => {
@@ -21,15 +20,14 @@ const ForgetPass = () => {
             .then(() => {
                 console.log('reset password mail sent')
                 event.target.reset();
-                /* navigate('/signin',
+                navigate('/signin',
                     {
                         state:
                         {
                             message: "success"
                         }
                     }
-                ); */
-                <MessageNavigation></MessageNavigation>
+                );
             })
             .catch((error) => {
                 console.log(error)
