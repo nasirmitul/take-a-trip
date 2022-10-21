@@ -12,17 +12,13 @@ const SignIn = () => {
     /* getting data while navigation from forget pass to this component*/
     const { state } = useLocation();
     const { message, email } = state || {};
-    /* if(message === 'success'){
-        // <MessageNavigation></MessageNavigation>
-        console.log('done');
-    } */
 
     /* Declaring states*/
     const [seePass, setSeePass] = useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [passErrorMessage, setPassErrorMessage] = useState('');
 
-    const { signIn, googleSign } = useContext(AuthContext);
+    const { user, signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -38,6 +34,11 @@ const SignIn = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
+                if(user.emailVerified === false)
+                {
+                    setEmailErrorMessage("Your Email isn't verified");
+                    return;
+                }
                 console.log('LoggedIn user: ', user.email);
                 form.reset();
                 navigate('/');
@@ -73,6 +74,10 @@ const SignIn = () => {
         <div>
             {
                 message === 'forget success' ? <p className='alert-message'>An Email has sent in your <span className='email-id'>"{email}"</span> account. Go check it out and reset your password. Don't forget to check spam folder if you can't see the mail.</p> : ""
+            }
+
+            {
+                message === 'signup success' ? <p className='alert-message'>A Verification Email has sent in your <span className='email-id'>"{email}"</span> account. Go check it out. Don't forget to check spam folder if you can't see the mail.</p> : ""
             }
             <div className="signup layer1">
                 <div className="layer2">

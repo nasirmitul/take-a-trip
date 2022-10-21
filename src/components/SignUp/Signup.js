@@ -59,7 +59,15 @@ const Signup = () => {
                 });
                 console.log('registered user: ', user);
                 form.reset();
-                navigate('/signin');
+                navigate('/signin',
+                    {
+                        state:
+                        {
+                            message: "signup success",
+                            email: email
+                        }
+                    }
+                );
                 emailVerify();
             })
             .catch(error => {
@@ -75,10 +83,10 @@ const Signup = () => {
     }
 
     /* User Email Verification */
-    const emailVerify = () =>{
+    const emailVerify = () => {
         sendEmailVerification(auth.currentUser)
-        .then(() => console.log('email verification sent'))
-        .catch((error) => console.log(error))
+            .then(() => console.log('email verification sent'))
+            .catch((error) => console.log(error))
     }
 
 
