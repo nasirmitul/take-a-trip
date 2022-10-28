@@ -4,14 +4,6 @@ import '../../../css/style.css'
 import man from '../../../images/man.jpg'
 
 import notification from '../../../icons/notification.png'
-/* import globe from '../../../images/t.png'
-import travel from '../../../images/space-travel.jpg'
-import menu from '../../../icons/menu.png'
-import react from '../../../icons/react.png'
-import comment from '../../../icons/comment.png'
-import interested from '../../../icons/interested.png'
-import going from '../../../icons/going.png'
-import moreInfo from '../../../icons/more info.png' */
 import SingleUserPost from './SingleUserPost';
 import SingleAgencyPost from './SingleAgencyPost';
 import Modal from '../../Modal/Modal';
@@ -44,12 +36,7 @@ const Home = () => {
                             {notifications && <Notifications></Notifications>}
                         </div>
                     </div>
-
-
                 </div>
-
-
-
 
                 <div className="make_post d-flex">
                     <div className='w-100 update-post' onClick={() => setOpenModal(true)}>
@@ -65,7 +52,7 @@ const Home = () => {
                 </div>
                 {
                     posts.map(post => <SingleUserPost
-                        key={posts.id}
+                        key={post.id}
                         post={post}
                     ></SingleUserPost>)
                 }

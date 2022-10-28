@@ -4,7 +4,7 @@ import Main from './layout/Main';
 import Home from './components/MainSection/Home/Home'
 import UpComingTours from './components/MainSection/UpComingTours/UpComingTours'
 import TourAgencies from './components/MainSection/TourAgencies/TourAgencies'
-import RecentEvent from './components/MainSection/RecentEvent/RecentEvent'
+import RecentEvents from './components/MainSection/RecentEvents/RecentEvents'
 import Profile from './components/MainSection/Profile/Profile'
 import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
 import MyAgency from './components/MainSection/MyAgency/MyAgency'
@@ -16,6 +16,7 @@ import Signup from './components/SignUp/Signup';
 import SignIn from './components/SignIn/SignIn';
 import ForgetPass from './components/ForgetPass/ForgetPass';
 import PrivateRoute from './routes/PrivateRoute';
+import UpComingTourDetails from './components/MainSection/UpComingTours/UpComingTourDetails';
 
 function App() {
 
@@ -45,8 +46,9 @@ function App() {
           },
           element: <UpComingTours></UpComingTours>
         },
+        { path: '/tour-details', element: <UpComingTourDetails></UpComingTourDetails> },
         { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
-        { path: '/recent-event', element: <RecentEvent></RecentEvent> },
+        { path: '/recent-event', element: <RecentEvents></RecentEvents> },
         { path: '/profile', element: <Profile></Profile> },
         { path: '/create-agency', element: <CreateAgency></CreateAgency> },
         { path: '/my-agency', element: <MyAgency></MyAgency> },

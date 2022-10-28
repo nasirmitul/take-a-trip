@@ -57,7 +57,7 @@ const SingleUserPost = ({ post }) => {
 
                 <div className="caption-text" onClick={captionCharCount}>
                     {
-                        captionLength ? caption : `${caption.slice(0, 200)} ...see more`
+                        captionLength ? caption : `${caption.slice(0, 200)} ...see more ${'<p>...see more</p>'}`
                     }
                 </div>
 

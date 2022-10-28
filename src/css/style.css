@@ -15,6 +15,8 @@
     --shadow: rgba(51, 206, 147, 0.6);
     --primary: #23CB8B;
     --error: #EE4C63;
+
+    --box-shadow: 0px 3px 7px 1px rgba(51, 216, 125, 0.08);
     /* --body-bg: #F9FBFB; */
 }
 
@@ -95,7 +97,7 @@ body {
 
 
 /* ============== Loading Page Design ================ */
-.loader{
+.loader {
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -199,10 +201,10 @@ body {
 /* ================================ SignUp, SignIn, Forget Password Style  ================================ */
 
 
-/* Showing Error message */ 
+/* Showing Error message */
 .email-mistake,
 .password-mistake,
-.name-mistake{
+.name-mistake {
     font-size: .9rem !important;
     color: var(--error) !important;
     margin-top: -8px !important;
@@ -210,7 +212,7 @@ body {
     font-weight: 500 !important;
 }
 
-.error-design{
+.error-design {
     border: 2px solid var(--error);
     background: rgba(238, 76, 100, 0.2);
 }
@@ -368,11 +370,11 @@ nav a .logo {
     border: 2px solid white;
 }
 
-.password-input{
+.password-input {
     position: relative;
 }
 
-.eye-icon{
+.eye-icon {
     position: absolute;
     right: 10px;
     top: 0;
@@ -672,9 +674,9 @@ nav a .logo {
     padding-top: 15px;
 }
 
-.middle-section {
+/* .middle-section {
     margin: 0 25px;
-}
+} */
 
 .search-notification {
     display: flex;
@@ -963,7 +965,7 @@ nav a .logo {
 
 /* carousel */
 .carousel-inner .carousel-item img {
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .react-pointer {
@@ -1148,13 +1150,16 @@ input:focus {
     background: var(--white);
     padding: 15px;
     margin-bottom: 15px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
 }
 
 .tour-card .image img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    margin-bottom: 15px;
+    border-radius: 3px;
+    /* margin-bottom: 15px; */
 }
 
 .tour-card .name-description {
@@ -1165,6 +1170,7 @@ input:focus {
     color: var(--text-color);
     font-size: 18px;
     margin-bottom: 5px !important;
+    margin-top: 15px !important;
 }
 
 .tour-card .name-description p {
@@ -1207,6 +1213,10 @@ input:focus {
     font-size: 10px;
 }
 
+.tour-card .upcoming-tour-button-link {
+    width: 100%;
+}
+
 .tour-card .upcoming-tour-button {
     margin-top: 10px;
     width: 100%;
@@ -1215,8 +1225,28 @@ input:focus {
     padding: 8px;
     border: none;
     border-radius: 5px;
-
 }
+
+/* =================== Upcoming Tour Details =================== */
+.upcoming-tour-detail .left-time {
+    color: var(--error);
+    font-weight: 500;
+    margin-top: -100px !important;
+}
+
+.upcoming-tour-detail .tour-card .name-description h3 {
+    margin-top: 5px !important;
+}
+
+.upcoming-tour-detail .info-part .info-row .row-1 {
+    padding: 10px 20px;
+}
+
+.upcoming-tour-detail .info-part .info-row .row-1 .info-name,
+.upcoming-tour-detail .info-part .info-row .row-1 .info-data {
+    font-weight: 1rem;
+}
+
 
 /* =================== Tour Agencies  =================== */
 .tour-agency {
@@ -1226,7 +1256,7 @@ input:focus {
     background: var(--white);
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0px 3px 7px 1px rgba(51, 216, 125, .04);
+    box-shadow: var(--box-shadow);
     margin-bottom: 10px;
 }
 
@@ -1287,6 +1317,51 @@ input:focus {
     cursor: pointer;
 }
 
+/* =================== Recent Event Part  =================== */
+.recent-event-heading .recent-event-title {
+    font-size: 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    background: var(--white);
+    width: 100%;
+    margin-bottom: 10px !important;
+    padding: 15px !important;
+}
+
+.all-recent-event {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+}
+
+.all-recent-event .recent-event .recent-event-card {
+    background: var(--white);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+}
+
+.all-recent-event .recent-event .recent-event-card .event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.all-recent-event .recent-event .recent-event-card .location-name {
+    font-size: 1.3rem;
+    margin-top: 10px !important;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.all-recent-event .recent-event .recent-event-card .recent-event-time {
+    color: var(--primary);
+    font-size: .9rem;
+    font-weight: 500;
+    margin-top: 5px !important;
+}
 
 
 /* =================== Notification Part  =================== */
@@ -1476,7 +1551,7 @@ input:focus {
 }
 
 
-.alert-message{
+.alert-message {
     position: absolute;
     width: 100%;
     background: var(--primary);
@@ -1487,6 +1562,6 @@ input:focus {
     color: var(--white);
 }
 
-.alert-message .email-id{
+.alert-message .email-id {
     font-weight: 500;
 }

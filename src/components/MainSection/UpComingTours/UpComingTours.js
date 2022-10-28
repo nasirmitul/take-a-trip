@@ -7,14 +7,14 @@ const UpComingTours = () => {
     const upComingTourData = useLoaderData();
     // console.log(upComingTourData);
 
-
+    
     //For Search By Location
     const [searchLocation, setSearchLocation] = useState('')
-
     let locationData = upComingTourData.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
 
 
     //For Sorting Data
+    const [sort, setSort] = useState('');
     const sortData = (a, b) => {
         if (a.locationName < b.locationName) {
             return -1;
@@ -26,9 +26,9 @@ const UpComingTours = () => {
             return 0;
         }
     }
-
-    const [sort, setSort] = useState('');
+    
     let sortedData = [];
+
     if (sort === '') {
         sortedData = upComingTourData;
         console.log('this is empty');

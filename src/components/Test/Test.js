@@ -13,7 +13,7 @@ import moreInfo from '../../icons/more info.png'
 import home from '../../icons/home.png'
 import upcomingTours from '../../icons/upcoming tours.png'
 import tourAgencies from '../../icons/tour agencies.png'
-import recentEvent from '../../icons/recent event.png'
+import RecentEvents from '../../icons/recent event.png'
 import profile from '../../icons/profile.png'
 import createAgency from '../../icons/create agency.png'
 import myAgency from '../../icons/my agency.png'
@@ -38,7 +38,7 @@ const Test = () => {
                                         <li><img src={home} alt="" /><a href="/">Home</a></li>
                                         <li><img src={upcomingTours} alt="" /><a href="/">Upcoming Tours</a></li>
                                         <li><img src={tourAgencies} alt="" /><a href="/">Tour Agencies</a></li>
-                                        <li><img src={recentEvent} alt="" /><a href="/">Recent Event</a></li>
+                                        <li><img src={RecentEvents} alt="" /><a href="/">Recent Event</a></li>
                                         <li><img src={profile} alt="" /><a href="/">profile</a></li>
                                         <li><img src={createAgency} alt="" /><a href="/">Create Agency</a></li>
                                         <li><img src={myAgency} alt="" /><a href="/">My Agency</a></li>

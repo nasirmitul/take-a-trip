@@ -1,5 +1,5 @@
 import React from 'react';
-import space from '../../../images/space-travel.jpg'
+import { Link } from 'react-router-dom';
 
 const UpComingTour = ({ upComingTour }) => {
 
@@ -53,7 +53,7 @@ const UpComingTour = ({ upComingTour }) => {
                         </div>
                     </div>
                 </div>
-                <button className='upcoming-tour-button'>Details</button>
+                <Link className='upcoming-tour-button-link' to='/tour-details'><button className='upcoming-tour-button'>Details</button></Link>
             </div>
         </div>
     );
