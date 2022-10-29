@@ -34,7 +34,7 @@ const BottomNavigation = () => {
                 <NavLink to='/home'>
                     <img src={home} alt="" />
                 </NavLink>
-                <NavLink to='/profile'>
+                <NavLink to='/profile/timeline'>
                     <img src={profile} alt="" />
                 </NavLink>
                 <NavLink to='/notification'>
