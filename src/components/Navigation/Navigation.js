@@ -44,7 +44,7 @@ const Navigation = () => {
                             <NavLink className='link' to='/upcoming-tours'><li><img src={upcomingTours} alt="" /><a href="/">Upcoming Tours</a></li></NavLink>
                             <NavLink className='link' to='/tour-agencies'><li><img src={tourAgencies} alt="" /><a href="/">Tour Agencies</a></li></NavLink>
                             <NavLink className='link' to='/recent-event'><li><img src={RecentEvents} alt="" /><a href="/">Recent Event</a></li></NavLink>
-                            <NavLink className='link' to='/profile'><li><img src={profile} alt="" /><a href="/">profile</a></li></NavLink>
+                            <NavLink className='link' to='/profile/timeline'><li><img src={profile} alt="" /><a href="/">profile</a></li></NavLink>
                             <NavLink className='link' to='/create-agency'><li><img src={createAgency} alt="" /><a href="/">Create Agency</a></li></NavLink>
                             <NavLink className='link' to='/my-agency'><li><img src={myAgency} alt="" /><a href="/">My Agency</a></li></NavLink>
                         </ul>
@@ -56,7 +56,7 @@ const Navigation = () => {
                         </ul>
 
                         <div className="log-profile d-flex">
-                            <Link to='/profile' className='link d-flex align-items-center'>
+                            <Link to='/profile/timeline' className='link d-flex align-items-center'>
                                 <div className="img">
                                     {
                                         user.photoURL && <img className="img-fluid profile-img" src={user?.photoURL} alt="profile image" />

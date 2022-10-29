@@ -6,6 +6,10 @@ import UpComingTours from './components/MainSection/UpComingTours/UpComingTours'
 import TourAgencies from './components/MainSection/TourAgencies/TourAgencies'
 import RecentEvents from './components/MainSection/RecentEvents/RecentEvents'
 import Profile from './components/MainSection/Profile/Profile'
+import Timeline from './components/MainSection/Profile/Timeline'
+import About from './components/MainSection/Profile/About'
+import Followers from './components/MainSection/Profile/Followers'
+import Following from './components/MainSection/Profile/Following'
 import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
 import MyAgency from './components/MainSection/MyAgency/MyAgency'
 import Settings from './components/MainSection/Settings/Settings'
@@ -17,6 +21,7 @@ import SignIn from './components/SignIn/SignIn';
 import ForgetPass from './components/ForgetPass/ForgetPass';
 import PrivateRoute from './routes/PrivateRoute';
 import UpComingTourDetails from './components/MainSection/UpComingTours/UpComingTourDetails';
+import ProfileLayout from './layout/ProfileLayout';
 
 function App() {
 
@@ -49,13 +54,23 @@ function App() {
         { path: '/tour-details', element: <UpComingTourDetails></UpComingTourDetails> },
         { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
         { path: '/recent-event', element: <RecentEvents></RecentEvents> },
-        { path: '/profile', element: <Profile></Profile> },
+        {
+          path: '/profile',
+          element: <ProfileLayout></ProfileLayout>,
+          children: [
+            { path: '/profile/timeline', element: <Timeline></Timeline> },
+            { path: '/profile/about', element: <About></About> },
+            { path: '/profile/followers', element: <Followers></Followers> },
+            { path: '/profile/following', element: <Following></Following> }
+          ]
+        },
         { path: '/create-agency', element: <CreateAgency></CreateAgency> },
         { path: '/my-agency', element: <MyAgency></MyAgency> },
         { path: '/settings', element: <Settings></Settings> },
         { path: '/logout', element: <LogOut></LogOut> },
         { path: '/menu', element: <Navigation></Navigation> },
         { path: '/notification', element: <Notifications></Notifications> }
+
       ]
     },
     {

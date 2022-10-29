@@ -2,7 +2,7 @@
     --btn-color: linear-gradient(135deg, #14BD9D 0%, #40C77C 100%);
     --id-name-col: #3E3E3E;
     --text-color: #4E4F4F;
-    --placeholder: #4e4f4f9c;
+    --placeholder: rgba(78, 79, 79, 0.6);
     --body-bg: #f7f7f7;
     --white: #ffffff;
     --primary-color: #119A7C;
@@ -73,6 +73,8 @@ body {
     padding: 10px 23px;
     border-radius: 5px;
     border: none;
+    background: var(--btn-color);
+    color: var(--white);
 }
 
 /* ============== Scrollbar Design ================ */
@@ -189,7 +191,19 @@ body {
 
     @media only screen and (max-width: 490px) {
         .my-container {
-            width: min(1320px, 99%);
+            width: min(1320px, 95%);
+        }
+
+        #middle-section .post{
+            padding: 10px !important;
+        }
+
+        #middle-section .comment input{
+            padding: 13px !important;
+        }
+        #middle-section .comment button{
+            padding: 8px 10px;
+            font-size: .8rem;
         }
     }
 
@@ -566,7 +580,7 @@ nav a .logo {
 
 /* =================== Navigation Section =================== */
 .main-menu {
-    padding: 25px;
+    padding: 15px;
     background: var(--white);
 }
 
@@ -597,10 +611,10 @@ nav a .logo {
 #left-part .link.active {
     width: 100%;
     height: min-content;
-    background: rgba(64, 199, 125, 0.1);
+    /* background: rgba(64, 199, 125, 0.1); */
     border-right: 10px solid #1BBE97;
     border-radius: 0 5px 5px 0;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     transition: .4s;
 }
 
@@ -1362,6 +1376,98 @@ input:focus {
     font-weight: 500;
     margin-top: 5px !important;
 }
+
+/* =================== User Profile Part  =================== */
+.user-profile .profile-header{
+    background: var(--white);
+    padding: 15px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+.profile-header .cover-image .user-cover-image{
+    width: 100%;
+    border-radius: 3px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.profile-header .profile-image-others{
+    display: flex;
+    gap: 10px;
+    padding-left: 25px;
+}
+
+.profile-header .profile-image-others .profile-image img{
+    margin-top: -20px;
+    height: 100px;width: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: var(--box-shadow);
+}
+
+.profile-header .profile-image-others .profile-others{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.profile-header .profile-image-others .profile-others .profile-name-follow{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.profile-header .profile-image-others .profile-others .profile-name-email .profile-name{
+    font-size: 1.3rem;
+    color: var(--text-color);
+    font-weight: 500;
+
+}
+
+.profile-header .profile-image-others .profile-others .profile-name-email .profile-email{
+    font-size: .8rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.profile-header .profile-image-others .profile-others .profile-navigation{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a{
+    margin-right: 20px;
+    color: var(--placeholder);
+    font-weight: 400;
+}
+
+.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a.active{
+    color: var(--primary);
+    font-weight: 500;
+    position: relative;
+}
+
+.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a.active::after{
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 30px;
+    background: var(--primary);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    border-radius: 3px;
+}
+
+
+
+
+
 
 
 /* =================== Notification Part  =================== */
