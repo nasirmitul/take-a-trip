@@ -51,7 +51,7 @@ const Home = () => {
 
                 </div>
                 {
-                    posts.map(post => <SingleUserPost
+                    posts && posts.map(post => <SingleUserPost
                         key={post.id}
                         post={post}
                     ></SingleUserPost>)

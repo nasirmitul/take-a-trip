@@ -29,7 +29,7 @@ const Profile = () => {
                                 <button className="custom-btn">Follow</button>
                             </div>
                         </div>
-                        <div className="profile-navigation">
+                        <div className="profile-navigation profile-navigation-top">
                             <div className="navigation-links">
                                 <NavLink to='/profile/timeline'>Timeline</NavLink>
                                 <NavLink to='/profile/about'>About</NavLink>
@@ -42,6 +42,20 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
+
+                <div className="profile-navigation profile-navigation-bottom">
+                    <div className="navigation-links">
+                        <NavLink to='/profile/timeline'>Timeline</NavLink>
+                        <NavLink to='/profile/about'>About</NavLink>
+                        <NavLink to='/profile/followers'>Followers</NavLink>
+                        <NavLink to='/profile/following'>Following</NavLink>
+                    </div>
+                    <div className="profile-settings">
+                        <Link to='/profile-settings'><img src={options} alt="" /></Link>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     );

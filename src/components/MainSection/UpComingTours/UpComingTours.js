@@ -5,63 +5,65 @@ import UpComingTour from './UpComingTour';
 const UpComingTours = () => {
 
     const upComingTourData = useLoaderData();
-    // console.log(upComingTourData);
 
-    
     //For Search By Location
     const [searchLocation, setSearchLocation] = useState('')
     let locationData = upComingTourData.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
 
-
     //For Sorting Data
     const [sort, setSort] = useState('');
-    const sortData = (a, b) => {
-        if (a.locationName < b.locationName) {
-            return -1;
-        }
-        else if (a.locationName > b.locationName) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-    
-    let sortedData = [];
 
-    if (sort === '') {
-        sortedData = upComingTourData;
-        console.log('this is empty');
-    }
-    else if (sort === 'default') {
-        sortedData = upComingTourData;
-        console.log('this is default');
-    }
-    else if (sort === 'locationName') {
-        sortedData = upComingTourData.sort(sortData);
-        console.log('this is locationName');
+    let updateUpcomingTourData = upComingTourData;
+
+    if (sort === 'locationName') {
+        const locationName = [...upComingTourData].sort((a, b) =>
+            a.locationName > b.locationName ? 1 : -1,
+        );
+
+        updateUpcomingTourData = locationName;
+        console.log(locationName);
     }
     else if (sort === 'totalRatings') {
-        sortedData = upComingTourData.sort(sortData);
-        console.log('this is totalRatings');
+        const totalRatings = [...upComingTourData].sort((a, b) => b.totalRating - a.totalRating);
+        console.log("totalRatings : ", totalRatings);
+        updateUpcomingTourData = totalRatings;
     }
     else if (sort === 'rating') {
-        sortedData = upComingTourData.sort(sortData);
-        console.log('this is rating');
+        const rating = [...upComingTourData].sort((a, b) => b.ratings - a.ratings);
+        console.log("rating : ", rating);
+        updateUpcomingTourData = rating;
     }
     else if (sort === 'cost') {
-        sortedData = upComingTourData.sort(sortData);
-        console.log('this is cost');
+        const cost = [...upComingTourData].sort((a, b) => b.totalCost - a.totalCost);
+        console.log("cost : ", cost);
+        updateUpcomingTourData = cost;
+
     }
     else if (sort === 'time') {
-        sortedData = upComingTourData.sort(sortData);
-        console.log('this is time');
+        const time = [...upComingTourData].sort((a, b) =>
+            a.time > b.time ? 1 : -1,
+        );
+        console.log(time)
+        updateUpcomingTourData = time;
     }
     else {
         console.log("No Data Found");
     }
 
+    // Check weather the user searing or filtering data
+    let checkUserPreference = '';
 
+
+    const handleCheckSearchFocus = (value) => {
+        checkUserPreference = value;
+        console.log('inside function', checkUserPreference.length);
+    }
+
+    const handleCheckSearchBlur = (value) => {
+        checkUserPreference = value;
+    }
+
+    console.log('outside function', checkUserPreference.length);
 
     return (
         <div>
@@ -71,7 +73,7 @@ const UpComingTours = () => {
                 </div>
                 <div className="filter-search">
                     <div className="filter">
-                        <select name='filteredData' onChange={e => setSort(e.target.value)}>
+                        <select name='filteredData' onBlur={() => { setSort('') }} onChange={e => setSort(e.target.value)}>
                             <option value="default">Default</option>
                             <option value="locationName">Location Name</option>
                             <option value="totalRatings">Total Ratings</option>
@@ -81,7 +83,7 @@ const UpComingTours = () => {
                         </select>
                     </div>
                     <div className="section-search">
-                        <input type="text" placeholder='search by location' onChange={event => setSearchLocation(event.target.value)} />
+                        <input onFocus={() => handleCheckSearchFocus('search-selected')} onBlur={() => handleCheckSearchBlur('')} type="text" placeholder='search by location' onChange={event => setSearchLocation(event.target.value)} />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
@@ -89,15 +91,20 @@ const UpComingTours = () => {
 
             <div className="up-coming-tour">
                 {
-                    locationData.map(upComingTour => <UpComingTour
+                    sort.length > 0 ? updateUpcomingTourData.map(upComingTour => <UpComingTour
                         key={upComingTour.id}
                         upComingTour={upComingTour}
-                    ></UpComingTour>)
+                    ></UpComingTour>) : locationData.map(upComingTour => <UpComingTour
+                        key={upComingTour.id}
+                        upComingTour={upComingTour}
+                    ></UpComingTour>)/* updateUpcomingTourData.map(upComingTour => <UpComingTour
+                        key={upComingTour.id}
+                        upComingTour={upComingTour}
+                    ></UpComingTour>)) */
+
                 }
             </div>
-
         </div>
-
     );
 };
 

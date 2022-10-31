@@ -21,6 +21,7 @@ import ForgetPass from './components/ForgetPass/ForgetPass';
 import PrivateRoute from './routes/PrivateRoute';
 import UpComingTourDetails from './components/MainSection/UpComingTours/UpComingTourDetails';
 import ProfileLayout from './layout/ProfileLayout';
+import ProfileSettings from './components/MainSection/Profile/ProfileSettings';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
         { path: '/create-agency', element: <CreateAgency></CreateAgency> },
         { path: '/my-agency', element: <MyAgency></MyAgency> },
         { path: '/settings', element: <Settings></Settings> },
+        { path: '/profile-settings', element: <ProfileSettings></ProfileSettings> },
         { path: '/logout', element: <LogOut></LogOut> },
         { path: '/menu', element: <Navigation></Navigation> },
         { path: '/notification', element: <Notifications></Notifications> }

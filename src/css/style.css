@@ -194,14 +194,15 @@ body {
             width: min(1320px, 95%);
         }
 
-        #middle-section .post{
+        #middle-section .post {
             padding: 10px !important;
         }
 
-        #middle-section .comment input{
+        #middle-section .comment input {
             padding: 13px !important;
         }
-        #middle-section .comment button{
+
+        #middle-section .comment button {
             padding: 8px 10px;
             font-size: .8rem;
         }
@@ -628,11 +629,11 @@ nav a .logo {
     align-items: center;
 }
 
-#left-part .menu-part li a {
+#left-part .menu-part li p {
     font-size: 15px;
     font-weight: 400;
     color: var(--text-color);
-    padding-left: 24px;
+    padding-left: 25px !important;
 }
 
 #left-part .menu-part .menu-heading {
@@ -1377,8 +1378,18 @@ input:focus {
     margin-top: 5px !important;
 }
 
+
+
+@media only screen and (max-width: 670px) {
+    .all-recent-event {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 15px;
+    }
+}
+
 /* =================== User Profile Part  =================== */
-.user-profile .profile-header{
+.user-profile .profile-header {
     background: var(--white);
     padding: 15px;
     width: 100%;
@@ -1386,73 +1397,78 @@ input:focus {
     margin-bottom: 25px;
 }
 
-.profile-header .cover-image .user-cover-image{
+.profile-header .cover-image .user-cover-image {
     width: 100%;
     border-radius: 3px;
     height: 220px;
     object-fit: cover;
 }
 
-.profile-header .profile-image-others{
+.profile-header .profile-image-others {
     display: flex;
     gap: 10px;
     padding-left: 25px;
 }
 
-.profile-header .profile-image-others .profile-image img{
+.profile-header .profile-image-others .profile-image img {
     margin-top: -20px;
-    height: 100px;width: 100px;
+    height: 100px;
+    width: 100px;
     border-radius: 10px;
     object-fit: cover;
     box-shadow: var(--box-shadow);
 }
 
-.profile-header .profile-image-others .profile-others{
+.profile-header .profile-image-others .profile-others {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
 
-.profile-header .profile-image-others .profile-others .profile-name-follow{
+.profile-header .profile-image-others .profile-others .profile-name-follow {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 10px;
 }
 
-.profile-header .profile-image-others .profile-others .profile-name-email .profile-name{
+.profile-header .profile-image-others .profile-others .profile-name-email .profile-name {
     font-size: 1.3rem;
     color: var(--text-color);
     font-weight: 500;
 
 }
 
-.profile-header .profile-image-others .profile-others .profile-name-email .profile-email{
+.profile-header .profile-image-others .profile-others .profile-name-email .profile-email {
     font-size: .8rem;
     color: var(--text-color);
     font-weight: 400;
 }
 
-.profile-header .profile-image-others .profile-others .profile-navigation{
+/* .profile-header .profile-image-others .profile-others */
+.profile-navigation {
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
 
-.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a{
+/* .profile-header .profile-image-others .profile-others */
+.profile-navigation .navigation-links a {
     margin-right: 20px;
     color: var(--placeholder);
     font-weight: 400;
 }
 
-.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a.active{
+/* .profile-header .profile-image-others .profile-others */
+.profile-navigation .navigation-links a.active {
     color: var(--primary);
     font-weight: 500;
     position: relative;
 }
 
-.profile-header .profile-image-others .profile-others .profile-navigation .navigation-links a.active::after{
+/* .profile-header .profile-image-others .profile-others */
+.profile-navigation .navigation-links a.active::after {
     content: '';
     position: absolute;
     height: 3px;
@@ -1464,8 +1480,59 @@ input:focus {
     border-radius: 3px;
 }
 
+.profile-navigation-bottom {
+    margin-top: 12px;
+    display: none;
+}
 
+@media only screen and (max-width: 1300px) {
+    .profile-navigation-top {
+        display: none;
+    }
 
+    .user-profile .profile-header {
+        padding-bottom: 8px;
+    }
+
+    .profile-navigation .navigation-links a.active::after {
+        bottom: -8px;
+    }
+
+    .profile-navigation-bottom {
+        display: flex;
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .profile-header .profile-image-others .profile-image img {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .profile-header .profile-image-others {
+        padding-left: 15px;
+    }
+
+    .profile-navigation .navigation-links a {
+        font-size: .9rem;
+        margin-right: 15px;
+    }
+
+    .profile-header .follow-button .custom-btn {
+        padding: 7px 14px;
+    }
+
+    .profile-header .profile-image-others .profile-others .profile-name-email .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .profile-header .profile-image-others .profile-others .profile-name-email .profile-email {
+        font-size: .7rem;
+    }
+}
 
 
 
@@ -1643,6 +1710,11 @@ input:focus {
     .tour-card .image img {
         height: 140px;
     }
+
+
+
+
+
 }
 
 
@@ -1670,4 +1742,43 @@ input:focus {
 
 .alert-message .email-id {
     font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.settings-title
+{
+    width: 20%;
+    font-size: 20px;
+}
+.settings-value
+{
+    width: 30%;
+}
+.settings-data
+{
+    width: 30%;
+}
+.settings-links
+{
+    width: 20%;
+    text-align: right;
+}
+.dltacc
+{
+    color: red;
+
 }
