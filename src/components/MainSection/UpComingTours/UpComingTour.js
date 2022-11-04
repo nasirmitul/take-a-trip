@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 const UpComingTour = ({ upComingTour }) => {
 
-    const { id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers } = upComingTour || {};
+    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers } = upComingTour || {};
+
+    // console.log('this is id and details', _id, details);
 
     return (
         <div>
@@ -53,7 +55,7 @@ const UpComingTour = ({ upComingTour }) => {
                         </div>
                     </div>
                 </div>
-                <Link className='upcoming-tour-button-link' to='/tour-details'><button className='upcoming-tour-button'>Details</button></Link>
+                <Link className='upcoming-tour-button-link' to={`/tour-details/${_id}`}><button className='upcoming-tour-button'>Details</button></Link>
             </div>
         </div>
     );

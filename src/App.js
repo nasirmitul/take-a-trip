@@ -47,44 +47,93 @@ function App() {
         {
           path: '/upcoming-tours',
           loader: async () => {
-            return fetch('JSON/fakeUpComingTours.json');
+            return fetch('http://localhost:5000/upcomingTours');
           },
           element: <UpComingTours></UpComingTours>
         },
-        { path: '/tour-details', element: <UpComingTourDetails></UpComingTourDetails> },
-        { path: '/tour-agencies', element: <TourAgencies></TourAgencies> },
-        { path: '/recent-event', element: <RecentEvents></RecentEvents> },
+        {
+          path: '/tour-details/:id',
+          loader: async ({params}) => {
+            return fetch(`http://localhost:5000/upcomingTours/${params.id}`)
+          },
+          element: <UpComingTourDetails></UpComingTourDetails>
+        },
+        {
+          path: '/tour-agencies',
+          element: <TourAgencies></TourAgencies>
+        },
+        {
+          path: '/recent-event',
+          element: <RecentEvents></RecentEvents>
+        },
         {
           path: '/profile',
           element: <ProfileLayout></ProfileLayout>,
           children: [
-            { path: '/profile/timeline', element: <Timeline></Timeline> },
-            { path: '/profile/about', element: <About></About> },
-            { path: '/profile/followers', element: <Followers></Followers> },
-            { path: '/profile/following', element: <Following></Following> }
+            {
+              path: '/profile/timeline',
+              element: <Timeline></Timeline>
+            },
+            {
+              path: '/profile/about',
+              element: <About></About>
+            },
+            {
+              path: '/profile/followers',
+              element: <Followers></Followers>
+            },
+            {
+              path: '/profile/following',
+              element: <Following></Following>
+            }
           ]
         },
-        { path: '/create-agency', element: <CreateAgency></CreateAgency> },
-        { path: '/my-agency', element: <MyAgency></MyAgency> },
-        { path: '/settings', element: <Settings></Settings> },
-        { path: '/profile-settings', element: <ProfileSettings></ProfileSettings> },
-        { path: '/logout', element: <LogOut></LogOut> },
-        { path: '/menu', element: <Navigation></Navigation> },
-        { path: '/notification', element: <Notifications></Notifications> }
+        {
+          path: '/create-agency',
+          element: <CreateAgency></CreateAgency>
+        },
+        {
+          path: '/my-agency',
+          element: <MyAgency></MyAgency>
+        },
+        {
+          path: '/settings',
+          element: <Settings></Settings>
+        },
+        {
+          path: '/profile-settings',
+          element: <ProfileSettings></ProfileSettings>
+        },
+        {
+          path: '/logout',
+          element: <LogOut></LogOut>
+        },
+        {
+          path: '/menu',
+          element: <Navigation></Navigation>
+        },
+        {
+          path: '/notification',
+          element: <Notifications></Notifications>
+        }
 
       ]
     },
     {
-      path: '/signup', element: <Signup></Signup>
+      path: '/signup',
+      element: <Signup></Signup>
     },
     {
-      path: '/signin', element: <SignIn></SignIn>
+      path: '/signin',
+      element: <SignIn></SignIn>
     },
     {
-      path: '/forget-password', element: <ForgetPass></ForgetPass>
+      path: '/forget-password',
+      element: <ForgetPass></ForgetPass>
     },
     {
-      path: '*', element: <h1>404 not found</h1>
+      path: '*',
+      element: <h1>404 not found</h1>
     }
   ])
 

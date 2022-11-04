@@ -1,6 +1,25 @@
 import React from 'react';
+import { useState } from 'react';
 
 const Modal = ({ closeModal }) => {
+    const [selectedImages, setSelectedImages] = useState([])
+
+
+    const handleAddImage = (event) => {
+        const selectedImage = event.target.files;
+        const selectedImageArray = Array.from(selectedImage);
+        const imageArray = selectedImageArray.map((image) => {
+            return URL.createObjectURL(image)
+        })
+        const totalSelectedImage = selectedImageArray.length + selectedImages.length;
+        if (totalSelectedImage <= 10) {
+            setSelectedImages((previousImage) => previousImage.concat(imageArray))
+        }
+        else {
+            return
+        }
+        console.log(totalSelectedImage);
+    }
     return (
         <div className='modal-background'>
             <div className="modal-body">
@@ -15,14 +34,29 @@ const Modal = ({ closeModal }) => {
                         <textarea placeholder='How was your recent tour?'></textarea>
                     </div>
 
+                    <div className="selected-images">
+                        {
+                            selectedImages && selectedImages.map((image) => {
 
+                                return (
+                                    <div key={image} className="image">
+                                        <img className='user-post-selected-image' src={image} alt="" />
+
+                                        <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>X</button>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                     <div className="add-also">
                         <p>Add</p>
 
+
+
                         <div className="items-to-add">
                             <div className="upload-image">
-                                <label className='tour-image-upload' for="tour-image"><i className="fa-solid fa-image"></i></label>
-                                <input id="tour-image" type="file" name="photo" required />
+                                <label className='tour-image-upload' htmlFor="tour-image"><i className="fa-solid fa-image"></i></label>
+                                <input id="tour-image" type="file" name="user-post-image" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
                             </div>
 
                             <div className="add-location">

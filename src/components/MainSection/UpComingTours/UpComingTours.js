@@ -97,11 +97,7 @@ const UpComingTours = () => {
                     ></UpComingTour>) : locationData.map(upComingTour => <UpComingTour
                         key={upComingTour.id}
                         upComingTour={upComingTour}
-                    ></UpComingTour>)/* updateUpcomingTourData.map(upComingTour => <UpComingTour
-                        key={upComingTour.id}
-                        upComingTour={upComingTour}
-                    ></UpComingTour>)) */
-
+                    ></UpComingTour>)
                 }
             </div>
         </div>

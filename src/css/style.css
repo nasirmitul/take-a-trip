@@ -843,6 +843,22 @@ nav a .logo {
     cursor: pointer;
 }
 
+.selected-images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 3px;
+}
+
+.user-post-selected-image{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+}
+
+
 .user-input {
     padding: 30px 0px 10px 0px;
 }
@@ -1781,4 +1797,31 @@ input:focus {
 {
     color: red;
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Temporary */
+
+.create-agency{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create-agency input, textarea{
+    padding: 10px 20px;
 }
