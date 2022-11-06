@@ -24,6 +24,7 @@ const CreateAgency = () => {
             agencyCover,
             agencyDescription
         }
+
         fetch('http://localhost:5000/createAgency', {
             method: 'POST',
             headers: {

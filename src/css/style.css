@@ -680,13 +680,22 @@ nav a .logo {
 .logout-button {
     background: transparent;
     border: none;
+    
 }
 
+.logout-button li p{
+    color: var(--error) !important;
+    font-weight: 500 !important;
+}
 
 /* =================== News Feed Section =================== */
 
 #middle-section {
     padding-top: 15px;
+}
+
+.close-scrolling{
+    overflow: hidden;
 }
 
 /* .middle-section {
@@ -794,7 +803,6 @@ nav a .logo {
     position: relative;
     width: 500px;
     height: fit-content;
-    /* padding: 30px; */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -843,7 +851,7 @@ nav a .logo {
     cursor: pointer;
 }
 
-.selected-images{
+.selected-images {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -852,7 +860,7 @@ nav a .logo {
     border-radius: 3px;
 }
 
-.user-post-selected-image{
+.user-post-selected-image {
     height: 70px;
     width: 70px;
     object-fit: cover;
@@ -874,7 +882,8 @@ nav a .logo {
     resize: none;
     border: none;
     outline: none;
-    padding-bottom: 50px;
+    padding: 0 0 50px 0;
+
 }
 
 .add-also {
@@ -920,6 +929,27 @@ nav a .logo {
     margin: 5px 0;
 }
 
+@media only screen and (max-width: 520px) {
+    .modal-body {
+        width: 90%;
+    }
+
+    .user-input {
+        padding: 15px 0 10px 0;
+    }
+
+    .user-input .tour-caption {
+        padding: 0 15px;
+    }
+
+    .add-also {
+        padding: 10px 15px;
+    }
+
+    .modal-body .upload-button {
+        padding: 0px 15px 10px;
+    }
+}
 
 .post-top-part {
     display: flex;
@@ -952,18 +982,6 @@ nav a .logo {
     left: 8px;
     top: 7px;
 }
-
-/* #middle-section .make_post input {
-    padding: 22px;
-    border-radius: 50px;
-    border: 1px solid rgba(0, 0, 0, 0.13);
-}
-
-#middle-section .make_post input::placeholder {
-    color: var(--placeholder);
-    font-size: 14px;
-    padding-left: 60px;
-} */
 
 /* id name and post time css */
 #middle-section .id .id-text h6 {
@@ -1552,7 +1570,6 @@ input:focus {
 
 
 
-
 /* =================== Notification Part  =================== */
 
 #notification-part {
@@ -1647,53 +1664,6 @@ input:focus {
 }
 
 
-/* #notification-part {
-    margin-top: 25px;
-    position: sticky;
-    top: 25px;
-}
-
-#notification-part .notifications h3 {
-    font-size: 17px;
-    font-weight: 00;
-    color: var(--text-color);
-}
-
-
-
-#notification-part .notification {
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-}
-
-#notification-part .user-profile-img {
-    height: 50px;
-    width: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 30px;
-}
-
-
-#notification-part .notification .text h5 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-#notification-part .notification .text p {
-    font-weight: 400;
-    color: var(--text-color);
-    font-size: 13px;
-    margin-top: -7px;
-}
-
-#notification-part .notification .text {
-    position: relative;
-} */
-
-
 /* ================= Responsive Design ================= */
 @media only screen and (max-width: 1300px) {
     .section-head {
@@ -1775,26 +1745,25 @@ input:focus {
 
 
 
-.settings-title
-{
+.settings-title {
     width: 20%;
     font-size: 20px;
 }
-.settings-value
-{
+
+.settings-value {
     width: 30%;
 }
-.settings-data
-{
+
+.settings-data {
     width: 30%;
 }
-.settings-links
-{
+
+.settings-links {
     width: 20%;
     text-align: right;
 }
-.dltacc
-{
+
+.dltacc {
     color: red;
 
 }
@@ -1816,12 +1785,13 @@ input:focus {
 
 /* Temporary */
 
-.create-agency{
+.create-agency {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.create-agency input, textarea{
+.create-agency input,
+textarea {
     padding: 10px 20px;
 }

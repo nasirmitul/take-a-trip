@@ -20,8 +20,6 @@ const SignIn = () => {
 
     const { user, signIn, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -34,14 +32,33 @@ const SignIn = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                if(user.emailVerified === false)
-                {
+                if (user.emailVerified === false) {
                     setEmailErrorMessage("Your Email isn't verified");
                     return;
                 }
+
+                // get jwt token
+                const currentUser = {
+                    userEmail: user.email
+                }
+                console.log("currentUser", currentUser);
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("data", data);
+                        // saving the token in local storage
+                        localStorage.setItem('tripToken', data.token)
+                        navigate('/');
+                    })
                 console.log('LoggedIn user: ', user.email);
                 form.reset();
-                navigate('/');
             })
             .catch(error => {
                 console.log(error);

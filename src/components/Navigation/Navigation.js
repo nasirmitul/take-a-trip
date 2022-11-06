@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../../css/style.css'
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import logo from '../../images/logo.png';
 
@@ -18,11 +18,14 @@ import { AuthContext } from '../../contexts/UserContext';
 
 
 const Navigation = () => {
+    const navigate = useNavigate();
     const { userSignOut, user } = useContext(AuthContext);
 
     const handleSignOut = () => {
         userSignOut()
-            .then(() => { })
+            .then(() => { 
+                navigate('/signin')
+            })
             .catch(error => {
                 console.log(error);
             })
@@ -52,7 +55,7 @@ const Navigation = () => {
                         <h5 className="menu-heading other">Other</h5>
                         <ul>
                             <NavLink className='link' to='/settings'><li><img src={settings} alt="" /><p  >Settings</p></li></NavLink>
-                            <button onClick={handleSignOut} className='logout-button link' ><li id="logout"><img src={logout} alt="" /><p >Log Out</p></li></button>
+                            <button onClick={handleSignOut} className='logout-button link' ><li id="logout"><img src={logout} alt="" /><p className='logout-button-color'>Log Out</p></li></button>
                         </ul>
 
                         <div className="log-profile d-flex">

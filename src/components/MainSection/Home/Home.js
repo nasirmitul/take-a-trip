@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../../css/style.css'
 
 import man from '../../../images/man.jpg'
@@ -9,9 +9,11 @@ import SingleAgencyPost from './SingleAgencyPost';
 import Modal from '../../Modal/Modal';
 import { useLoaderData } from 'react-router-dom';
 import Notifications from '../../Notifications/Notifications';
+import { AuthContext } from '../../../contexts/UserContext';
 
 const Home = () => {
 
+    const {user} = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
     const [notifications, setNotifications] = useState(false);
 
@@ -40,7 +42,7 @@ const Home = () => {
 
                 <div className="make_post d-flex">
                     <div className='w-100 update-post' onClick={() => setOpenModal(true)}>
-                        <img className="img-fluid user-profile-img" src={man} alt="" />
+                        <img className="img-fluid user-profile-img" src={user.photoURL} alt="" />
                         <p>How was your recent tour?</p>
                     </div>
 
@@ -48,10 +50,9 @@ const Home = () => {
                         {openModal && <Modal closeModal={setOpenModal} />}
                     </div>
 
-
                 </div>
                 {
-                    posts && posts.map(post => <SingleUserPost
+                    Array.isArray(posts) && posts?.map(post => <SingleUserPost
                         key={post.id}
                         post={post}
                     ></SingleUserPost>)

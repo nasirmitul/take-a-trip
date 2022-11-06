@@ -12,7 +12,6 @@ import Following from './components/MainSection/Profile/Following'
 import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
 import MyAgency from './components/MainSection/MyAgency/MyAgency'
 import Settings from './components/MainSection/Settings/Settings'
-import LogOut from './components/MainSection/LogOut/LogOut'
 import Navigation from './components/Navigation/Navigation';
 import Notifications from './components/Notifications/Notifications'
 import Signup from './components/SignUp/Signup';
@@ -46,9 +45,9 @@ function App() {
         },
         {
           path: '/upcoming-tours',
-          loader: async () => {
+          /* loader: async () => {
             return fetch('http://localhost:5000/upcomingTours');
-          },
+          }, */
           element: <UpComingTours></UpComingTours>
         },
         {
@@ -103,10 +102,6 @@ function App() {
         {
           path: '/profile-settings',
           element: <ProfileSettings></ProfileSettings>
-        },
-        {
-          path: '/logout',
-          element: <LogOut></LogOut>
         },
         {
           path: '/menu',

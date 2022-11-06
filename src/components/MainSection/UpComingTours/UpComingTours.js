@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import UpComingTour from './UpComingTour';
 
-const UpComingTours = () => {
 
-    const upComingTourData = useLoaderData();
+const UpComingTours = () => {
+    const [upComingTourData, setUpComingTourData] = useState([]);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/upcomingTours`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setUpComingTourData(data.upComingTourData);
+            })
+    }, [])
+
 
     //For Search By Location
     const [searchLocation, setSearchLocation] = useState('')
-    let locationData = upComingTourData.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
+    let locationData = upComingTourData?.filter(locationValue => locationValue.locationName.toLowerCase().includes(searchLocation.toLowerCase()));
 
     //For Sorting Data
     const [sort, setSort] = useState('');
@@ -50,9 +60,8 @@ const UpComingTours = () => {
         console.log("No Data Found");
     }
 
-    // Check weather the user searing or filtering data
+    // Check weather the user searching or filtering data
     let checkUserPreference = '';
-
 
     const handleCheckSearchFocus = (value) => {
         checkUserPreference = value;
@@ -65,6 +74,26 @@ const UpComingTours = () => {
 
     console.log('outside function', checkUserPreference.length);
 
+
+
+    /* const [currentItems, setCurrentItems] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
+
+    const itemsPerPage = 10;
+
+    useEffect(() => {
+        const endOffset = itemOffset + itemsPerPage;
+        setCurrentItems(upComingTourData.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(upComingTourData.length / itemsPerPage));
+    }, [itemOffset, itemsPerPage, upComingTourData]);
+
+    const handlePageClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % upComingTourData.length;
+
+        setItemOffset(newOffset);
+    } */
+
     return (
         <div>
             <div className="section-head">
@@ -73,7 +102,7 @@ const UpComingTours = () => {
                 </div>
                 <div className="filter-search">
                     <div className="filter">
-                        <select name='filteredData' onBlur={() => { setSort('') }} onChange={e => setSort(e.target.value)}>
+                        <select name='filteredData' onChange={e => setSort(e.target.value)}>
                             <option value="default">Default</option>
                             <option value="locationName">Location Name</option>
                             <option value="totalRatings">Total Ratings</option>
@@ -83,7 +112,7 @@ const UpComingTours = () => {
                         </select>
                     </div>
                     <div className="section-search">
-                        <input onFocus={() => handleCheckSearchFocus('search-selected')} onBlur={() => handleCheckSearchBlur('')} type="text" placeholder='search by location' onChange={event => setSearchLocation(event.target.value)} />
+                        <input onClick={() => { setSort('') }} onFocus={() => handleCheckSearchFocus('search-selected')} onBlur={() => handleCheckSearchBlur('')} type="text" placeholder='search by location' onChange={event => setSearchLocation(event.target.value)} />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
@@ -91,11 +120,11 @@ const UpComingTours = () => {
 
             <div className="up-coming-tour">
                 {
-                    sort.length > 0 ? updateUpcomingTourData.map(upComingTour => <UpComingTour
-                        key={upComingTour.id}
+                    sort.length > 0 ? updateUpcomingTourData?.reverse().map(upComingTour => <UpComingTour
+                        key={upComingTour._id}
                         upComingTour={upComingTour}
-                    ></UpComingTour>) : locationData.map(upComingTour => <UpComingTour
-                        key={upComingTour.id}
+                    ></UpComingTour>) : locationData?.reverse().map(upComingTour => <UpComingTour
+                        key={upComingTour._id}
                         upComingTour={upComingTour}
                     ></UpComingTour>)
                 }
