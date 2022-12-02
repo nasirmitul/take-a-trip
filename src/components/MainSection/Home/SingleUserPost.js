@@ -11,7 +11,7 @@ import comment from '../../../icons/comment.png'
 
 const SingleUserPost = ({ post }) => {
     /* destructuring data from api */
-    const { id, name, picture, caption, profile, time, reacts, comments } = post;
+    const { id, name, picture, caption, profile, time, reacts, comments, pictures } = post;
 
 
     /* Check Caption length and work on see more */
@@ -62,19 +62,73 @@ const SingleUserPost = ({ post }) => {
                 </div>
 
                 <div className="upload-img">
-                    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
-                        <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                <img className="d-block w-100" src={picture} alt="First slide" />
+
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {
+                                pictures.map(pic =>
+                                    <div class="carousel-item active">
+                                        <img src={pic} class="d-block w-100" alt="..." />
+                                    </div>
+                                )
+                            }
+                            {/*  */}
+
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+
+                    {/* {
+                        allPicture && allPicture.map(pics =>
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src={pics.pic} class="d-block w-100" alt="..." />
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
-                            <div className="carousel-item">
-                                <img className="d-block w-100" src={picture} alt="Second slide" />
+                        )
+                    } */}
+
+                    {/* <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src={picture} class="d-block w-100" alt="..."/>
                             </div>
-                            <div className="carousel-item">
-                                <img className="d-block w-100" src={picture} alt="Third slide" />
+                            <div class="carousel-item">
+                                <img src={picture} class="d-block w-100" alt="..."/>
+                            </div>
+                            <div class="carousel-item">
+                                <img src={picture} class="d-block w-100" alt="..."/>
                             </div>
                         </div>
-                    </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div> */}
+
+
                 </div>
 
                 <div className="react-comment d-flex justify-content-between">

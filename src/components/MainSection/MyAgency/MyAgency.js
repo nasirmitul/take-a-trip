@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
+import options from '../../../icons/menu.png'
 
 const MyAgency = () => {
     const navigate = useNavigate();
     const { user, userSignOut } = useContext(AuthContext);
     const [agency, setAgency] = useState({});
+    const [showPopup, setShowPopup] = useState(false);
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     const handleCreateTour = (event) => {
         event.preventDefault();
         const form = event.target;
+        const formData = new FormData();
 
-        const tourHeaderImg = form.headerImg.value;
+        const tourHeaderImg = form.headerImg.files[0];
         const tourLocation = form.location.value;
         const tourTotalCost = form.cost.value;
         const tourTripDate = form.date.value;
@@ -22,38 +26,57 @@ const MyAgency = () => {
         const tourHotelInformation = form.hotelInformation.value;
         const tourDescription = form.description.value;
 
-        const createTour = {
-            userID: user.uid,
-            agencyEmail: user.email,
-            agencyName: agency[0]?.agencyName,
-            agencyProfile: agency[0]?.agencyProfile,
-            image: tourHeaderImg,
-            locationName: tourLocation,
-            details: tourDescription,
-            totalCost: tourTotalCost,
-            tourTripDate,
-            tourTripTime,
-            totalTravelers: tourTraveler,
-            tourTripDay,
-            tourDeparture,
-            tourHotelInformation
-        }
+        formData.append('image', tourHeaderImg)
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
 
-        fetch('http://localhost:5000/upcomingTours', {
+        fetch(url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(createTour)
+            body: formData
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.acknowledged) {
-                    form.reset();
+            .then(imgData => {
+                if (imgData.success) {
+                    console.log(imgData.data.url);
+
+                    const createTour = {
+                        userID: user.uid,
+                        agencyEmail: user.email,
+                        agencyName: agency[0]?.agencyName,
+                        agencyProfile: agency[0]?.agencyProfile,
+                        image: imgData.data.url,
+                        locationName: tourLocation,
+                        details: tourDescription,
+                        totalCost: tourTotalCost,
+                        tourTripDate,
+                        tourTripTime,
+                        totalTravelers: tourTraveler,
+                        tourTripDay,
+                        tourDeparture,
+                        tourHotelInformation
+                    }
+
+                    console.log(createTour);
+
+                    fetch('http://localhost:5000/upcomingTours', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(createTour)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.acknowledged) {
+                                form.reset();
+                            }
+                        })
+                        .catch(error => console.log(error))
+
                 }
+                console.log(imgData);
             })
-            .catch(error => console.log(error))
+
     }
 
 
@@ -65,59 +88,101 @@ const MyAgency = () => {
             }
         })
             .then(res => {
-                if(res.status === 401 || res.status === 403){
+                /* if(res.status === 401 || res.status === 403){
                     userSignOut();
-                }
+                } */
                 return res.json()
             })
             .then(data => setAgency(data))
     }, [])
 
-    const handleAgencyDelete = (id) => {
-        fetch(`http://localhost:5000/createAgency/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.deletedCount > 0) {
-                    console.log(data.deletedCount);
-                    navigate('/home');
+
+    const handleToSettings = () => {
+        navigate('/agency-settings',
+            {
+                state:
+                {
+                    agency_Id: agency[0]?._id
                 }
-            })
+            }
+        );
     }
 
     return (
+
         <div>
-            <h1>Agency Name: {agency[0]?.agencyName}</h1>
-            <p>Agency Description: {agency[0]?.agencyDescription}</p>
-            <p>id: {agency[0]?._id}</p>
+            <div className='user-profile'>
+                <div className="profile-header">
+                    <div className="cover-image">
+                        <img className='user-cover-image' src={agency[0]?.agencyCover} alt="" />
+                    </div>
 
-            <button className='custom-btn' onClick={() => handleAgencyDelete(agency[0]?._id)}>Delete Agency</button>
+                    <div className="profile-image-others">
+                        <div className="profile-image">
+                            <img src={agency[0]?.agencyProfile} alt="" />
+                        </div>
 
-            <br />
-            <br />
-            <br />
+                        <div className="profile-others">
+                            <div className="profile-name-follow">
+                                <div className="profile-name-email">
+                                    <h2 className="profile-name">{agency[0]?.agencyName}</h2>
+                                    <p className="profile-email">{agency[0]?.agencyEmail}</p>
+                                </div>
 
-            <form className='create-agency' onSubmit={handleCreateTour}>
-                <h1>Create a Tour</h1>
-                <input type="text" name='headerImg' placeholder='Header Image URL' required />
-                <input type="text" name='location' placeholder='location' required />
-                <input type="number" name='cost' placeholder='Total Cost' required />
-                <input type="date" name='date' placeholder='Trip Date' required />
-                <input type="time" name='time' placeholder='Trip Time' required />
-                <input type="number" name='traveler' placeholder='Total Traveler' required />
-                <input type="number" name='totalDay' placeholder='How many days?' required />
-                <input type="text" name='departure' placeholder='Departure From?' required />
-                <input type="text" name='hotelInformation' placeholder='Hotel Information' required />
-                <textarea name="description" id="" rows="4" placeholder='Description'></textarea>
+                            </div>
+                            <div className="profile-navigation profile-navigation-top">
+                                <div className="navigation-links">
+                                    <NavLink to='/my-agency/agency-timeline'>Timeline</NavLink>
+                                    <NavLink to='/my-agency/agency-about'>About</NavLink>
+                                </div>
+                                <div className="profile-settings agency-settings">
+                                    <img onClick={handleToSettings} src={options} alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div className="profile-navigation profile-navigation-bottom">
+                        <div className="navigation-links">
+                            <NavLink to='/my-agency/agency-timeline'>Timeline</NavLink>
+                            <NavLink to='/my-agency/agency-about'>About</NavLink>
+                        </div>
+                        <div className="profile-settings">
+                            <Link to='/agency-settings'><img src={options} alt="" /></Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <input className='custom-btn' type="submit" value="Create Tour" />
+            <div className="make_post d-flex" onClick={() => setShowPopup(!showPopup)}>
+                <div className='w-100 update-post'>
+                    <img className="img-fluid user-profile-img" src={agency[0]?.agencyProfile} alt="" />
+                    <p>Create A Tour?</p>
+                </div>
+            </div>
 
-                {/* <button className='custom-btn'>Create Tour</button> */}
-            </form>
+            <div className={`tour-popup ${showPopup ? 'show-tour-popup' : 'hide-tour-popup'}`}>
+                <form className='create-agency' onSubmit={handleCreateTour}>
+                    <h1>Create a Tour</h1>
+                    <input type="file" name='headerImg' accept="image/png, image/gif, image/jpeg" required />
+                    <input type="text" name='location' placeholder='location' required />
+                    <input type="number" name='cost' placeholder='Total Cost' required />
+                    <input type="date" name='date' placeholder='Trip Date' required />
+                    <input type="time" name='time' placeholder='Trip Time' required />
+                    <input type="number" name='traveler' placeholder='Total Traveler' required />
+                    <input type="number" name='totalDay' placeholder='How many days?' required />
+                    <input type="text" name='departure' placeholder='Departure From?' required />
+                    <input type="text" name='hotelInformation' placeholder='Hotel Information' required />
+                    <textarea name="description" id="" rows="4" placeholder='Description'></textarea>
+
+                    <input className='custom-btn' type="submit" value="Create Tour" />
+                </form>
+            </div>
         </div>
+
+
+
+
     );
 };
 

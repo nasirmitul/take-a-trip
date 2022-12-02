@@ -1,5 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import Main from './layout/Main';
 import Home from './components/MainSection/Home/Home'
 import UpComingTours from './components/MainSection/UpComingTours/UpComingTours'
@@ -21,6 +24,11 @@ import PrivateRoute from './routes/PrivateRoute';
 import UpComingTourDetails from './components/MainSection/UpComingTours/UpComingTourDetails';
 import ProfileLayout from './layout/ProfileLayout';
 import ProfileSettings from './components/MainSection/Profile/ProfileSettings';
+import AgencyTimeline from './components/MainSection/MyAgency/AgencyTimeline';
+import AgencyAbout from './components/MainSection/MyAgency/AgencyAbout';
+import AgencyLayout from './layout/AgencyLayout';
+import AgencySettings from './components/MainSection/MyAgency/AgencySettings';
+import CarouselTest from './components/Test/CarouselTest';
 
 function App() {
 
@@ -93,7 +101,17 @@ function App() {
         },
         {
           path: '/my-agency',
-          element: <MyAgency></MyAgency>
+          element: <AgencyLayout></AgencyLayout>,
+          children: [ 
+            {
+              path: '/my-agency/agency-timeline',
+              element: <AgencyTimeline></AgencyTimeline>
+            },
+            {
+              path: '/my-agency/agency-about',
+              element: <AgencyAbout></AgencyAbout>
+            }
+          ]
         },
         {
           path: '/settings',
@@ -102,6 +120,10 @@ function App() {
         {
           path: '/profile-settings',
           element: <ProfileSettings></ProfileSettings>
+        },
+        {
+          path: '/agency-settings',
+          element: <AgencySettings></AgencySettings>
         },
         {
           path: '/menu',
@@ -129,6 +151,11 @@ function App() {
     {
       path: '*',
       element: <h1>404 not found</h1>
+    },
+
+    {
+      path: '/test',
+      element: <CarouselTest></CarouselTest>
     }
   ])
 

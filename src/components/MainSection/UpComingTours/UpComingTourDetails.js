@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import coxBazar from '../../../images/bazar.jpg'
 
 const UpComingTourDetails = () => {
 
-    const { image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers } = useLoaderData();
+    const { image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation } = useLoaderData();
 
-console.log('location name', locationName);
     return (
         <div className='upcoming-tour-detail'>
             <div className="tour-card">
@@ -14,7 +13,7 @@ console.log('location name', locationName);
                     <img src={image} alt="" />
                 </div>
                 <div className="name-description">
-                    <small className='left-time'>2 days left</small>
+                    <small className='left-time'>{tourTripDay} days left</small>
                     <h3>{locationName}</h3>
                     <p>{details}</p>
                 </div>
@@ -28,11 +27,11 @@ console.log('location name', locationName);
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Ratings</p>
-                                <p className='info-data'>{totalRating} ratings</p>
+                                <p className='info-data'>{totalRating ? totalRating : 0} ratings</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Rating</p>
-                                <p className='info-data ratings'>{ratings}<span>/5</span></p>
+                                <p className='info-data ratings'>{ratings ? ratings : 0}<span>/5</span></p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +46,7 @@ console.log('location name', locationName);
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Time</p>
-                                <p className='info-data'>{time}</p>
+                                <p className='info-data'>{tourTripDate} at {tourTripTime}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Travelers</p>
@@ -55,19 +54,19 @@ console.log('location name', locationName);
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Journey Start</p>
-                                <p className='info-data'>1 July, 2022</p>
+                                <p className='info-data'>{tourTripDate}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Journey End</p>
-                                <p className='info-data'>4 July, 2022</p>
+                                <p className='info-data'>{tourTripDate}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Departure</p>
-                                <p className='info-data'>Dhaka, Jatrabari</p>
+                                <p className='info-data'>{tourDeparture}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Hotel Information</p>
-                                <p className='info-data'>Hotel Sea Crown, 3 Star</p>
+                                <p className='info-data'>{tourHotelInformation}</p>
                             </div>
                         </div>
                     </div>

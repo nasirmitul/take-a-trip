@@ -38,7 +38,7 @@ const SignIn = () => {
                 }
 
                 // get jwt token
-                const currentUser = {
+                /* const currentUser = {
                     userEmail: user.email
                 }
                 console.log("currentUser", currentUser);
@@ -56,7 +56,10 @@ const SignIn = () => {
                         // saving the token in local storage
                         localStorage.setItem('tripToken', data.token)
                         navigate('/');
-                    })
+                    }) */
+
+
+                navigate('/');
                 console.log('LoggedIn user: ', user.email);
                 form.reset();
             })

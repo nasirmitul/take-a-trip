@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../css/style.css'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
@@ -23,13 +23,24 @@ const Navigation = () => {
 
     const handleSignOut = () => {
         userSignOut()
-            .then(() => { 
+            .then(() => {
                 navigate('/signin')
             })
             .catch(error => {
                 console.log(error);
             })
     }
+
+
+    const [agency, setAgency] = useState([])
+    useEffect(() => {
+        fetch(`http://localhost:5000/createAgency?agencyEmail=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAgency(data))
+    }, [])
+
+    // console.log("agency from navigation", agency[0]?.agencyEmail);
+
 
     return (
         <div>
@@ -48,8 +59,9 @@ const Navigation = () => {
                             <NavLink className='link' to='/tour-agencies'><li><img src={tourAgencies} alt="" /><p >Tour Agencies</p></li></NavLink>
                             <NavLink className='link' to='/recent-event'><li><img src={RecentEvents} alt="" /><p >Recent Event</p></li></NavLink>
                             <NavLink className='link' to='/profile/timeline'><li><img src={profile} alt="" /><p >profile</p></li></NavLink>
-                            <NavLink className='link' to='/create-agency'><li><img src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
-                            <NavLink className='link' to='/my-agency'><li><img src={myAgency} alt="" /><p >My Agency</p></li></NavLink>
+                            {
+                                (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
+                            }
                         </ul>
 
                         <h5 className="menu-heading other">Other</h5>

@@ -20,6 +20,15 @@ const Modal = ({ closeModal }) => {
         }
         console.log(totalSelectedImage);
     }
+
+    const handleNewPostSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+
+        const tourStatus = form.tourStatus.value;
+
+    }
+
     return (
         <div className='modal-background'>
             <div className="modal-body">
@@ -29,50 +38,51 @@ const Modal = ({ closeModal }) => {
                         <i className="fa-solid fa-xmark"></i>
                     </div>
                 </div>
-                <div className="user-input">
-                    <div className="tour-caption">
-                        <textarea placeholder='How was your recent tour?'></textarea>
-                    </div>
 
-                    <div className="selected-images">
-                        {
-                            selectedImages && selectedImages.map((image) => {
-
-                                return (
-                                    <div key={image} className="image">
-                                        <img className='user-post-selected-image' src={image} alt="" />
-
-                                        <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>X</button>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="add-also">
-                        <p>Add</p>
-
-
-
-                        <div className="items-to-add">
-                            <div className="upload-image">
-                                <label className='tour-image-upload' htmlFor="tour-image"><i className="fa-solid fa-image"></i></label>
-                                <input id="tour-image" type="file" name="user-post-image" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
-                            </div>
-
-                            <div className="add-location">
-                                <i className="fa-solid fa-location-dot"></i>
-                            </div>
+                <form action="" onSubmit={handleNewPostSubmit}>
+                    <div className="user-input">
+                        <div className="tour-caption">
+                            <textarea placeholder='How was your recent tour?' name='tourStatus' required></textarea>
                         </div>
 
+                        <div className="selected-images">
+                            {
+                                selectedImages && selectedImages.map((image) => {
+
+                                    return (
+                                        <div key={image} className="image">
+                                            <img className='user-post-selected-image' src={image} alt="" />
+
+                                            <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>X</button>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="add-also">
+                            <p>Add</p>
+
+                            <div className="items-to-add">
+                                <div className="upload-image">
+                                    <label className='tour-image-upload' htmlFor="tour-image"><i className="fa-solid fa-image"></i></label>
+                                    <input id="tour-image" type="file" name="user-post-image" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
+                                </div>
+
+                                <div className="add-location">
+                                    <i className="fa-solid fa-location-dot"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    <div className="upload-button">
+                        <button>Post</button>
+                    </div>
+                </form>
 
-                <div className="upload-button">
-                    <button>Post</button>
-                </div>
+
+
             </div>
-
         </div>
     );
 };

@@ -1,10 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 
 const CreateAgency = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
+
+
+
+    const [agency, setAgency] = useState([])
+    useEffect(() => {
+        fetch(`http://localhost:5000/createAgency?agencyEmail=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setAgency(data))
+    }, [])
+
+    console.log("agency from navigation", agency[0]?.agencyEmail);
+
+    if(agency[0]?.agencyEmail === user?.email) {
+        navigate('/my-agency/agency-timeline')
+    }
 
     const handleCreateAgency = event => {
         event.preventDefault();
@@ -24,6 +39,8 @@ const CreateAgency = () => {
             agencyCover,
             agencyDescription
         }
+
+        console.log(createAgency);
 
         fetch('http://localhost:5000/createAgency', {
             method: 'POST',

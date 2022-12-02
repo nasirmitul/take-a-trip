@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 const UpComingTour = ({ upComingTour }) => {
 
-    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers } = upComingTour || {};
+    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime } = upComingTour || {};
 
     // console.log('this is id and details', _id, details);
+
 
     return (
         <div>
@@ -27,11 +28,11 @@ const UpComingTour = ({ upComingTour }) => {
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Ratings</p>
-                                <p className='info-data'>{totalRating} ratings</p>
+                                <p className='info-data'>{totalRating ? totalRating : 0} ratings</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Rating</p>
-                                <p className='info-data ratings'>{ratings} <span>/5</span></p>
+                                <p className='info-data ratings'>{ratings ? ratings : 0} <span>/5</span></p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +47,7 @@ const UpComingTour = ({ upComingTour }) => {
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Time</p>
-                                <p className='info-data'>{time}</p>
+                                <p className='info-data'>{tourTripDate} at {tourTripTime}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Travelers</p>

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TourAgency from './TourAgency';
 
 const TourAgencies = () => {
+    const [tourAgencies, setTourAgencies] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/createAgency')
+            .then(res => res.json())
+            .then(data => setTourAgencies(data))
+    }, [])
     return (
         <div>
             <div className="section-head">
@@ -25,17 +31,9 @@ const TourAgencies = () => {
                     </div>
                 </div>
             </div>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
-            <TourAgency></TourAgency>
+            {
+                tourAgencies.map(tourAgency => <TourAgency key={tourAgency._id} tourAgency={tourAgency}></TourAgency>)
+            }
         </div>
     );
 };

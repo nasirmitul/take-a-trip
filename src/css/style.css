@@ -48,9 +48,9 @@ ul {
     padding: 0 !important;
 }
 
-/* html {
+html {
     overflow-x: hidden;
-} */
+}
 
 body {
     background: var(--body-bg) !important;
@@ -680,10 +680,10 @@ nav a .logo {
 .logout-button {
     background: transparent;
     border: none;
-    
+
 }
 
-.logout-button li p{
+.logout-button li p {
     color: var(--error) !important;
     font-weight: 500 !important;
 }
@@ -694,7 +694,7 @@ nav a .logo {
     padding-top: 15px;
 }
 
-.close-scrolling{
+.close-scrolling {
     overflow: hidden;
 }
 
@@ -1051,9 +1051,10 @@ nav a .logo {
 }
 
 #middle-section .comment input {
-    padding: 16px;
+    padding: 15px;
     border-radius: 5px;
     outline: none;
+    padding-right: 140px;
 }
 
 input:focus {
@@ -1324,6 +1325,10 @@ input:focus {
     gap: 10px;
 }
 
+.tour-agency .agency-info .name-tourArranged {
+    width: 45%;
+}
+
 .tour-agency .agency-info .name-tourArranged .name {
     color: var(--text-color);
     font-size: 1rem;
@@ -1364,6 +1369,33 @@ input:focus {
     color: var(--white);
     border-radius: 3px;
     cursor: pointer;
+}
+
+/* =================== My Agency  =================== */
+.agency-settings img{
+    height: 20px;
+    width: 25px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.tour-popup {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+}
+
+.tour-popup.show-tour-popup {
+    display: block;
+}
+
+.tour-popup.hide-tour-popup {
+    display: none;
 }
 
 /* =================== Recent Event Part  =================== */
