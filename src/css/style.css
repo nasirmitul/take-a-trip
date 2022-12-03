@@ -5,6 +5,8 @@
     --placeholder: rgba(78, 79, 79, 0.6);
     --body-bg: #f7f7f7;
     --white: #ffffff;
+    --white-30: rgba(94, 94, 94, 0.3);
+    --white-90: rgba(94, 94, 94, 0.7);
     --primary-color: #119A7C;
     --primary-color-light: #40C77C;
     --black: #3E3D3E;
@@ -15,7 +17,6 @@
     --shadow: rgba(51, 206, 147, 0.6);
     --primary: #23CB8B;
     --error: #EE4C63;
-
     --box-shadow: 0px 3px 7px 1px rgba(51, 216, 125, 0.08);
     /* --body-bg: #F9FBFB; */
 }
@@ -213,8 +214,7 @@ body {
     }
 }
 
-/* ================================ SignUp, SignIn, Forget Password Style  ================================ */
-
+/* ============================================= SignUp, SignIn, Forget Password Style  ============================================= */
 
 /* Showing Error message */
 .email-mistake,
@@ -549,7 +549,7 @@ nav a .logo {
 }
 
 
-/* =================== Bottom Navigation Section =================== */
+/* ================================ Bottom Navigation Section ================================ */
 .bottom-navigation-route {
     display: none;
     margin-top: 45px;
@@ -579,7 +579,7 @@ nav a .logo {
 }
 
 
-/* =================== Navigation Section =================== */
+/* ================================ Navigation Section ================================ */
 .main-menu {
     padding: 15px;
     background: var(--white);
@@ -688,8 +688,7 @@ nav a .logo {
     font-weight: 500 !important;
 }
 
-/* =================== News Feed Section =================== */
-
+/* ================================ News Feed Section ================================ */
 #middle-section {
     padding-top: 15px;
 }
@@ -697,10 +696,6 @@ nav a .logo {
 .close-scrolling {
     overflow: hidden;
 }
-
-/* .middle-section {
-    margin: 0 25px;
-} */
 
 .search-notification {
     display: flex;
@@ -761,7 +756,6 @@ nav a .logo {
     cursor: pointer;
 }
 
-
 #post {
     padding: 0 20px;
 }
@@ -786,7 +780,149 @@ nav a .logo {
     border-radius: 5px;
 }
 
-/* =================== Post Modal Design =================== */
+/* News feed image slider */
+.image-slider{
+    position: relative;
+}
+
+.image-slider .main-slider {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.image-slider .main-slider .slider-img {
+    width: 100%;
+    border-radius: 5px;
+    height: 450px;
+    object-fit: cover;
+}
+
+.image-slider .main-slider .prev,
+.image-slider .main-slider .next {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background: var(--white-30);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .7;
+    transition: .4s;
+}
+
+.image-slider .main-slider .prev:hover,
+.image-slider .main-slider .next:hover{
+    opacity: 1;
+}
+
+.image-slider .main-slider .prev .n-p-icon,
+.image-slider .main-slider .next .n-p-icon {
+    font-size: 20px;
+    position: relative;
+    top: 1px;
+    color: red;
+}
+
+.image-slider .main-slider .prev svg polyline,
+.image-slider .main-slider .next svg polyline {
+    stroke: var(--white);
+}
+
+.image-slider .main-slider .prev .n-p-icon {
+    right: 1px;
+}
+
+.image-slider .main-slider .next .n-p-icon {
+    left: 1px;
+}
+
+
+.image-slider .main-slider .prev {
+    left: 8px;
+}
+
+.image-slider .main-slider .next {
+    right: 8px;
+}
+
+.change-image{
+    display: flex;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.change-image .dot .dot-icon{
+    font-size: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.7);
+    gap: 50px;
+    margin: 0 6px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.image-count{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.image-count .image-number{
+    color: rgba(255, 255, 255, 1);
+    font-size: .9rem;
+}
+
+.image-count .image-number span{
+    color: rgba(255, 255, 255, .6);
+    font-size: .9rem;
+}
+
+/* Comment */
+
+.all-comments .single-comment{
+    display: flex;
+    margin-top: 15px;
+    position: relative;
+}
+
+.all-comments .single-comment::after{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: calc(100% - 60px);
+    background: var(--white-30);
+    bottom: -8px;
+    right: 0;
+}
+
+.all-comments .single-comment .commentator-image{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.all-comments .single-comment .name-comment .name{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.all-comments .single-comment .name-comment .comment{
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+/* ================================ Post Modal Design ================================ */
 
 .modal-background {
     position: fixed;
@@ -806,7 +942,7 @@ nav a .logo {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
+    z-index: 999999999;
     background: var(--white);
     border-radius: 8px;
     border: 2px solid rgba(64, 199, 125, 0.1);
@@ -856,16 +992,40 @@ nav a .logo {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     border-radius: 3px;
+    position: relative;
+}
+
+.user-selected-images{
+    position: relative;
 }
 
 .user-post-selected-image {
     height: 70px;
     width: 70px;
     object-fit: cover;
+    position: relative;
 }
 
+.cancel-image{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    border: none;
+    outline: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-image .cross-icon{
+    font-size: .9rem;
+}
 
 .user-input {
     padding: 30px 0px 10px 0px;
@@ -874,7 +1034,6 @@ nav a .logo {
 .user-input .tour-caption {
     padding: 0 30px;
 }
-
 
 .user-input textarea {
     width: 100%;
@@ -893,6 +1052,7 @@ nav a .logo {
     border-top: 1px solid rgba(44, 44, 44, 0.15);
     border-bottom: 1px solid rgba(44, 44, 44, 0.15);
     padding: 10px 30px;
+    margin-top: 10px;
 }
 
 .add-also .items-to-add {
@@ -1033,7 +1193,6 @@ nav a .logo {
     display: flex;
     align-items: center;
     gap: 10px;
-
 }
 
 #middle-section .react-comment .react p span {
@@ -1052,13 +1211,16 @@ nav a .logo {
 
 #middle-section .comment input {
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 6px;
     outline: none;
     padding-right: 140px;
 }
 
-input:focus {
-    outline: none;
+#middle-section .comment input:focus {
+    outline: 0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+    border: 1px solid var(--primary);
 }
 
 #middle-section .comment input::placeholder {
@@ -1070,7 +1232,8 @@ input:focus {
     position: absolute;
     content: '';
     top: 8px;
-    right: 11px;
+    right: 8px;
+    border-radius: 3px;
     background: var(--btn-color);
     color: var(--white);
 }
@@ -1112,7 +1275,7 @@ input:focus {
     object-fit: cover;
 }
 
-/* =================== Section Heading  =================== */
+/* ================================ Section Heading  ================================ */
 .section-head {
     display: flex;
     justify-content: space-between;
@@ -1175,7 +1338,7 @@ input:focus {
     cursor: pointer;
 }
 
-/* =================== Right Panel  =================== */
+/* ================================ Right Panel  ================================ */
 
 .right-panel {
     margin: 25px 0;
@@ -1189,7 +1352,7 @@ input:focus {
 }
 
 
-/* =================== Upcoming Tour  =================== */
+/* ================================ Upcoming Tour  ================================ */
 .up-coming-tour {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1277,7 +1440,7 @@ input:focus {
     border-radius: 5px;
 }
 
-/* =================== Upcoming Tour Details =================== */
+/* ================================ Upcoming Tour Details ================================ */
 .upcoming-tour-detail .left-time {
     color: var(--error);
     font-weight: 500;
@@ -1298,7 +1461,7 @@ input:focus {
 }
 
 
-/* =================== Tour Agencies  =================== */
+/* ================================ Tour Agencies  ================================ */
 .tour-agency {
     display: flex;
     align-items: center;
@@ -1371,8 +1534,8 @@ input:focus {
     cursor: pointer;
 }
 
-/* =================== My Agency  =================== */
-.agency-settings img{
+/* ================================ My Agency  ================================ */
+.agency-settings img {
     height: 20px;
     width: 25px;
     object-fit: contain;
@@ -1398,7 +1561,7 @@ input:focus {
     display: none;
 }
 
-/* =================== Recent Event Part  =================== */
+/* ================================ Recent Event Part  ================================ */
 .recent-event-heading .recent-event-title {
     font-size: 20px;
     color: var(--text-color);
@@ -1454,7 +1617,7 @@ input:focus {
     }
 }
 
-/* =================== User Profile Part  =================== */
+/* ================================ User Profile Part  ================================ */
 .user-profile .profile-header {
     background: var(--white);
     padding: 15px;
@@ -1602,7 +1765,7 @@ input:focus {
 
 
 
-/* =================== Notification Part  =================== */
+/* ================================ Notification Part  ================================ */
 
 #notification-part {
     background: var(--white);
@@ -1696,7 +1859,7 @@ input:focus {
 }
 
 
-/* ================= Responsive Design ================= */
+/* ============================== Responsive Design ============================== */
 @media only screen and (max-width: 1300px) {
     .section-head {
         display: block;
@@ -1728,11 +1891,6 @@ input:focus {
     .tour-card .image img {
         height: 140px;
     }
-
-
-
-
-
 }
 
 
@@ -1745,7 +1903,6 @@ input:focus {
         height: 180px;
     }
 }
-
 
 .alert-message {
     position: absolute;
@@ -1775,6 +1932,7 @@ input:focus {
 
 
 
+/* ============================== Settings ============================== */
 
 
 .settings-title {

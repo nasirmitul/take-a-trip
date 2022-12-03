@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from 'react';
 
-import man from '../../../images/man.jpg'
-import globe from '../../../images/t.png'
 import menu from '../../../icons/menu.png'
 import react from '../../../icons/react.png'
 import reactStroke from '../../../icons/reactStroke.png'
 import comment from '../../../icons/comment.png'
 
+import { GrFormPrevious } from 'react-icons/gr';
+import { GrFormNext } from 'react-icons/gr';
+import { VscDebugStackframeDot } from 'react-icons/vsc';
 
 
 const SingleUserPost = ({ post }) => {
-    /* destructuring data from api */
-    const { id, name, picture, caption, profile, time, reacts, comments, pictures } = post;
+    const { id, name, caption, profile, time, reacts, comments, allPicture } = post;
 
+    /* Image slider for posts pictures */
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    const goPrev = () => {
+        const isFirstSlide = currentIndex === 0
+        const newIndex = isFirstSlide ? allPicture.length - 1 : currentIndex - 1;
+        setCurrentIndex(newIndex)
+    }
+
+    const goNext = () => {
+        const isLastSlide = currentIndex === allPicture.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex)
+    }
+
+    const goToSlide = (slideIndex) => {
+        setCurrentIndex(slideIndex)
+    }
 
     /* Check Caption length and work on see more */
     const [captionLength, setCaptionLength] = useState(true);
-
     useEffect(() => {
         if (caption.length > 200) {
             setCaptionLength(false);
@@ -61,73 +78,26 @@ const SingleUserPost = ({ post }) => {
                     }
                 </div>
 
-                <div className="upload-img">
-
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {
-                                pictures.map(pic =>
-                                    <div class="carousel-item active">
-                                        <img src={pic} class="d-block w-100" alt="..." />
-                                    </div>
-                                )
-                            }
-                            {/*  */}
-
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                <div className="image-slider">
+                    <div className='main-slider'>
+                        <button className='prev' onClick={goPrev}><GrFormPrevious className='n-p-icon'></GrFormPrevious></button>
+                        <img className='slider-img' src={allPicture[currentIndex].imgURL} alt="" />
+                        <button className='next' onClick={goNext}><GrFormNext className='n-p-icon'></GrFormNext></button>
                     </div>
 
-
-                    {/* {
-                        allPicture && allPicture.map(pics =>
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src={pics.pic} class="d-block w-100" alt="..." />
-                                    </div>
+                    <div className="change-image">
+                        {
+                            allPicture.map((image, slideIndex) => (
+                                <div className='dot' key={slideIndex}>
+                                    <VscDebugStackframeDot onClick={() => goToSlide(slideIndex)} className='dot-icon'></VscDebugStackframeDot>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        )
-                    } */}
+                            ))
+                        }
+                    </div>
 
-                    {/* <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src={picture} class="d-block w-100" alt="..."/>
-                            </div>
-                            <div class="carousel-item">
-                                <img src={picture} class="d-block w-100" alt="..."/>
-                            </div>
-                            <div class="carousel-item">
-                                <img src={picture} class="d-block w-100" alt="..."/>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div> */}
-
+                    <div className="image-count">
+                        <p className='image-number'>{currentIndex + 1}<span>/{allPicture.length}</span></p>
+                    </div>
 
                 </div>
 
@@ -140,11 +110,10 @@ const SingleUserPost = ({ post }) => {
                                     <img onClick={() => setReactCount(reactCount + 1)} className='react-pointer' src={reactStroke} />
                             }
                         </div>
-
                         <span>{reactCount}</span>
                     </div>
                     <div className="comment">
-                        <p>{comments}<span>comment</span><img src={comment} alt="" /></p>
+                        <p>{comments.length}<span>comment</span><img src={comment} alt="" /></p>
                     </div>
                 </div>
 
@@ -152,6 +121,23 @@ const SingleUserPost = ({ post }) => {
                     <input className="form-control w-100" type="search" placeholder="Your thought on it" />
                     <button className="btn-comment custom-btn" type="comment">Comment</button>
                 </div>
+
+
+                <div className="all-comments">
+                    {
+                        comments.map((comment, commentIndex) =>
+                            <div className='single-comment' key={commentIndex}>
+                                <div className="commentator-image">
+                                    <img className='commentator-image' src={comment.commentatorImg} alt="" />
+                                </div>
+                                <div className="name-comment">
+                                    <p className="name">{comment.commentator}</p>
+                                    <p className="comment">{comment.comment}</p>
+                                </div>
+                            </div>).reverse()
+                    }
+                </div>
+
             </div>
         </div>
     );

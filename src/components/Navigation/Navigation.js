@@ -48,7 +48,7 @@ const Navigation = () => {
                 <div className="menu-part">
 
                     <div className="logo">
-                        <img src={logo} alt="" />
+                        <Link to='/'><img src={logo} alt="" /></Link>
                     </div>
 
                     <div className="main-menu">

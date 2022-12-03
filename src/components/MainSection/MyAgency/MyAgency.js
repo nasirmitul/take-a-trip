@@ -15,7 +15,7 @@ const MyAgency = () => {
         const form = event.target;
         const formData = new FormData();
 
-        const tourHeaderImg = form.headerImg.files[0];
+        const tourHeaderImg = form.headerImg.files;
         const tourLocation = form.location.value;
         const tourTotalCost = form.cost.value;
         const tourTripDate = form.date.value;
@@ -26,7 +26,7 @@ const MyAgency = () => {
         const tourHotelInformation = form.hotelInformation.value;
         const tourDescription = form.description.value;
 
-        formData.append('image', tourHeaderImg)
+        formData.append('tourImage', tourHeaderImg)
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
 
         fetch(url, {
@@ -179,10 +179,6 @@ const MyAgency = () => {
                 </form>
             </div>
         </div>
-
-
-
-
     );
 };
 

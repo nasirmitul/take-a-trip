@@ -15,7 +15,7 @@ const TourAgency = ({tourAgency}) => {
                             <p>{agencyName}</p>
                         </div>
                         <div className="tour-arranged">
-                            <p>{tourArranged} tour arranged</p>
+                            <p>{tourArranged ? tourArranged : '0'} tour arranged</p>
                         </div>
                     </div>
                     <div className="ratings">

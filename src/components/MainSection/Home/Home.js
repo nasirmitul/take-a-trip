@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query'
 import '../../../css/style.css'
-
-import man from '../../../images/man.jpg'
 
 import notification from '../../../icons/notification.png'
 import SingleUserPost from './SingleUserPost';
@@ -13,11 +12,30 @@ import { AuthContext } from '../../../contexts/UserContext';
 
 const Home = () => {
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
     const [notifications, setNotifications] = useState(false);
 
-    const posts = useLoaderData();
+    // const posts = useLoaderData();
+
+    /* const { data: posts = [], refetch } = useQuery({
+        queryKey: ['posts'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/posts');
+            const data = await res.json();
+            return data;
+        }
+    }) */
+    
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:5000/posts')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setPosts(data)
+        })
+    }, [])
 
     return (
 
@@ -51,13 +69,14 @@ const Home = () => {
                     </div>
 
                 </div>
+
                 {
                     Array.isArray(posts) && posts?.map(post => <SingleUserPost
-                        key={post.id}
+                        key={post._id}
                         post={post}
                     ></SingleUserPost>)
                 }
-                {/* <SingleUserPost posts={posts}></SingleUserPost> */}
+
                 <SingleAgencyPost></SingleAgencyPost>
 
             </section>

@@ -50,13 +50,11 @@ const SingleAgencyPost = () => {
                             journey and enjoy...</p>
                     </div>
 
-                    <div className="agency-icons d-flex justify-content-between mt-3">
+                    <div className="agency-icons d-flex justify-content-around mt-3">
                         <div className="interested">
                             <p><a href="/"><img src={interested} alt="" /><span>interested</span></a></p>
                         </div>
-                        <div className="going">
-                            <p><a href="/"><img src={going} alt="" /><span>Going</span></a></p>
-                        </div>
+
                         <div className="info">
                             <p><a href="/"><img src={moreInfo} alt="" /><span>More info</span></a></p>
                         </div>

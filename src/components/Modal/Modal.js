@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
+import { RxCross2 } from 'react-icons/rx';
+import { AuthContext } from '../../contexts/UserContext';
 
 const Modal = ({ closeModal }) => {
+    const { user } = useContext(AuthContext);
     const [selectedImages, setSelectedImages] = useState([])
+    const imageHostKey = process.env.REACT_APP_imgbb_key_post;
 
 
     const handleAddImage = (event) => {
@@ -24,8 +28,59 @@ const Modal = ({ closeModal }) => {
     const handleNewPostSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
+        const formData = new FormData();
 
         const tourStatus = form.tourStatus.value;
+        const tourImage = form.userPostImage.files[0];
+        console.log('tourImage', tourImage);
+
+        formData.append('image', tourImage)
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    console.log(imgData.data.url);
+
+                    const createPost = {
+                        userID: user.uid,
+                        allPicture: [
+                            {
+                                imgURL: imgData.data.url
+                            }
+                        ],
+                        caption: tourStatus,
+                        name: user.displayName,
+                        profile: user.photoURL,
+                        time: new Date(),
+                        reacts: 0,
+                        comments: []
+                    }
+
+                    console.log(createPost);
+
+                    fetch('http://localhost:5000/posts', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(createPost)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.acknowledged) {
+                                form.reset();
+                                alert('posted')
+                            }
+                        })
+                        .catch(error => console.log(error))
+                }
+            })
 
     }
 
@@ -48,12 +103,11 @@ const Modal = ({ closeModal }) => {
                         <div className="selected-images">
                             {
                                 selectedImages && selectedImages.map((image) => {
-
                                     return (
-                                        <div key={image} className="image">
+                                        <div key={image} className="user-selected-images">
                                             <img className='user-post-selected-image' src={image} alt="" />
 
-                                            <button onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}>X</button>
+                                            <button className='cancel-image' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}><RxCross2 className='cross-icon'></RxCross2></button>
                                         </div>
                                     )
                                 })
@@ -65,7 +119,7 @@ const Modal = ({ closeModal }) => {
                             <div className="items-to-add">
                                 <div className="upload-image">
                                     <label className='tour-image-upload' htmlFor="tour-image"><i className="fa-solid fa-image"></i></label>
-                                    <input id="tour-image" type="file" name="user-post-image" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
+                                    <input id="tour-image" type="file" name="userPostImage" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
                                 </div>
 
                                 <div className="add-location">

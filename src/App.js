@@ -13,7 +13,6 @@ import About from './components/MainSection/Profile/About'
 import Followers from './components/MainSection/Profile/Followers'
 import Following from './components/MainSection/Profile/Following'
 import CreateAgency from './components/MainSection/CreateAgency/CreateAgency'
-import MyAgency from './components/MainSection/MyAgency/MyAgency'
 import Settings from './components/MainSection/Settings/Settings'
 import Navigation from './components/Navigation/Navigation';
 import Notifications from './components/Notifications/Notifications'
@@ -39,16 +38,16 @@ function App() {
       children: [
         {
           path: '/',
-          loader: async () => {
-            return fetch('JSON/fakePosts.json');
-          },
+          /* loader: async () => {
+            return fetch('http://localhost:5000/posts');
+          }, */
           element: <Home></Home>
         },
         {
           path: '/home',
-          loader: async () => {
-            return fetch('JSON/fakePosts.json');
-          },
+          /* loader: async () => {
+            return fetch('http://localhost:5000/posts');
+          }, */
           element: <Home></Home>
         },
         {
