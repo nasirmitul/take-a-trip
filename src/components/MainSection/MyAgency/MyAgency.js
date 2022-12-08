@@ -52,7 +52,8 @@ const MyAgency = () => {
                         totalTravelers: tourTraveler,
                         tourTripDay,
                         tourDeparture,
-                        tourHotelInformation
+                        tourHotelInformation,
+                        time: new Date()
                     }
 
                     console.log(createTour);

@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import man from '../../../images/man.jpg'
+import AgencyDetailModal from './AgencyDetailModal';
 
 const TourAgency = ({tourAgency}) => {
+    const [viewAgencyModal, setViewAgencyModal] = useState(null);
+    const closeAgencyModal = () => {
+        setViewAgencyModal(null)
+    }
+
+
     const {agencyName, agencyProfile, tourArranged, agencyRatings} = tourAgency;
     return (
         <div>
@@ -23,14 +30,19 @@ const TourAgency = ({tourAgency}) => {
                             <p>4.2<span>/5</span></p>
                         </div>
                         <div className="total-ratings">
-                            <p>{agencyRatings} ratings</p>
+                            <p>{agencyRatings ? agencyRatings : 0} ratings</p>
                         </div>
                     </div>
                     <div className="button">
-                        <button className='agency-choose-button'>Choose</button>
+                        <button className='agency-choose-button' onClick={() => setViewAgencyModal(tourAgency)}>Choose</button>
                     </div>
                 </div>
             </div>
+
+            {
+                viewAgencyModal && <AgencyDetailModal agencyDetail={viewAgencyModal} closeAgencyModal={closeAgencyModal}></AgencyDetailModal>
+            }
+
         </div>
     );
 };

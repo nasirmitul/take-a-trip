@@ -16,7 +16,7 @@ const UpComingTour = ({ upComingTour }) => {
                 </div>
                 <div className="name-description">
                     <h3>{locationName}</h3>
-                    <p>{details}</p>
+                    <p>{details.slice(0, 150)}...</p>
                 </div>
                 <div className="info-part agency-info">
                     <div className="info-title">

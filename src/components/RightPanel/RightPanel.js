@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import UpComingTour from '../MainSection/UpComingTours/UpComingTour';
 
 
 
 const RightPanel = () => {
 
-    /* const [upComingTour, setUpComingTour] = useState([]);
+    const [upComingTours, setUpComingTours] = useState([]);
     useEffect(() => {
-        fetch('JSON/fakeUpComingTours.json')
+        fetch('http://localhost:5000/rightUpcomingTours')
             .then(res => res.json())
-            .then(data => setUpComingTour(data))
+            .then(data => {
+                console.log('upComingTours', upComingTours);
+                setUpComingTours(data)
+            })
     }, []);
- */
+
 
 
     return (
@@ -19,8 +22,40 @@ const RightPanel = () => {
             <div className="section-title">
                 <p>Upcoming Tours for you</p>
             </div>
-            <UpComingTour></UpComingTour>
-            <UpComingTour></UpComingTour>
+            {
+                upComingTours?.map(upComingTour => <UpComingTour
+                    key={upComingTour._id}
+                    upComingTour={upComingTour}
+                ></UpComingTour>)
+            }
+        </div>
+    );
+};
+
+export default RightPanel; */
+import React, { useEffect, useState } from 'react';
+import UpComingTour from '../MainSection/UpComingTours/UpComingTour';
+
+const RightPanel = () => {
+
+    const [upcomingTours, setUpComingTours] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:5000/rightUpcomingTours')
+        .then(res => res.json())
+        .then(data => {
+            console.log('dataaaaaaa', data.upComingTourData);
+            setUpComingTours(data.upComingTourData)
+        })
+    }, [])
+
+    return (
+        <div className='right-panel'>
+            <div className="section-title">
+                <p>Upcoming Tours for you</p>
+            </div>
+            {
+                upcomingTours.map(upcomingTour => <UpComingTour key={upcomingTour._id} upComingTour={upcomingTour}></UpComingTour>)
+            }
         </div>
     );
 };

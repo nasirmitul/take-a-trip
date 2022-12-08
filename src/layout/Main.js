@@ -1,5 +1,4 @@
 import React from 'react';
-import './Main.css';
 import { Outlet } from 'react-router-dom';
 import Navigation from '../components/Navigation/Navigation';
 

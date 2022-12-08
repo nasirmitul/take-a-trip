@@ -5,16 +5,154 @@ import '../../../css/style.css'
 import notification from '../../../icons/notification.png'
 import SingleUserPost from './SingleUserPost';
 import SingleAgencyPost from './SingleAgencyPost';
-import Modal from '../../Modal/Modal';
-import { useLoaderData } from 'react-router-dom';
 import Notifications from '../../Notifications/Notifications';
 import { AuthContext } from '../../../contexts/UserContext';
 
+import { RxCross2 } from 'react-icons/rx';
+
 const Home = () => {
+    const [selectedImages, setSelectedImages] = useState([])
+    const imageHostKey = process.env.REACT_APP_imgbb_key_post;
 
     const { user } = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
     const [notifications, setNotifications] = useState(false);
+    const [loadData, setLoadData] = useState(false);
+
+    const handleAddImage = (event) => {
+        const selectedImage = event.target.files;
+        const selectedImageArray = Array.from(selectedImage);
+        const imageArray = selectedImageArray.map((image) => {
+            return URL.createObjectURL(image)
+        })
+        const totalSelectedImage = selectedImageArray.length + selectedImages.length;
+        if (totalSelectedImage <= 10) {
+            setSelectedImages((previousImage) => previousImage.concat(imageArray))
+        }
+        else {
+            return
+        }
+        console.log(totalSelectedImage);
+    }
+
+    const handleNewPostSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData();
+
+        const tourStatus = form.tourStatus.value;
+        const tourImage = form.userPostImage.files;
+        console.log(tourImage.length);
+
+        var allImages = [];
+
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+
+        for (let i = 0; i < tourImage.length; i++) {
+            const postTourImage = form.userPostImage.files[i];
+            formData.append('image', postTourImage)
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(imgData => {
+                    if (imgData.success) {
+                        console.log(imgData.data.url, form.userPostImage.files[i]);
+                        allImages.push({imgURL: imgData.data.url})
+                        console.log('arr', allImages);
+                    }
+                })
+        }
+
+        setTimeout(() => {
+            const createPost = {
+                userID: user.uid,
+                allPicture: allImages,
+                caption: tourStatus,
+                name: user.displayName,
+                email: user.email,
+                profile: user.photoURL,
+                time: new Date(),
+                reacts: 0,
+                comments: []
+            }
+
+            console.log(createPost);
+            fetch('http://localhost:5000/posts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(createPost)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.acknowledged) {
+                        form.reset();
+                        setOpenModal(false)
+                        setLoadData(true)
+                    }
+                })
+                .catch(error => console.log(error))
+
+            setLoadData(false)
+        }, 15000)
+
+
+
+        /* formData.append('image', tourImage)
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    console.log(imgData.data.url);
+
+                    const createPost = {
+                        userID: user.uid,
+                        allPicture: [
+                            {
+                                imgURL: imgData.data.url
+                            }
+                        ],
+                        caption: tourStatus,
+                        name: user.displayName,
+                        email: user.email,
+                        profile: user.photoURL,
+                        time: new Date(),
+                        reacts: 0,
+                        comments: []
+                    }
+
+                    console.log(createPost);
+
+                    fetch('http://localhost:5000/posts', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(createPost)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.acknowledged) {
+                                form.reset();
+                                setOpenModal(false)
+                                setLoadData(true)
+                            }
+                        })
+                        .catch(error => console.log(error))
+                }
+            })
+        setLoadData(false) */
+    }
 
     // const posts = useLoaderData();
 
@@ -26,16 +164,16 @@ const Home = () => {
             return data;
         }
     }) */
-    
+
     const [posts, setPosts] = useState([])
     useEffect(() => {
         fetch('http://localhost:5000/posts')
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setPosts(data)
-        })
-    }, [])
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setPosts(data)
+            })
+    }, [loadData])
 
     return (
 
@@ -65,7 +203,59 @@ const Home = () => {
                     </div>
 
                     <div className='post-modal'>
-                        {openModal && <Modal closeModal={setOpenModal} />}
+                        {
+                            openModal && <div>
+                                <div className='modal-background' onClick={() => setOpenModal(false)}></div>
+                                <div className="modal-body">
+                                    <div className="modal-title">
+                                        <p className='title'>Create Tour Post</p>
+                                        <div className="close-icon" onClick={() => setOpenModal(false)}>
+                                            <i className="fa-solid fa-xmark"></i>
+                                        </div>
+                                    </div>
+
+                                    <form action="" onSubmit={handleNewPostSubmit}>
+                                        <div className="user-input">
+                                            <div className="tour-caption">
+                                                <textarea placeholder='How was your recent tour?' name='tourStatus' required></textarea>
+                                            </div>
+
+                                            <div className="selected-images">
+                                                {
+                                                    selectedImages && selectedImages.map((image) => {
+                                                        return (
+                                                            <div key={image} className="user-selected-images">
+                                                                <img className='user-post-selected-image' src={image} alt="" />
+
+                                                                <button className='cancel-image' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}><RxCross2 className='cross-icon'></RxCross2></button>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                            <div className="add-also">
+                                                <p>Add</p>
+
+                                                <div className="items-to-add">
+                                                    <div className="upload-image">
+                                                        <label className='tour-image-upload' htmlFor="tour-image"><i className="fa-solid fa-image"></i></label>
+                                                        <input id="tour-image" type="file" name="userPostImage" accept="image/png, image/gif, image/jpeg" required multiple onChange={handleAddImage} />
+                                                    </div>
+
+                                                    <div className="add-location">
+                                                        <i className="fa-solid fa-location-dot"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="upload-button">
+                                            <button>Post</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                 </div>
@@ -77,7 +267,7 @@ const Home = () => {
                     ></SingleUserPost>)
                 }
 
-                <SingleAgencyPost></SingleAgencyPost>
+                {/* <SingleAgencyPost></SingleAgencyPost> */}
 
             </section>
         </div>

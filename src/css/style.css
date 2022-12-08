@@ -5,6 +5,8 @@
     --placeholder: rgba(78, 79, 79, 0.6);
     --body-bg: #f7f7f7;
     --white: #ffffff;
+    --yellow: #FEDF01;
+    --white-800: rgba(255, 255, 255, 0.8);
     --white-30: rgba(94, 94, 94, 0.3);
     --white-90: rgba(94, 94, 94, 0.7);
     --primary-color: #119A7C;
@@ -74,6 +76,23 @@ body {
     padding: 10px 23px;
     border-radius: 5px;
     border: none;
+    background: var(--btn-color);
+    color: var(--white);
+}
+
+.custom-btn-outline {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-color);
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    transition: .4s !important;
+}
+
+.custom-btn-outline:hover{
     background: var(--btn-color);
     color: var(--white);
 }
@@ -781,7 +800,7 @@ nav a .logo {
 }
 
 /* News feed image slider */
-.image-slider{
+.image-slider {
     position: relative;
 }
 
@@ -815,7 +834,7 @@ nav a .logo {
 }
 
 .image-slider .main-slider .prev:hover,
-.image-slider .main-slider .next:hover{
+.image-slider .main-slider .next:hover {
     opacity: 1;
 }
 
@@ -849,7 +868,7 @@ nav a .logo {
     right: 8px;
 }
 
-.change-image{
+.change-image {
     display: flex;
     position: absolute;
     bottom: 5px;
@@ -857,42 +876,51 @@ nav a .logo {
     transform: translateX(-50%);
 }
 
-
-.change-image .dot .dot-icon{
-    font-size: 6px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.7);
+.change-image .dot .dot-icon {
+    font-size: 5px;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     gap: 50px;
     margin: 0 6px;
     cursor: pointer;
     border-radius: 50%;
 }
 
-.image-count{
+.change-image .dot .dot-icon-active {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.9);
+    gap: 50px;
+    margin: 0 6px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.image-count {
     position: absolute;
     top: 10px;
     left: 10px;
 }
 
-.image-count .image-number{
+.image-count .image-number {
     color: rgba(255, 255, 255, 1);
     font-size: .9rem;
 }
 
-.image-count .image-number span{
+.image-count .image-number span {
     color: rgba(255, 255, 255, .6);
     font-size: .9rem;
 }
 
 /* Comment */
 
-.all-comments .single-comment{
+.all-comments .single-comment {
     display: flex;
     margin-top: 15px;
     position: relative;
 }
 
-.all-comments .single-comment::after{
+.all-comments .single-comment::after {
     content: '';
     position: absolute;
     height: 1px;
@@ -902,7 +930,7 @@ nav a .logo {
     right: 0;
 }
 
-.all-comments .single-comment .commentator-image{
+.all-comments .single-comment .commentator-image {
     height: 45px;
     width: 45px;
     border-radius: 50%;
@@ -910,13 +938,13 @@ nav a .logo {
     margin-right: 15px;
 }
 
-.all-comments .single-comment .name-comment .name{
+.all-comments .single-comment .name-comment .name {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-color);
 }
 
-.all-comments .single-comment .name-comment .comment{
+.all-comments .single-comment .name-comment .comment {
     font-size: .9rem;
     font-weight: 400;
     color: var(--text-color);
@@ -925,24 +953,25 @@ nav a .logo {
 /* ================================ Post Modal Design ================================ */
 
 .modal-background {
-    position: fixed;
+    position: absolute;
     height: 100vh;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(2.3px);
+    backdrop-filter: blur(2.3px);
 }
 
 .modal-body {
-    position: relative;
-    width: 500px;
+    position: absolute;
+    width: min(500px, 95%);
     height: fit-content;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999999999;
+    top: 100px;
+    transform: translateX(-50%);
+    z-index: 10;
     background: var(--white);
     border-radius: 8px;
     border: 2px solid rgba(64, 199, 125, 0.1);
@@ -997,7 +1026,7 @@ nav a .logo {
     position: relative;
 }
 
-.user-selected-images{
+.user-selected-images {
     position: relative;
 }
 
@@ -1008,7 +1037,7 @@ nav a .logo {
     position: relative;
 }
 
-.cancel-image{
+.cancel-image {
     position: absolute;
     top: 3px;
     right: 3px;
@@ -1023,7 +1052,7 @@ nav a .logo {
     align-items: center;
 }
 
-.cancel-image .cross-icon{
+.cancel-image .cross-icon {
     font-size: .9rem;
 }
 
@@ -1090,9 +1119,6 @@ nav a .logo {
 }
 
 @media only screen and (max-width: 520px) {
-    .modal-body {
-        width: 90%;
-    }
 
     .user-input {
         padding: 15px 0 10px 0;
@@ -1218,7 +1244,7 @@ nav a .logo {
 
 #middle-section .comment input:focus {
     outline: 0px !important;
-    -webkit-appearance:none;
+    -webkit-appearance: none;
     box-shadow: none !important;
     border: 1px solid var(--primary);
 }
@@ -1252,7 +1278,6 @@ nav a .logo {
     font-weight: 600;
     font-size: 20px;
     color: var(--text-color);
-    letter-spacing: 2px;
 }
 
 #middle-section .post .agency-text p {
@@ -1389,6 +1414,7 @@ nav a .logo {
 .tour-card .name-description p {
     font-size: 14px;
     color: rgba(78, 79, 79, 0.9);
+    height: 70px;
 }
 
 .info-part {
@@ -1460,6 +1486,52 @@ nav a .logo {
     font-weight: 1rem;
 }
 
+
+/* ================================ Agency rating  ================================ */
+
+.agency-ratings {
+    width: 100%;
+}
+
+.agency-ratings .stars {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.agency-ratings .stars .feedback-title {
+    margin-right: 10px !important;
+}
+
+.agency-ratings .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.agency-ratings .review-form textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--white-90);
+    outline: none;
+    border-radius: 5px;
+    color: var(--black);
+    font-size: .9rem;
+    height: 100px;
+    padding: 15px;
+}
+
+.agency-ratings .review-form textarea:focus {
+    border: 1px solid var(--primary);
+}
+
+.agency-ratings .review-form .custom-btn {
+    width: fit-content;
+}
+
+.star-hover:hover {
+    transform: scale(1.2);
+}
 
 /* ================================ Tour Agencies  ================================ */
 .tour-agency {
@@ -1534,7 +1606,125 @@ nav a .logo {
     cursor: pointer;
 }
 
+
+/* ------------------- Agency Detail Modal --------------------  */
+.full-agency-detail-modal {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(2.3px);
+    backdrop-filter: blur(2.3px);
+}
+
+.agency-detail-modal {
+    position: absolute;
+    padding: 15px;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: var(--white);
+    border-radius: 5px;
+    border: 1px solid rgba(64, 199, 125, 0.1);
+    width: min(400px, 100%);
+}
+
+.agency-detail-modal .modal-head {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--white-800);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.agency-detail-modal .cancel-icon {
+    color: var(--black);
+    font-size: 1.2rem;
+}
+
+.agency-detail-modal .agency-cover-image img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    position: relative;
+}
+
+.agency-detail-modal .agency-profile-image img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: -40px 0 10px 0;
+}
+
+.agency-detail-modal .agency-name h3 {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.agency-detail-modal .agency-email p {
+    text-align: center;
+    color: var(--text-color);
+    font-size: .8rem;
+    font-weight: 400;
+    margin-bottom: 10px !important;
+}
+
+.agency-detail-modal .tour-arranged p,
+.agency-detail-modal .ratings p,
+.agency-detail-modal .reviews p {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.agency-detail-modal .reviews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.agency-detail-modal .reviews span{
+    font-size: .7rem;
+}
+
+.agency-detail-modal .reviews .star{
+    color: var(--yellow);
+}
+
+.agency-detail-modal .actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
 /* ================================ My Agency  ================================ */
+.no-post {
+    color: var(--white-90);
+    text-align: center;
+}
+
 .agency-settings img {
     height: 20px;
     width: 25px;

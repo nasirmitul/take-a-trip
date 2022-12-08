@@ -6,8 +6,10 @@ import menu from '../../../icons/menu.png'
 import interested from '../../../icons/interested.png'
 import going from '../../../icons/going.png'
 import moreInfo from '../../../icons/more info.png'
+import { Link } from 'react-router-dom';
 
-const SingleAgencyPost = () => {
+const SingleAgencyPost = ({post}) => {
+    const {_id, agencyName, agencyProfile, time, image, tourTripDate, tourTripTime, locationName, details} = post;
     return (
         <div>
             <div className="agency-post">
@@ -15,11 +17,11 @@ const SingleAgencyPost = () => {
                     <div className="id d-flex post-top-part">
                         <div className="id-name d-flex align-items-center">
                             <div className="id-img">
-                                <img className="post-user-img" src={man} alt="men" />
+                                <img className="post-user-img" src={agencyProfile} alt="men" />
                             </div>
                             <div className="id-text  ms-4">
-                                <h6>Sharif</h6>
-                                <p>12:03pm, june 17,20</p>
+                                <h6>{agencyName}</h6>
+                                <p>{time || 'posted time here'}</p>
                             </div>
                         </div>
                         <div className="post-menu">
@@ -31,7 +33,7 @@ const SingleAgencyPost = () => {
                         <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img className="d-block w-100" src={travel} alt="First slide" />
+                                    <img className="d-block w-100" src={image} alt="First slide" />
                                 </div>
                                 <div className="carousel-item">
                                     <img className="d-block w-100" src="./images/t.png" alt="Second slide" />
@@ -43,20 +45,18 @@ const SingleAgencyPost = () => {
                         </div>
                     </div>
                     <div className="agency-text">
-                        <p id="time">August 23 at 7:00 pm</p>
-                        <h4>Cox’s Bazar Tour</h4>
-                        <p>We are arranging a tour for 3 days 4 night from 1 july, 2022 to 4 july, 2022. Our journey will
-                            start from Dhaka at 7:00pm and we will reach at cox’s Bazar at 4:00 am hopefully. Let’s join in the
-                            journey and enjoy...</p>
+                        <p id="time">{tourTripDate} at {tourTripTime}</p>
+                        <h4>{locationName}</h4>
+                        <p>{details}</p>
                     </div>
 
                     <div className="agency-icons d-flex justify-content-around mt-3">
                         <div className="interested">
-                            <p><a href="/"><img src={interested} alt="" /><span>interested</span></a></p>
+                            <p><Link><img src={interested} alt="" /><span>interested</span></Link></p>
                         </div>
 
                         <div className="info">
-                            <p><a href="/"><img src={moreInfo} alt="" /><span>More info</span></a></p>
+                            <p><Link to={`/tour-details/${_id}`}><img src={moreInfo} alt="" /><span>More info</span></Link></p>
                         </div>
                     </div>
                 </div>

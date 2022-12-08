@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import menu from '../../../icons/menu.png'
 import react from '../../../icons/react.png'
@@ -8,10 +8,18 @@ import comment from '../../../icons/comment.png'
 import { GrFormPrevious } from 'react-icons/gr';
 import { GrFormNext } from 'react-icons/gr';
 import { VscDebugStackframeDot } from 'react-icons/vsc';
+import { AuthContext } from '../../../contexts/UserContext';
 
 
 const SingleUserPost = ({ post }) => {
-    const { id, name, caption, profile, time, reacts, comments, allPicture } = post;
+    const { user } = useContext(AuthContext);
+    const { _id, name, caption, profile, time, reacts, comments, allPicture } = post;
+
+
+    /* Change React Icon and Increase/Decrease Value */
+    const [reactActive, setReactActive] = useState(false);
+    const [reactCount, setReactCount] = useState(reacts)
+
 
     /* Image slider for posts pictures */
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -32,6 +40,7 @@ const SingleUserPost = ({ post }) => {
         setCurrentIndex(slideIndex)
     }
 
+
     /* Check Caption length and work on see more */
     const [captionLength, setCaptionLength] = useState(true);
     useEffect(() => {
@@ -49,9 +58,46 @@ const SingleUserPost = ({ post }) => {
         }
     }
 
-    /* Change React Icon and Increase/Decrease Value */
-    const [reactActive, setReactActive] = useState(false);
-    const [reactCount, setReactCount] = useState(reacts)
+
+    /* Add new comment to a posts */
+    const addComment = (event) => {
+        event.preventDefault();
+        const form = event.target;
+
+        const comment = form.comment.value;
+        const commentatorImg = user.photoURL;
+        const commentator = user.displayName;
+
+        const commentData = {
+            comment,
+            commentatorImg,
+            commentator,
+            commentTime : new Date()
+        }
+
+        console.log(commentData);
+
+        fetch(`http://localhost:5000/posts/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(commentData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.modifiedCount > 0){
+                alert('comment added successfully')
+            }
+            console.log(data);
+        })
+    }
+
+
+    /* Add react */
+    const addReact = () =>{
+        
+    }
 
 
     return (
@@ -64,7 +110,7 @@ const SingleUserPost = ({ post }) => {
                         </div>
                         <div className="id-text ms-4">
                             <h6>{name}</h6>
-                            <p>{time}</p>
+                            <p>{time.slice(11, 16)}, {time.slice(0, 10)}</p>
                         </div>
                     </div>
                     <div className="post-menu">
@@ -89,7 +135,7 @@ const SingleUserPost = ({ post }) => {
                         {
                             allPicture.map((image, slideIndex) => (
                                 <div className='dot' key={slideIndex}>
-                                    <VscDebugStackframeDot onClick={() => goToSlide(slideIndex)} className='dot-icon'></VscDebugStackframeDot>
+                                    <VscDebugStackframeDot onClick={() => goToSlide(slideIndex)} className={slideIndex === currentIndex ? 'dot-icon-active':'dot-icon'}></VscDebugStackframeDot>
                                 </div>
                             ))
                         }
@@ -117,10 +163,10 @@ const SingleUserPost = ({ post }) => {
                     </div>
                 </div>
 
-                <div className="comment d-flex">
-                    <input className="form-control w-100" type="search" placeholder="Your thought on it" />
+                <form action="" className="comment d-flex" onSubmit={addComment}>
+                    <input className="form-control w-100" name='comment' type="search" placeholder="Your thought on it" />
                     <button className="btn-comment custom-btn" type="comment">Comment</button>
-                </div>
+                </form>
 
 
                 <div className="all-comments">
@@ -128,11 +174,11 @@ const SingleUserPost = ({ post }) => {
                         comments.map((comment, commentIndex) =>
                             <div className='single-comment' key={commentIndex}>
                                 <div className="commentator-image">
-                                    <img className='commentator-image' src={comment.commentatorImg} alt="" />
+                                    <img className='commentator-image' src={comment?.commentatorImg} alt="" />
                                 </div>
                                 <div className="name-comment">
-                                    <p className="name">{comment.commentator}</p>
-                                    <p className="comment">{comment.comment}</p>
+                                    <p className="name">{comment?.commentator} <span>.</span> {comment?.commentTime.slice(11,16)}</p>
+                                    <p className="comment">{comment?.comment}</p>
                                 </div>
                             </div>).reverse()
                     }
