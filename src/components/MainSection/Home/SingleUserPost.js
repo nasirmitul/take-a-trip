@@ -13,12 +13,54 @@ import { AuthContext } from '../../../contexts/UserContext';
 
 const SingleUserPost = ({ post }) => {
     const { user } = useContext(AuthContext);
-    const { _id, name, caption, profile, time, reacts, comments, allPicture } = post;
+    const { _id, name, caption, profile, time, reacts, comments, allPicture, reacts_uid } = post;
 
 
     /* Change React Icon and Increase/Decrease Value */
     const [reactActive, setReactActive] = useState(false);
     const [reactCount, setReactCount] = useState(reacts)
+    const [checkReact, setCheckReact] = useState(false);
+
+
+    /* useEffect(() => {
+
+    }, [])
+    reacts_uid?.forEach( react => {
+        react === user.uid ? setCheckReact(true) : setCheckReact(false)
+    }) */
+
+    const addReact = () => {
+        setReactCount(reactCount + 1);
+
+        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ react: 1, uid: user.uid })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
+
+    const removeReact = () => {
+        setReactCount(reactCount - 1);
+
+        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ react: -1, uid: user.uid })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+    }
+
 
 
     /* Image slider for posts pictures */
@@ -39,7 +81,6 @@ const SingleUserPost = ({ post }) => {
     const goToSlide = (slideIndex) => {
         setCurrentIndex(slideIndex)
     }
-
 
     /* Check Caption length and work on see more */
     const [captionLength, setCaptionLength] = useState(true);
@@ -72,31 +113,26 @@ const SingleUserPost = ({ post }) => {
             comment,
             commentatorImg,
             commentator,
-            commentTime : new Date()
+            date: new Date().toUTCString(),
+            time: new Date().toLocaleString()
         }
 
         console.log(commentData);
 
-        fetch(`http://localhost:5000/posts/${_id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(commentData)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.modifiedCount > 0){
-                alert('comment added successfully')
-            }
-            console.log(data);
-        })
-    }
-
-
-    /* Add react */
-    const addReact = () =>{
-        
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('comment added successfully')
+                }
+                console.log(data);
+            })
     }
 
 
@@ -124,6 +160,7 @@ const SingleUserPost = ({ post }) => {
                     }
                 </div>
 
+
                 <div className="image-slider">
                     <div className='main-slider'>
                         <button className='prev' onClick={goPrev}><GrFormPrevious className='n-p-icon'></GrFormPrevious></button>
@@ -135,7 +172,7 @@ const SingleUserPost = ({ post }) => {
                         {
                             allPicture.map((image, slideIndex) => (
                                 <div className='dot' key={slideIndex}>
-                                    <VscDebugStackframeDot onClick={() => goToSlide(slideIndex)} className={slideIndex === currentIndex ? 'dot-icon-active':'dot-icon'}></VscDebugStackframeDot>
+                                    <VscDebugStackframeDot onClick={() => goToSlide(slideIndex)} className={slideIndex === currentIndex ? 'dot-icon-active' : 'dot-icon'}></VscDebugStackframeDot>
                                 </div>
                             ))
                         }
@@ -144,20 +181,25 @@ const SingleUserPost = ({ post }) => {
                     <div className="image-count">
                         <p className='image-number'>{currentIndex + 1}<span>/{allPicture.length}</span></p>
                     </div>
-
                 </div>
 
+
+
                 <div className="react-comment d-flex justify-content-between">
+
+
                     <div className="react">
                         <div className="react-icon" onClick={() => setReactActive(!reactActive)}>
                             {
-                                reactActive ?
-                                    <img onClick={() => setReactCount(reactCount - 1)} className='react-pointer' src={react} /> :
-                                    <img onClick={() => setReactCount(reactCount + 1)} className='react-pointer' src={reactStroke} />
+                                reactActive || checkReact ?
+                                    <img onClick={removeReact} className='react-pointer' src={react} /> :
+                                    <img onClick={addReact} className='react-pointer' src={reactStroke} />
                             }
                         </div>
                         <span>{reactCount}</span>
                     </div>
+
+
                     <div className="comment">
                         <p>{comments.length}<span>comment</span><img src={comment} alt="" /></p>
                     </div>
@@ -177,10 +219,15 @@ const SingleUserPost = ({ post }) => {
                                     <img className='commentator-image' src={comment?.commentatorImg} alt="" />
                                 </div>
                                 <div className="name-comment">
-                                    <p className="name">{comment?.commentator} <span>.</span> {comment?.commentTime.slice(11,16)}</p>
+                                    <p className="name">{comment?.commentator}
+                                        <span className="comment-time">
+                                            {comment?.date?.slice(5, 17)}, {comment?.time?.slice(12, 16)} {comment?.time?.slice(20, 22)}
+                                        </span>
+                                    </p>
                                     <p className="comment">{comment?.comment}</p>
                                 </div>
-                            </div>).reverse()
+                            </div>
+                        ).reverse()
                     }
                 </div>
 

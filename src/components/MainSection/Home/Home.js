@@ -13,7 +13,6 @@ import { RxCross2 } from 'react-icons/rx';
 const Home = () => {
     const [selectedImages, setSelectedImages] = useState([])
     const imageHostKey = process.env.REACT_APP_imgbb_key_post;
-
     const { user } = useContext(AuthContext);
     const [openModal, setOpenModal] = useState(false);
     const [notifications, setNotifications] = useState(false);
@@ -59,7 +58,7 @@ const Home = () => {
                 .then(imgData => {
                     if (imgData.success) {
                         console.log(imgData.data.url, form.userPostImage.files[i]);
-                        allImages.push({imgURL: imgData.data.url})
+                        allImages.push({ imgURL: imgData.data.url })
                         console.log('arr', allImages);
                     }
                 })
@@ -75,11 +74,12 @@ const Home = () => {
                 profile: user.photoURL,
                 time: new Date(),
                 reacts: 0,
-                comments: []
+                comments: [],
+                reacts_uid: []
             }
 
             console.log(createPost);
-            fetch('http://localhost:5000/posts', {
+            fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -132,7 +132,7 @@ const Home = () => {
 
                     console.log(createPost);
 
-                    fetch('http://localhost:5000/posts', {
+                    fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -159,7 +159,7 @@ const Home = () => {
     /* const { data: posts = [], refetch } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/posts');
+            const res = await fetch('https://take-a-trip-server-sigma.vercel.app/posts');
             const data = await res.json();
             return data;
         }
@@ -167,7 +167,7 @@ const Home = () => {
 
     const [posts, setPosts] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/posts')
+        fetch('https://take-a-trip-server-sigma.vercel.app/posts')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -226,7 +226,6 @@ const Home = () => {
                                                         return (
                                                             <div key={image} className="user-selected-images">
                                                                 <img className='user-post-selected-image' src={image} alt="" />
-
                                                                 <button className='cancel-image' onClick={() => setSelectedImages(selectedImages.filter((e) => e !== image))}><RxCross2 className='cross-icon'></RxCross2></button>
                                                             </div>
                                                         )

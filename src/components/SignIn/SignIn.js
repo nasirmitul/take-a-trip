@@ -43,7 +43,7 @@ const SignIn = () => {
                 }
                 console.log("currentUser", currentUser);
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://take-a-trip-server-sigma.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -1,6 +1,7 @@
 import React from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { AiFillStar } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const AgencyDetailModal = ({ agencyDetail, closeAgencyModal }) => {
     return (
@@ -41,7 +42,9 @@ const AgencyDetailModal = ({ agencyDetail, closeAgencyModal }) => {
                 </div>
 
                 <div className="actions">
-                    <button className="custom-btn">View Profile</button>
+                    <Link to={`/agencyProfile/${agencyDetail._id}`}>
+                        <button className="custom-btn">View Profile</button>
+                    </Link>
                     <button className="custom-btn-outline">Personalize Tour</button>
                 </div>
 

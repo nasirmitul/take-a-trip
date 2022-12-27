@@ -28,6 +28,7 @@ import AgencyAbout from './components/MainSection/MyAgency/AgencyAbout';
 import AgencyLayout from './layout/AgencyLayout';
 import AgencySettings from './components/MainSection/MyAgency/AgencySettings';
 import CarouselTest from './components/Test/CarouselTest';
+import ViewAgencyProfile from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyProfile';
 
 function App() {
 
@@ -39,28 +40,28 @@ function App() {
         {
           path: '/',
           /* loader: async () => {
-            return fetch('http://localhost:5000/posts');
+            return fetch('https://take-a-trip-server-sigma.vercel.app/posts');
           }, */
           element: <Home></Home>
         },
         {
           path: '/home',
           /* loader: async () => {
-            return fetch('http://localhost:5000/posts');
+            return fetch('https://take-a-trip-server-sigma.vercel.app/posts');
           }, */
           element: <Home></Home>
         },
         {
           path: '/upcoming-tours',
           /* loader: async () => {
-            return fetch('http://localhost:5000/upcomingTours');
+            return fetch('https://take-a-trip-server-sigma.vercel.app/upcomingTours');
           }, */
           element: <UpComingTours></UpComingTours>
         },
         {
           path: '/tour-details/:id',
           loader: async ({params}) => {
-            return fetch(`http://localhost:5000/upcomingTours/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/upcomingTours/${params.id}`)
           },
           element: <UpComingTourDetails></UpComingTourDetails>
         },
@@ -111,6 +112,13 @@ function App() {
               element: <AgencyAbout></AgencyAbout>
             }
           ]
+        },
+        {
+          path: '/agencyProfile/:id',
+          element: <ViewAgencyProfile></ViewAgencyProfile>,
+          loader: async ({params}) => {
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
+          },
         },
         {
           path: '/settings',

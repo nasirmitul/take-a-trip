@@ -2,20 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 import options from '../../../icons/menu.png'
+import { BiImageAdd } from 'react-icons/bi';
 
 const MyAgency = () => {
     const navigate = useNavigate();
     const { user, userSignOut } = useContext(AuthContext);
     const [agency, setAgency] = useState({});
     const [showPopup, setShowPopup] = useState(false);
-    const imageHostKey = process.env.REACT_APP_imgbb_key;
+    const imageHostKey = process.env.REACT_APP_imgbb_key_post;
+
+    console.log(imageHostKey);
 
     const handleCreateTour = (event) => {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData();
 
-        const tourHeaderImg = form.headerImg.files;
+        const tourHeaderImg = form.headerImg.files[0];
         const tourLocation = form.location.value;
         const tourTotalCost = form.cost.value;
         const tourTripDate = form.date.value;
@@ -26,7 +29,7 @@ const MyAgency = () => {
         const tourHotelInformation = form.hotelInformation.value;
         const tourDescription = form.description.value;
 
-        formData.append('tourImage', tourHeaderImg)
+        formData.append('image', tourHeaderImg)
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
 
         fetch(url, {
@@ -50,6 +53,7 @@ const MyAgency = () => {
                         tourTripDate,
                         tourTripTime,
                         totalTravelers: tourTraveler,
+                        leftTravelers: 0,
                         tourTripDay,
                         tourDeparture,
                         tourHotelInformation,
@@ -58,7 +62,7 @@ const MyAgency = () => {
 
                     console.log(createTour);
 
-                    fetch('http://localhost:5000/upcomingTours', {
+                    fetch('https://take-a-trip-server-sigma.vercel.app/upcomingTours', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -83,7 +87,7 @@ const MyAgency = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createAgency?agencyEmail=${user.email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('tripToken')}`
             }
@@ -97,7 +101,6 @@ const MyAgency = () => {
             .then(data => setAgency(data))
     }, [])
 
-
     const handleToSettings = () => {
         navigate('/agency-settings',
             {
@@ -110,7 +113,6 @@ const MyAgency = () => {
     }
 
     return (
-
         <div>
             <div className='user-profile'>
                 <div className="profile-header">
@@ -155,29 +157,50 @@ const MyAgency = () => {
                 </div>
             </div>
 
-            <div className="make_post d-flex" onClick={() => setShowPopup(!showPopup)}>
+            <div className="make_post d-flex" onClick={() => setShowPopup(true)}>
                 <div className='w-100 update-post'>
                     <img className="img-fluid user-profile-img" src={agency[0]?.agencyProfile} alt="" />
                     <p>Create A Tour?</p>
                 </div>
             </div>
 
-            <div className={`tour-popup ${showPopup ? 'show-tour-popup' : 'hide-tour-popup'}`}>
-                <form className='create-agency' onSubmit={handleCreateTour}>
-                    <h1>Create a Tour</h1>
-                    <input type="file" name='headerImg' accept="image/png, image/gif, image/jpeg" required />
-                    <input type="text" name='location' placeholder='location' required />
-                    <input type="number" name='cost' placeholder='Total Cost' required />
-                    <input type="date" name='date' placeholder='Trip Date' required />
-                    <input type="time" name='time' placeholder='Trip Time' required />
-                    <input type="number" name='traveler' placeholder='Total Traveler' required />
-                    <input type="number" name='totalDay' placeholder='How many days?' required />
-                    <input type="text" name='departure' placeholder='Departure From?' required />
-                    <input type="text" name='hotelInformation' placeholder='Hotel Information' required />
-                    <textarea name="description" id="" rows="4" placeholder='Description'></textarea>
 
-                    <input className='custom-btn' type="submit" value="Create Tour" />
-                </form>
+            <div className={`create-tour-popup ${showPopup ? 'show-tour-popup' : 'hide-tour-popup'}`}>
+                <div className='modal-background' onClick={() => setShowPopup(false)}></div>
+
+                <div className="modal-body">
+                    <div className="modal-title">
+                        <p className='title'>Crate A Tour</p>
+
+                        <div className="close-icon" onClick={() => setShowPopup(false)}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <form className='create-agency' onSubmit={handleCreateTour}>
+                        <input type="text" name='location' placeholder='location' required />
+                        <input type="number" name='cost' placeholder='Total Cost' required />
+                        <input type="date" name='date' placeholder='Trip Date' required />
+                        <input type="time" name='time' placeholder='Trip Time' required />
+                        <input type="number" name='traveler' placeholder='Total Traveler' required />
+                        <input type="number" name='totalDay' placeholder='How many days?' required />
+                        <input type="text" name='departure' placeholder='Departure From?' required />
+                        <input type="text" name='hotelInformation' placeholder='Hotel Information' required />
+                        <textarea name="description" id="" rows="4" placeholder='Description'></textarea>
+
+                        <div className="add-image">
+                            <label className='create-tour-image-body' htmlFor="headerImg">
+                                <BiImageAdd className='add-image-icon'></BiImageAdd>
+                                <p>Add Image</p>
+                            </label>
+                            <input type="file" className='create-tour-image' name='headerImg' id='headerImg' accept="image/png, image/gif, image/jpeg" required />
+                        </div>
+                        
+
+                        <input className='custom-btn' type="submit" value="Create Tour" />
+                        
+                    </form>
+                </div>
+
             </div>
         </div>
     );

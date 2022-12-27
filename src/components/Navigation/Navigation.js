@@ -34,7 +34,7 @@ const Navigation = () => {
 
     const [agency, setAgency] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/createAgency?agencyEmail=${user?.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user?.email}`)
             .then(res => res.json())
             .then(data => setAgency(data))
     }, [])
