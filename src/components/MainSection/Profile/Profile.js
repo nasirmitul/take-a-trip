@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import cover from '../../../images/nature.jpg'
-import dp from '../../../images/man.jpg'
 import { Link, NavLink } from 'react-router-dom';
 import options from '../../../icons/menu.png'
 
@@ -24,9 +23,6 @@ const Profile = () => {
                             <div className="profile-name-email">
                                 <h2 className="profile-name">{user.displayName}</h2>
                                 <p className="profile-email">{user.email}</p>
-                            </div>
-                            <div className="follow-button">
-                                <button className="custom-btn">Follow</button>
                             </div>
                         </div>
                         <div className="profile-navigation profile-navigation-top">

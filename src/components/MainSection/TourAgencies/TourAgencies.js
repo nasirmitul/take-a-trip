@@ -4,7 +4,7 @@ import TourAgency from './TourAgency';
 const TourAgencies = () => {
     const [tourAgencies, setTourAgencies] = useState([]);
     useEffect(() => {
-        fetch('https://take-a-trip-server-sigma.vercel.app/createAgency')
+        fetch('http://localhost:5000/createAgency')
             .then(res => res.json())
             .then(data => setTourAgencies(data))
     }, [])

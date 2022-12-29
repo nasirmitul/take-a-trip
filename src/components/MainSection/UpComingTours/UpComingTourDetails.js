@@ -1,13 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AuthContext } from '../../../contexts/UserContext';
 
 const UpComingTourDetails = () => {
 
-    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers } = useLoaderData();
+    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail } = useLoaderData();
 
     const [showPayment, setShowPayment] = useState(false);
+    const [disable, setDisable] = useState(false)
+
+    useEffect(() => {
+        if(parseInt(totalTravelers) === leftTravelers){
+            setDisable(true)
+        }
+    }, [leftTravelers])
+
+
     const { user } = useContext(AuthContext)
 
 
@@ -28,8 +37,14 @@ const UpComingTourDetails = () => {
             username: name,
             userEmail: email,
             phone_number: phone_number,
-            // post_code,
-            address: address
+            address: address,
+            tourImage: image,
+            tourTripDate: tourTripDate,
+            tourTripTime: tourTripTime,
+            tourTripDay: tourTripDay,
+            tourDeparture: tourDeparture,
+            agencyEmail: agencyEmail,
+            agencyName: agencyName
         }
 
         console.log(makePayment);
@@ -118,29 +133,83 @@ const UpComingTourDetails = () => {
                         </div>
                     </div>
                 </div>
-                <button className='upcoming-tour-button' onClick={() => { setShowPayment(true) }}>Going</button>
+                <button className='upcoming-tour-button' onClick={() => { setShowPayment(true) }} disabled={disable}>Going</button>
             </div>
 
 
-            <div className={`tour-payment ${showPayment ? 'show-tour-payment' : 'hide-tour-payment'}`}>
-                <div className="title-cancel">
-                    <h2 className="payment-title">Payment Details</h2>
-                    <RxCross2 onClick={() => { setShowPayment(false) }}></RxCross2>
-                </div>
-                <p className="payment-description">Complete your payment for <span>{locationName}</span> tour by providing your payment details</p>
+            <div className={`tour-payment p-3 ${showPayment ? 'show-tour-payment' : 'hide-tour-payment'}`}>
+                <div className="tour-payment-body">
+                    <div className="title-cancel form-text">
+                        <h2 className="payment-title">Payment Details</h2>
+                        <RxCross2 className='cancel' onClick={() => { setShowPayment(false) }}></RxCross2>
+                    </div>
+                    <p className="payment-description">Complete your payment for <span>{locationName}</span> tour by providing your details</p>
 
-                <div className="payment-info">
-                    <form action="" onSubmit={handleCheckout}>
-                        <input type="email" name="email" defaultValue={user.email} readOnly />
-                        <input type="text" name="name" defaultValue={user.displayName} placeholder='Name' />
-                        <input type="tel" name="phone_number" placeholder='Phone Number' />
-                        {/* <input type="number" name="post_code" placeholder='Post Code' /> */}
-                        <textarea name="address" placeholder='Address'></textarea>
+                    <form className="payment-info" onSubmit={handleCheckout}>
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlInput1" className="form-label">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="exampleFormControlInput1"
+                                placeholder="@example.com"
+                                name="email"
+                                defaultValue={user.email}
+                                readOnly
+                                required
+                            />
+                        </div>
 
-                        <button className='upcoming-tour-button' type='submit'>Payment</button>
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlInput1" className="form-label">
+                                Username
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="exampleFormControlInput1"
+                                placeholder="username"
+                                name="name"
+                                defaultValue={user.displayName}
+                                required
+                            />
+                        </div>
+
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlInput1" className="form-label">
+                                Phone
+                            </label>
+                            <input
+                                type="tel"
+                                className="form-control"
+                                id="exampleFormControlInput1"
+                                placeholder="phone"
+                                name="phone_number"
+                                required
+                            />
+                        </div>
+
+
+                        <div className="mb-3">
+                            <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                                Address
+                            </label>
+                            <textarea
+                                className="form-control"
+                                id="exampleFormControlTextarea1"
+                                rows="3"
+                                name="address"
+                                placeholder='address'
+                                required
+                            ></textarea>
+                        </div>
+                        <button type='submit' className='custom-btn'>Pay ৳{totalCost}</button>
                     </form>
                 </div>
             </div>
+
 
         </div>
     );

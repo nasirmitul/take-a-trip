@@ -43,7 +43,7 @@ const SignIn = () => {
                 }
                 console.log("currentUser", currentUser);
 
-                fetch('https://take-a-trip-server-sigma.vercel.app/jwt', {
+                fetch('http://localhost:5000/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -81,6 +81,31 @@ const SignIn = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                const createUser = {
+                    userID: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    profile: user.photoURL,
+                    time: new Date(),
+                    gender: 'N/A'
+                }
+
+                console.log(createUser);
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(createUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.acknowledged) {
+                            alert("Account Created")
+                        }
+                    })
+                    .catch(error => console.log(error))
                 navigate('/');
             }).catch((error) => {
                 const errorCode = error.code;

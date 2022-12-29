@@ -97,6 +97,12 @@ body {
     color: var(--white);
 }
 
+button:disabled,
+button[disabled] {
+    background: var(--white-30) !important;
+    color: var(--white-90) !important;
+}
+
 /* ============== Scrollbar Design ================ */
 
 ::-webkit-scrollbar {
@@ -1508,6 +1514,154 @@ nav a .logo {
     display: none;
 }
 
+.tour-payment {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(2.3px);
+    backdrop-filter: blur(2.3px);
+}
+
+.tour-payment-body {
+    position: relative;
+    z-index: 999;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 10px;
+    width: min(500px, 90%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tour-payment-body .payment-title {
+    color: var(--text-color);
+    font-size: 1.8rem;
+}
+
+.tour-payment-body .cancel {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 30px;
+    width: 30px;
+    background: var(--white-30);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tour-payment-body .payment-description {
+    margin-bottom: 20px !important;
+    font-size: .9rem;
+    color: var(--white-90);
+    width: 90%;
+}
+
+.tour-payment-body .payment-description span {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.tour-payment-body .payment-info .form-label {
+    font-size: .9rem;
+    color: var(--white-90);
+    margin-bottom: -7px !important;
+}
+
+.tour-payment-body .payment-info .custom-btn {
+    width: 100%;
+    margin-top: 20px !important;
+}
+
+
+
+
+
+/* Invoice */
+.invoice{
+    width: min(500px, 95%);
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+}
+.invoice .card-title {
+    color: var(--primary);
+    margin-bottom: 10px !important;
+}
+
+.invoice .payment-icon {
+    color: var(--primary);
+    font-size: 35px;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 10px !important;
+}
+
+.invoice .payment-info-text {
+    margin-bottom: 8px !important;
+}
+
+.invoice .payment-info-title {
+    color: var(--white-90);
+}
+
+.invoice .payment-info-value {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.invoice .payment-info-value.transaction {
+    cursor: pointer;
+    position: relative;
+}
+
+.invoice .payment-info-value.transaction:hover::after {
+    content: 'click to copy';
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    background: var(--white-30);
+    text-align: center;
+    padding: 3px;
+    border-radius: 3px;
+    color: var(--white);
+}
+
+.invoice .payment-info-value span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.invoice .payment-info-button {
+    margin-top: 30px !important;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice .payment-info-button button {
+    background: var(--primary);
+    padding: 9px 30px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    color: var(--white);
+}
+
+
 
 /* ================================ Agency rating  ================================ */
 
@@ -2238,4 +2392,33 @@ nav a .logo {
 .create-agency input,
 textarea {
     padding: 10px 20px;
+}
+
+
+
+
+/* No print */
+@media print {
+
+    .payment-info-button,
+    .right-panel,
+    .main-navigation {
+        visibility: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 1.6cm;
+    }
 }

@@ -8,7 +8,7 @@ const AgencySettings = () => {
 
 
     const handleAgencyDelete = () => {
-        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency/${agency_Id}`, {
+        fetch(`http://localhost:5000/createAgency/${agency_Id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

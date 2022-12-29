@@ -63,7 +63,7 @@ const Modal = ({ closeModal }) => {
 
                     console.log(createPost);
 
-                    fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
+                    fetch('http://localhost:5000/posts', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

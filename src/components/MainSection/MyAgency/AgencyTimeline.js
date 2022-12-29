@@ -7,7 +7,7 @@ const AgencyTimeline = () => {
     const { user } = useContext(AuthContext);
     const [posts, setPost] = useState([])
     useEffect(() => {
-        fetch(`https://take-a-trip-server-sigma.vercel.app/agency/${user.email}`)
+        fetch(`http://localhost:5000/agency/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setPost(data)

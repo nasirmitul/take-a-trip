@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../contexts/UserContext';
 import RecentEvent from './RecentEvent';
 
 const RecentEvents = () => {
+
+    const { user } = useContext(AuthContext)
+
+    const [recentEvents, setRecentEvents] = useState([])
+    useEffect(() => {
+        fetch(`http://localhost:5000/my-tours?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("recent events", data);
+                setRecentEvents(data)
+            })
+    }, [])
+
     return (
         <div>
             <div className="recent-event-heading">
@@ -9,14 +23,12 @@ const RecentEvents = () => {
             </div>
 
             <div className="all-recent-event">
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
-                <RecentEvent></RecentEvent>
+                {
+                    recentEvents.map(recentEvent => <RecentEvent
+                        key={recentEvent._id}
+                        recentEvent={recentEvent}
+                    ></RecentEvent>).reverse()
+                }
             </div>
 
         </div>

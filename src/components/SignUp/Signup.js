@@ -68,6 +68,45 @@ const Signup = () => {
                         }
                     }
                 );
+
+
+
+
+
+                const createUser = {
+                    userID: user.uid,
+                    name: name,
+                    email: user.email,
+                    profile: avatar,
+                    time: new Date(),
+                    gender
+                }
+    
+                console.log(createUser);
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(createUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.acknowledged) {
+                            alert("Account Created")
+                        }
+                    })
+                    .catch(error => console.log(error))
+
+
+
+
+
+
+
+
+
                 emailVerify();
             })
             .catch(error => {
@@ -96,6 +135,33 @@ const Signup = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+
+                const createUser = {
+                    userID: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    profile: user.photoURL,
+                    time: new Date(),
+                    gender: 'N/A'
+                }
+    
+                console.log(createUser);
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(createUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.acknowledged) {
+                            alert("Account Created")
+                        }
+                    })
+                    .catch(error => console.log(error))
+
                 navigate('/');
             }).catch((error) => {
                 const errorCode = error.code;

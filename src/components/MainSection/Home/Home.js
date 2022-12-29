@@ -34,6 +34,12 @@ const Home = () => {
         console.log(totalSelectedImage);
     }
 
+
+
+
+
+
+
     const handleNewPostSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -60,106 +66,52 @@ const Home = () => {
                         console.log(imgData.data.url, form.userPostImage.files[i]);
                         allImages.push({ imgURL: imgData.data.url })
                         console.log('arr', allImages);
+
+                        if (tourImage.length === allImages.length) {
+                            const createPost = {
+                                userID: user.uid,
+                                allPicture: allImages,
+                                caption: tourStatus,
+                                name: user.displayName,
+                                email: user.email,
+                                profile: user.photoURL,
+                                time: new Date(),
+                                reacts: 0,
+                                comments: [],
+                                reacts_uid: []
+                            }
+
+                            console.log(createPost);
+                            fetch('http://localhost:5000/posts', {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(createPost)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    console.log(data)
+                                    if (data.acknowledged) {
+                                        form.reset();
+                                        setOpenModal(false)
+                                        setLoadData(true)
+                                    }
+                                })
+                                .catch(error => console.log(error))
+
+                            setLoadData(false)
+                        }
                     }
                 })
         }
-
-        setTimeout(() => {
-            const createPost = {
-                userID: user.uid,
-                allPicture: allImages,
-                caption: tourStatus,
-                name: user.displayName,
-                email: user.email,
-                profile: user.photoURL,
-                time: new Date(),
-                reacts: 0,
-                comments: [],
-                reacts_uid: []
-            }
-
-            console.log(createPost);
-            fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(createPost)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    if (data.acknowledged) {
-                        form.reset();
-                        setOpenModal(false)
-                        setLoadData(true)
-                    }
-                })
-                .catch(error => console.log(error))
-
-            setLoadData(false)
-        }, 15000)
-
-
-
-        /* formData.append('image', tourImage)
-        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-            .then(res => res.json())
-            .then(imgData => {
-                if (imgData.success) {
-                    console.log(imgData.data.url);
-
-                    const createPost = {
-                        userID: user.uid,
-                        allPicture: [
-                            {
-                                imgURL: imgData.data.url
-                            }
-                        ],
-                        caption: tourStatus,
-                        name: user.displayName,
-                        email: user.email,
-                        profile: user.photoURL,
-                        time: new Date(),
-                        reacts: 0,
-                        comments: []
-                    }
-
-                    console.log(createPost);
-
-                    fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(createPost)
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data)
-                            if (data.acknowledged) {
-                                form.reset();
-                                setOpenModal(false)
-                                setLoadData(true)
-                            }
-                        })
-                        .catch(error => console.log(error))
-                }
-            })
-        setLoadData(false) */
     }
 
-    // const posts = useLoaderData();
 
     /* const { data: posts = [], refetch } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
-            const res = await fetch('https://take-a-trip-server-sigma.vercel.app/posts');
+            const res = await fetch('http://localhost:5000/posts');
             const data = await res.json();
             return data;
         }
@@ -167,7 +119,7 @@ const Home = () => {
 
     const [posts, setPosts] = useState([])
     useEffect(() => {
-        fetch('https://take-a-trip-server-sigma.vercel.app/posts')
+        fetch('http://localhost:5000/posts')
             .then(res => res.json())
             .then(data => {
                 console.log(data);

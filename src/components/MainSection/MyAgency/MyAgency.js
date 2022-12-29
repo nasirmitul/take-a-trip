@@ -62,7 +62,7 @@ const MyAgency = () => {
 
                     console.log(createTour);
 
-                    fetch('https://take-a-trip-server-sigma.vercel.app/upcomingTours', {
+                    fetch('http://localhost:5000/upcomingTours', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -87,7 +87,7 @@ const MyAgency = () => {
 
 
     useEffect(() => {
-        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user.email}`, {
+        fetch(`http://localhost:5000/createAgency?agencyEmail=${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('tripToken')}`
             }

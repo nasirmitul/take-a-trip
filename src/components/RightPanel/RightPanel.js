@@ -7,7 +7,7 @@ const RightPanel = () => {
 
     const [upComingTours, setUpComingTours] = useState([]);
     useEffect(() => {
-        fetch('https://take-a-trip-server-sigma.vercel.app/rightUpcomingTours')
+        fetch('http://localhost:5000/rightUpcomingTours')
             .then(res => res.json())
             .then(data => {
                 console.log('upComingTours', upComingTours);
@@ -40,7 +40,7 @@ const RightPanel = () => {
 
     const [upcomingTours, setUpComingTours] = useState([])
     useEffect(() => {
-        fetch('https://take-a-trip-server-sigma.vercel.app/rightUpcomingTours')
+        fetch('http://localhost:5000/rightUpcomingTours')
         .then(res => res.json())
         .then(data => {
             console.log('dataaaaaaa', data.upComingTourData);

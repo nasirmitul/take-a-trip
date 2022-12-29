@@ -9,30 +9,41 @@ import { GrFormPrevious } from 'react-icons/gr';
 import { GrFormNext } from 'react-icons/gr';
 import { VscDebugStackframeDot } from 'react-icons/vsc';
 import { AuthContext } from '../../../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 
 const SingleUserPost = ({ post }) => {
     const { user } = useContext(AuthContext);
-    const { _id, name, caption, profile, time, reacts, comments, allPicture, reacts_uid } = post;
+    const { _id, name, email, caption, profile, time, reacts, comments, allPicture, reacts_uid } = post;
 
 
     /* Change React Icon and Increase/Decrease Value */
-    const [reactActive, setReactActive] = useState(false);
+
     const [reactCount, setReactCount] = useState(reacts)
     const [checkReact, setCheckReact] = useState(false);
+    const [reactActive, setReactActive] = useState(false);
 
 
-    /* useEffect(() => {
+    useEffect(() => {
+        reacts_uid?.forEach(react => {
+            if(react === user.uid){
+                setCheckReact(true)
+                setReactActive(true)
+            }
+            else{
+                setCheckReact(false)
+                setReactActive(false)
+            }
+            // react === user.uid ? setCheckReact(true) : setCheckReact(false)
+        })
+    }, [checkReact])
 
-    }, [])
-    reacts_uid?.forEach( react => {
-        react === user.uid ? setCheckReact(true) : setCheckReact(false)
-    }) */
+    console.log('uid', reacts_uid);
 
     const addReact = () => {
         setReactCount(reactCount + 1);
 
-        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react/${_id}`, {
+        fetch(`http://localhost:5000/post_react_add/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -48,7 +59,7 @@ const SingleUserPost = ({ post }) => {
     const removeReact = () => {
         setReactCount(reactCount - 1);
 
-        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react/${_id}`, {
+        fetch(`http://localhost:5000/post_react_remove/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -109,6 +120,10 @@ const SingleUserPost = ({ post }) => {
         const commentatorImg = user.photoURL;
         const commentator = user.displayName;
 
+        if (comment.length < 1) {
+            return;
+        }
+
         const commentData = {
             comment,
             commentatorImg,
@@ -117,9 +132,9 @@ const SingleUserPost = ({ post }) => {
             time: new Date().toLocaleString()
         }
 
-        console.log(commentData);
+        // console.log(commentData);
 
-        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${_id}`, {
+        fetch(`http://localhost:5000/posts/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -129,7 +144,9 @@ const SingleUserPost = ({ post }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    alert('comment added successfully')
+                    // alert('comment added successfully')
+                    form.reset();
+                    
                 }
                 console.log(data);
             })
@@ -145,7 +162,7 @@ const SingleUserPost = ({ post }) => {
                             <img className="post-user-img" src={profile} alt="men" />
                         </div>
                         <div className="id-text ms-4">
-                            <h6>{name}</h6>
+                            <Link to={`/user/${email}/timeline`}><h6>{name}</h6></Link>
                             <p>{time.slice(11, 16)}, {time.slice(0, 10)}</p>
                         </div>
                     </div>
@@ -191,7 +208,7 @@ const SingleUserPost = ({ post }) => {
                     <div className="react">
                         <div className="react-icon" onClick={() => setReactActive(!reactActive)}>
                             {
-                                reactActive || checkReact ?
+                                reactActive ?
                                     <img onClick={removeReact} className='react-pointer' src={react} /> :
                                     <img onClick={addReact} className='react-pointer' src={reactStroke} />
                             }

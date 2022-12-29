@@ -6,7 +6,7 @@ const UpComingTours = () => {
     const [upComingTourData, setUpComingTourData] = useState([]);
 
     useEffect(() => {
-        const url = `https://take-a-trip-server-sigma.vercel.app/upcomingTours`
+        const url = `http://localhost:5000/upcomingTours`
         fetch(url)
             .then(res => res.json())
             .then(data => {

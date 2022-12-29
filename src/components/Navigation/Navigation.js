@@ -34,7 +34,7 @@ const Navigation = () => {
 
     const [agency, setAgency] = useState([])
     useEffect(() => {
-        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user?.email}`)
+        fetch(`http://localhost:5000/createAgency?agencyEmail=${user?.email}`)
             .then(res => res.json())
             .then(data => setAgency(data))
     }, [])
@@ -44,7 +44,7 @@ const Navigation = () => {
 
     return (
         <div>
-            <section id="left-part">
+            <section id="left-part" className='main-navigation'>
                 <div className="menu-part">
 
                     <div className="logo">

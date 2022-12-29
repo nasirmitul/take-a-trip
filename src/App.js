@@ -29,6 +29,10 @@ import AgencyLayout from './layout/AgencyLayout';
 import AgencySettings from './components/MainSection/MyAgency/AgencySettings';
 import CarouselTest from './components/Test/CarouselTest';
 import ViewAgencyProfile from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyProfile';
+import PaymentSuccess from './components/MainSection/UpComingTours/PaymentSuccess';
+import ViewUserProfileLayout from './layout/ViewUserProfileLayout';
+import ViewUserTimeline from './components/MainSection/ViewProfile/ViewUserProfile/ViewUserTimeline';
+import ViewUserAbout from './components/MainSection/ViewProfile/ViewUserProfile/ViewUserAbout';
 
 function App() {
 
@@ -40,31 +44,32 @@ function App() {
         {
           path: '/',
           /* loader: async () => {
-            return fetch('https://take-a-trip-server-sigma.vercel.app/posts');
+            return fetch('http://localhost:5000/posts');
           }, */
           element: <Home></Home>
         },
         {
           path: '/home',
           /* loader: async () => {
-            return fetch('https://take-a-trip-server-sigma.vercel.app/posts');
+            return fetch('http://localhost:5000/posts');
           }, */
           element: <Home></Home>
         },
         {
           path: '/upcoming-tours',
           /* loader: async () => {
-            return fetch('https://take-a-trip-server-sigma.vercel.app/upcomingTours');
+            return fetch('http://localhost:5000/upcomingTours');
           }, */
           element: <UpComingTours></UpComingTours>
         },
         {
           path: '/tour-details/:id',
           loader: async ({params}) => {
-            return fetch(`https://take-a-trip-server-sigma.vercel.app/upcomingTours/${params.id}`)
+            return fetch(`http://localhost:5000/upcomingTours/${params.id}`)
           },
           element: <UpComingTourDetails></UpComingTourDetails>
         },
+        
         {
           path: '/tour-agencies',
           element: <TourAgencies></TourAgencies>
@@ -95,6 +100,27 @@ function App() {
             }
           ]
         },
+
+
+
+        {
+          path: '/user/:email',
+          element: <ViewUserProfileLayout></ViewUserProfileLayout>,
+          children: [
+            {
+              path: '/user/:email/timeline',
+              element: <ViewUserTimeline></ViewUserTimeline>
+            },
+            {
+              path: '/user/:email/about',
+              element: <ViewUserAbout></ViewUserAbout>
+            }
+          ]
+        },
+
+
+
+
         {
           path: '/create-agency',
           element: <CreateAgency></CreateAgency>
@@ -117,7 +143,7 @@ function App() {
           path: '/agencyProfile/:id',
           element: <ViewAgencyProfile></ViewAgencyProfile>,
           loader: async ({params}) => {
-            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
+            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
           },
         },
         {
@@ -143,6 +169,7 @@ function App() {
 
       ]
     },
+
     {
       path: '/signup',
       element: <Signup></Signup>
@@ -154,6 +181,10 @@ function App() {
     {
       path: '/forget-password',
       element: <ForgetPass></ForgetPass>
+    },
+    {
+      path: '/payment/success',
+      element: <PaymentSuccess></PaymentSuccess>
     },
     {
       path: '*',
