@@ -137,6 +137,8 @@ const MyAgency = () => {
                                 <div className="navigation-links">
                                     <NavLink to='/my-agency/agency-timeline'>Timeline</NavLink>
                                     <NavLink to='/my-agency/agency-about'>About</NavLink>
+                                    <NavLink to='/my-agency/agency-ratings'>Ratings</NavLink>
+                                    <NavLink to='/my-agency/agency-dashboard'>Dashboard</NavLink>
                                 </div>
                                 <div className="profile-settings agency-settings">
                                     <img onClick={handleToSettings} src={options} alt="" />
@@ -149,6 +151,8 @@ const MyAgency = () => {
                         <div className="navigation-links">
                             <NavLink to='/my-agency/agency-timeline'>Timeline</NavLink>
                             <NavLink to='/my-agency/agency-about'>About</NavLink>
+                            <NavLink to='/my-agency/agency-ratings'>Ratings</NavLink>
+                            <NavLink to='/my-agency/agency-dashboard'>Dashboard</NavLink>
                         </div>
                         <div className="profile-settings">
                             <Link to='/agency-settings'><img src={options} alt="" /></Link>

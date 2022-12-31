@@ -38,7 +38,7 @@ const SingleUserPost = ({ post }) => {
         })
     }, [checkReact])
 
-    console.log('uid', reacts_uid);
+    // console.log('uid', reacts_uid);
 
     const addReact = () => {
         setReactCount(reactCount + 1);
@@ -162,7 +162,7 @@ const SingleUserPost = ({ post }) => {
                             <img className="post-user-img" src={profile} alt="men" />
                         </div>
                         <div className="id-text ms-4">
-                            <Link to={`/user/${email}/timeline`}><h6>{name}</h6></Link>
+                            <Link to={`${user?.email === email? `/profile/timeline` : `/user/${email}`}`}><h6>{name}</h6></Link>
                             <p>{time.slice(11, 16)}, {time.slice(0, 10)}</p>
                         </div>
                     </div>

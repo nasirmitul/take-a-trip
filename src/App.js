@@ -31,8 +31,11 @@ import CarouselTest from './components/Test/CarouselTest';
 import ViewAgencyProfile from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyProfile';
 import PaymentSuccess from './components/MainSection/UpComingTours/PaymentSuccess';
 import ViewUserProfileLayout from './layout/ViewUserProfileLayout';
-import ViewUserTimeline from './components/MainSection/ViewProfile/ViewUserProfile/ViewUserTimeline';
 import ViewUserAbout from './components/MainSection/ViewProfile/ViewUserProfile/ViewUserAbout';
+import AgencyRatings from './components/MainSection/MyAgency/AgencyRatings';
+import ViewAgencyAbout from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyAbout';
+import ViewAgencyRatings from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyRatings';
+import AgencyDashboard from './components/MainSection/MyAgency/AgencyDashboard';
 
 function App() {
 
@@ -64,12 +67,12 @@ function App() {
         },
         {
           path: '/tour-details/:id',
-          loader: async ({params}) => {
+          loader: async ({ params }) => {
             return fetch(`http://localhost:5000/upcomingTours/${params.id}`)
           },
           element: <UpComingTourDetails></UpComingTourDetails>
         },
-        
+
         {
           path: '/tour-agencies',
           element: <TourAgencies></TourAgencies>
@@ -100,27 +103,14 @@ function App() {
             }
           ]
         },
-
-
-
         {
           path: '/user/:email',
-          element: <ViewUserProfileLayout></ViewUserProfileLayout>,
-          children: [
-            {
-              path: '/user/:email/timeline',
-              element: <ViewUserTimeline></ViewUserTimeline>
-            },
-            {
-              path: '/user/:email/about',
-              element: <ViewUserAbout></ViewUserAbout>
-            }
-          ]
+          element: <ViewUserProfileLayout></ViewUserProfileLayout>
         },
-
-
-
-
+        {
+          path: '/user/:email/about',
+          element: <ViewUserAbout></ViewUserAbout>
+        },
         {
           path: '/create-agency',
           element: <CreateAgency></CreateAgency>
@@ -128,7 +118,7 @@ function App() {
         {
           path: '/my-agency',
           element: <AgencyLayout></AgencyLayout>,
-          children: [ 
+          children: [
             {
               path: '/my-agency/agency-timeline',
               element: <AgencyTimeline></AgencyTimeline>
@@ -136,15 +126,38 @@ function App() {
             {
               path: '/my-agency/agency-about',
               element: <AgencyAbout></AgencyAbout>
+            },
+            {
+              path: '/my-agency/agency-ratings',
+              element: <AgencyRatings></AgencyRatings>
+            },
+            {
+              path: '/my-agency/agency-dashboard',
+              element: <AgencyDashboard></AgencyDashboard>
             }
           ]
         },
+        
         {
           path: '/agencyProfile/:id',
           element: <ViewAgencyProfile></ViewAgencyProfile>,
-          loader: async ({params}) => {
+          loader: async ({ params }) => {
             return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
-          },
+          }
+        },
+        {
+          path: '/agencyProfile/:id/about',
+          element: <ViewAgencyAbout></ViewAgencyAbout>,
+          loader: async ({ params }) => {
+            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+          }
+        },
+        {
+          path: '/agencyProfile/:id/ratings',
+          element: <ViewAgencyRatings></ViewAgencyRatings>,
+          loader: async ({ params }) => {
+            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+          }
         },
         {
           path: '/settings',

@@ -32,9 +32,9 @@ const Profile = () => {
                                 <NavLink to='/profile/followers'>Followers</NavLink>
                                 <NavLink to='/profile/following'>Following</NavLink>
                             </div>
-                            <div className="profile-settings">
+                            {/* <div className="profile-settings">
                                 <Link to='/profile-settings'><img src={options} alt="" /></Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -46,9 +46,9 @@ const Profile = () => {
                         <NavLink to='/profile/followers'>Followers</NavLink>
                         <NavLink to='/profile/following'>Following</NavLink>
                     </div>
-                    <div className="profile-settings">
+                    {/* <div className="profile-settings">
                         <Link to='/profile-settings'><img src={options} alt="" /></Link>
-                    </div>
+                    </div> */}
                 </div>
 
 

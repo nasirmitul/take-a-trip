@@ -23,7 +23,7 @@ const AgencyTimeline = () => {
                 Array.isArray(posts) && posts?.map(post => <SingleAgencyPost
                     key={post._id}
                     post={post}
-                ></SingleAgencyPost>)
+                ></SingleAgencyPost>).reverse()
             }
         </div>
     );

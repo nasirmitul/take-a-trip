@@ -6,7 +6,6 @@ const AgencyAbout = () => {
     return (
         <div>
             <h1>Agency About</h1>
-            <AgencyRatings></AgencyRatings>
         </div>
     );
 };

@@ -79,7 +79,10 @@ const Signup = () => {
                     email: user.email,
                     profile: avatar,
                     time: new Date(),
-                    gender
+                    gender,
+                    followers: [],
+                    following: [],
+                    tours: []
                 }
     
                 console.log(createUser);
@@ -142,7 +145,10 @@ const Signup = () => {
                     email: user.email,
                     profile: user.photoURL,
                     time: new Date(),
-                    gender: 'N/A'
+                    gender: 'N/A',
+                    followers: [],
+                    following: [],
+                    tours: []
                 }
     
                 console.log(createUser);

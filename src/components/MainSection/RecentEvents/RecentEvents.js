@@ -19,8 +19,12 @@ const RecentEvents = () => {
     return (
         <div>
             <div className="recent-event-heading">
-                <h1 className='recent-event-title'>Recent Event</h1>
+                <h1 className='recent-event-title'>My Tours</h1>
             </div>
+
+            {
+                recentEvents.length <=0 && <p className='no-recent-event'>Looks like you haven't been on any tours yet</p>
+            }
 
             <div className="all-recent-event">
                 {

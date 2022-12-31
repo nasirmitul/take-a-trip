@@ -37,7 +37,8 @@ const CreateAgency = () => {
             agencyEmail,
             agencyProfile,
             agencyCover,
-            agencyDescription
+            agencyDescription,
+            reviews: []
         }
 
         console.log(createAgency);

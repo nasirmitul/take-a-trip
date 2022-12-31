@@ -87,7 +87,10 @@ const SignIn = () => {
                     email: user.email,
                     profile: user.photoURL,
                     time: new Date(),
-                    gender: 'N/A'
+                    gender: 'N/A',
+                    followers: [],
+                    following: [],
+                    tours: []
                 }
 
                 console.log(createUser);

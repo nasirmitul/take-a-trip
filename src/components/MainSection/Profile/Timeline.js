@@ -4,6 +4,9 @@ import SingleUserPost from '../Home/SingleUserPost';
 
 const Timeline = () => {
     const { user } = useContext(AuthContext);
+
+
+    
     const [posts, setPost] = useState([])
     useEffect(() => {
         fetch(`http://localhost:5000/posts/${user.email}`)
