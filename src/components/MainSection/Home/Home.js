@@ -9,6 +9,7 @@ import Notifications from '../../Notifications/Notifications';
 import { AuthContext } from '../../../contexts/UserContext';
 
 import { RxCross2 } from 'react-icons/rx';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [selectedImages, setSelectedImages] = useState([])
@@ -17,6 +18,8 @@ const Home = () => {
     const [openModal, setOpenModal] = useState(false);
     const [notifications, setNotifications] = useState(false);
     const [loadData, setLoadData] = useState(false);
+    const [refetch, setRefetch] = useState(false);
+    const navigate = useNavigate();
 
     const handleAddImage = (event) => {
         const selectedImage = event.target.files;
@@ -33,11 +36,6 @@ const Home = () => {
         }
         console.log(totalSelectedImage);
     }
-
-
-
-
-
 
 
     const handleNewPostSubmit = (event) => {
@@ -107,6 +105,10 @@ const Home = () => {
         }
     }
 
+    const handleSearch = () => {
+        navigate('/search')
+    }
+
 
     /* const { data: posts = [], refetch } = useQuery({
         queryKey: ['posts'],
@@ -125,7 +127,11 @@ const Home = () => {
                 console.log(data);
                 setPosts(data)
             })
-    }, [loadData])
+    }, [loadData, refetch])
+
+    const handleRefetch = () => {
+        setRefetch(!refetch);
+    }
 
     return (
 
@@ -134,7 +140,7 @@ const Home = () => {
 
                 <div className="search-notification">
                     <div className="search-bar">
-                        <input className='search' type="text" name="" id="" placeholder='search' />
+                        <input onClick={handleSearch} className='search' type="text" name="" id="" placeholder='search' />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
 
@@ -215,6 +221,7 @@ const Home = () => {
                     Array.isArray(posts) && posts?.map(post => <SingleUserPost
                         key={post._id}
                         post={post}
+                        handleRefetch={handleRefetch}
                     ></SingleUserPost>)
                 }
 

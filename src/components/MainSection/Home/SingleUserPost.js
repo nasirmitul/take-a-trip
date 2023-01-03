@@ -12,7 +12,7 @@ import { AuthContext } from '../../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
 
-const SingleUserPost = ({ post }) => {
+const SingleUserPost = ({ post, handleRefetch }) => {
     const { user } = useContext(AuthContext);
     const { _id, name, email, caption, profile, time, reacts, comments, allPicture, reacts_uid } = post;
 
@@ -26,11 +26,11 @@ const SingleUserPost = ({ post }) => {
 
     useEffect(() => {
         reacts_uid?.forEach(react => {
-            if(react === user.uid){
+            if (react === user.uid) {
                 setCheckReact(true)
                 setReactActive(true)
             }
-            else{
+            else {
                 setCheckReact(false)
                 setReactActive(false)
             }
@@ -119,6 +119,7 @@ const SingleUserPost = ({ post }) => {
         const comment = form.comment.value;
         const commentatorImg = user.photoURL;
         const commentator = user.displayName;
+        const commentatorEmail = user.email;
 
         if (comment.length < 1) {
             return;
@@ -128,6 +129,7 @@ const SingleUserPost = ({ post }) => {
             comment,
             commentatorImg,
             commentator,
+            commentatorEmail,
             date: new Date().toUTCString(),
             time: new Date().toLocaleString()
         }
@@ -144,9 +146,9 @@ const SingleUserPost = ({ post }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    // alert('comment added successfully')
+                    //alert('comment added successfully')
                     form.reset();
-                    
+                    handleRefetch();
                 }
                 console.log(data);
             })
@@ -159,10 +161,10 @@ const SingleUserPost = ({ post }) => {
                 <div className="id d-flex post-top-part">
                     <div className="id-name d-flex align-items-center">
                         <div className="id-img">
-                            <img className="post-user-img" src={profile} alt="men" />
+                            <Link to={`${user?.email === email ? `/profile/timeline` : `/user/${email}`}`}><img className="post-user-img" src={profile} alt="men" /></Link>
                         </div>
                         <div className="id-text ms-4">
-                            <Link to={`${user?.email === email? `/profile/timeline` : `/user/${email}`}`}><h6>{name}</h6></Link>
+                            <Link to={`${user?.email === email ? `/profile/timeline` : `/user/${email}`}`}><h6>{name}</h6></Link>
                             <p>{time.slice(11, 16)}, {time.slice(0, 10)}</p>
                         </div>
                     </div>
@@ -233,14 +235,18 @@ const SingleUserPost = ({ post }) => {
                         comments.map((comment, commentIndex) =>
                             <div className='single-comment' key={commentIndex}>
                                 <div className="commentator-image">
-                                    <img className='commentator-image' src={comment?.commentatorImg} alt="" />
+                                    <Link to={`${user?.email === comment?.commentatorEmail ? `/profile/timeline` : `/user/${comment?.commentatorEmail}`}`}><img className='commentator-image' src={comment?.commentatorImg} alt="" /></Link>
                                 </div>
                                 <div className="name-comment">
-                                    <p className="name">{comment?.commentator}
-                                        <span className="comment-time">
-                                            {comment?.date?.slice(5, 17)}, {comment?.time?.slice(12, 16)} {comment?.time?.slice(20, 22)}
-                                        </span>
-                                    </p>
+
+                                    <Link to={`${user?.email === comment?.commentatorEmail ? `/profile/timeline` : `/user/${comment?.commentatorEmail}`}`}>
+                                        <p className="name">{comment?.commentator}
+                                            <span className="comment-time">
+                                                {comment?.date?.slice(5, 17)}, {comment?.time?.slice(12, 16)} {comment?.time?.slice(20, 22)}
+                                            </span>
+                                        </p>
+                                    </Link>
+
                                     <p className="comment">{comment?.comment}</p>
                                 </div>
                             </div>

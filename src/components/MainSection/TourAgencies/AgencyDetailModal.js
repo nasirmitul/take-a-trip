@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { AiFillStar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/UserContext';
 
 const AgencyDetailModal = ({ agencyDetail, closeAgencyModal }) => {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     return (
         <div>
             <div className='full-agency-detail-modal' onClick={closeAgencyModal}></div>
@@ -42,10 +45,12 @@ const AgencyDetailModal = ({ agencyDetail, closeAgencyModal }) => {
                 </div>
 
                 <div className="actions">
-                    <Link to={`/agencyProfile/${agencyDetail._id}`}>
+                    <Link to={agencyDetail.agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${agencyDetail._id}`}>
                         <button className="custom-btn">View Profile</button>
                     </Link>
-                    <button className="custom-btn-outline">Personalize Tour</button>
+                    <Link to={agencyDetail.agencyEmail === user.email ? '/my-agency/agency-timeline' : `/personalize-tour/${agencyDetail._id}`}>
+                        <button className="custom-btn-outline">Personalize Tour</button>
+                    </Link>
                 </div>
 
             </div>

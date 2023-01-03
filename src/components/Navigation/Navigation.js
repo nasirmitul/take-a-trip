@@ -58,6 +58,9 @@ const Navigation = () => {
                             <NavLink className='link' to='/upcoming-tours'><li><img src={upcomingTours} alt="" /><p >Upcoming Tours</p></li></NavLink>
                             <NavLink className='link' to='/tour-agencies'><li><img src={tourAgencies} alt="" /><p >Tour Agencies</p></li></NavLink>
                             <NavLink className='link' to='/recent-event'><li><img src={RecentEvents} alt="" /><p >My Tours</p></li></NavLink>
+
+                            <NavLink className='link' to='/personalize-tours'><li><img src={RecentEvents} alt="" /><p >Personalize Tours</p></li></NavLink>
+
                             <NavLink className='link' to='/profile/timeline'><li><img src={profile} alt="" /><p >profile</p></li></NavLink>
                             {
                                 (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>

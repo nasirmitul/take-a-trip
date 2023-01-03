@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/UserContext';
 
 const UpComingTour = ({ upComingTour }) => {
+    const { user } = useContext(AuthContext)
 
-    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime } = upComingTour || {};
+    const { _id, image, locationName, details, agencyName, agencyEmail, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime } = upComingTour || {};
 
     // console.log('this is id and details', _id, details);
-
 
     return (
         <div>
@@ -24,7 +25,10 @@ const UpComingTour = ({ upComingTour }) => {
                         <div className="info-row">
                             <div className="row-1">
                                 <p className='info-name'>Name</p>
-                                <p className='info-data'>{agencyName}</p>
+                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${_id}`}>
+                                    <p className='info-data'>{agencyName}</p>
+                                </Link>
+
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Ratings</p>

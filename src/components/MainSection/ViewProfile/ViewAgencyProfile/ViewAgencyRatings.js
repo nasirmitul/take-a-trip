@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { Link, NavLink, useLoaderData } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { AuthContext } from '../../../../contexts/UserContext';
 
@@ -153,33 +153,32 @@ const ViewAgencyRatings = () => {
             }
 
 
-
             <div className="rating-reviews">
                 {
-                    userTours.length > 0 &&
+                    reviews.length > 0 &&
                     <div className="rating">
-                    <div className="rating-numbers">
-                        {
-                            typeof totalRating === 'number' &&
-                            <h1 className='rating-count'>
+                        <div className="rating-numbers">
+                            {
+                                typeof totalRating === 'number' &&
+                                <h1 className='rating-count'>
+                                    {
+                                        reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : '0.0'
+                                    }
+                                </h1>
+                            }
+                            <ul className='rating-icons'>
                                 {
-                                    reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : '0.0'
+                                    Array.apply(null, { length: Math.floor(totalRating / reviews.length) }).map((e, i) => <li key={i} className='orange'><AiFillStar></AiFillStar></li>)
                                 }
-                            </h1>
-                        }
-                        <ul className='rating-icons'>
-                            {
-                                Array.apply(null, { length: Math.floor(totalRating / reviews.length) }).map((e, i) => <li key={i} className='orange'><AiFillStar></AiFillStar></li>)
-                            }
-                            {
-                                Math.floor(totalRating / reviews.length) < 5 && Array.apply(null, { length: 5 - Math.floor(totalRating / reviews.length) }).map((e, i) => <li key={i} className='gray'><AiFillStar></AiFillStar></li>)
-                            }
-                        </ul>
+                                {
+                                    Math.floor(totalRating / reviews.length) < 5 && Array.apply(null, { length: 5 - Math.floor(totalRating / reviews.length) }).map((e, i) => <li key={i} className='gray'><AiFillStar></AiFillStar></li>)
+                                }
+                            </ul>
+                        </div>
+                        <div className="total-reviews">
+                            <p><span>{reviews.length}</span> reviews</p>
+                        </div>
                     </div>
-                    <div className="total-reviews">
-                        <p><span>{reviews.length}</span> reviews</p>
-                    </div>
-                </div>
                 }
 
 
@@ -187,10 +186,15 @@ const ViewAgencyRatings = () => {
                     reviews.map(review =>
                         <div className="reviews">
                             <div className="image">
-                                <img src={review.reviewerImage} alt="" />
+                                <Link to={`${user?.email === review?.reviewerEmail ? `/profile/timeline` : `/user/${review?.reviewerEmail}`}`}>
+                                    <img src={review.reviewerImage} alt="" />
+                                </Link>
                             </div>
                             <div className="reviewer-info">
-                                <p className="name">{review.reviewerName}</p>
+                                <Link to={`${user?.email === review?.reviewerEmail ? `/profile/timeline` : `/user/${review?.reviewerEmail}`}`}>
+                                    <p className="name">{review.reviewerName}</p>
+                                </Link>
+
                                 <div className="rating-time">
                                     <ul className='rating-icons'>
                                         {
@@ -200,14 +204,14 @@ const ViewAgencyRatings = () => {
                                             review.rating < 5 && Array.apply(null, { length: 5 - review.rating }).map((e, i) => <li key={i} className='gray'><AiFillStar></AiFillStar></li>)
                                         }
                                     </ul>
-                                    <p className="time">{review.reviewTime}</p>
+                                    <p className="time">{review.reviewTime.slice(0, 10)}</p>
                                 </div>
                                 <div className="main-review">
                                     <p>{review.review}</p>
                                 </div>
                             </div>
                         </div>
-                    )
+                    ).reverse()
                 }
             </div>
 

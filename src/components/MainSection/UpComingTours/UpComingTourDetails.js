@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AuthContext } from '../../../contexts/UserContext';
 
@@ -7,11 +7,13 @@ const UpComingTourDetails = () => {
 
     const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail } = useLoaderData();
 
+    console.log(_id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail);
+
     const [showPayment, setShowPayment] = useState(false);
     const [disable, setDisable] = useState(false)
 
     useEffect(() => {
-        if(parseInt(totalTravelers) === leftTravelers){
+        if (parseInt(totalTravelers) === leftTravelers) {
             setDisable(true)
         }
     }, [leftTravelers])
@@ -85,7 +87,11 @@ const UpComingTourDetails = () => {
                         <div className="info-row">
                             <div className="row-1">
                                 <p className='info-name'>Name</p>
-                                <p className='info-data'>{agencyName}</p>
+
+                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${_id}`}>
+                                    <p className='info-data'>{agencyName}</p>
+                                </Link>
+                                
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Ratings</p>

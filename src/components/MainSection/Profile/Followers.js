@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BsThreeDots } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 
 const Followers = () => {
@@ -34,14 +35,21 @@ const Followers = () => {
 
                 {
                     followers.map(follower =>
-                        <div className="follower">
+                        <div key={follower.followByEmail} className="follower">
                             <div className="follower-info">
                                 <div className="follower-img">
-                                    <img src={follower.followByImage} alt="" />
+                                    <Link to={`${user?.email === follower.followByEmail ? `/profile/timeline` : `/user/${follower.followByEmail}`}`}>
+                                        <img src={follower.followByImage} alt="" />
+                                    </Link>
+
                                 </div>
                                 <div className="followers-text">
-                                    <p className="followers-name">{follower.followByName}</p>
+                                    <Link to={`${user?.email === follower.followByEmail ? `/profile/timeline` : `/user/${follower.followByEmail}`}`}>
+                                        <p className="followers-name">{follower.followByName}</p>
+                                    </Link>
+
                                     <div className="follower-number">
+
                                         <small>{follower.followByEmail}</small>
                                         {/* <small>110 Following</small> */}
                                     </div>

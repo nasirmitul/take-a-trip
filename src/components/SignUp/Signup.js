@@ -69,10 +69,6 @@ const Signup = () => {
                     }
                 );
 
-
-
-
-
                 const createUser = {
                     userID: user.uid,
                     name: name,
@@ -82,7 +78,11 @@ const Signup = () => {
                     gender,
                     followers: [],
                     following: [],
-                    tours: []
+                    tours: [],
+                    bio: '',
+                    facebook: '',
+                    instagram: '',
+                    twitter: ''
                 }
     
                 console.log(createUser);
@@ -101,15 +101,6 @@ const Signup = () => {
                         }
                     })
                     .catch(error => console.log(error))
-
-
-
-
-
-
-
-
-
                 emailVerify();
             })
             .catch(error => {
@@ -148,7 +139,11 @@ const Signup = () => {
                     gender: 'N/A',
                     followers: [],
                     following: [],
-                    tours: []
+                    tours: [],
+                    bio: '',
+                    facebook: '',
+                    instagram: '',
+                    twitter: ''
                 }
     
                 console.log(createUser);

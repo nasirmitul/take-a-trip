@@ -36,6 +36,9 @@ import AgencyRatings from './components/MainSection/MyAgency/AgencyRatings';
 import ViewAgencyAbout from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyAbout';
 import ViewAgencyRatings from './components/MainSection/ViewProfile/ViewAgencyProfile/ViewAgencyRatings';
 import AgencyDashboard from './components/MainSection/MyAgency/AgencyDashboard';
+import Search from './components/MainSection/Search/Search';
+import PersonalizeTour from './components/MainSection/TourAgencies/BookPersonalizeTour';
+import PersonalizeTours from './components/MainSection/PersonalizeTours/PersonalizeTours';
 
 function App() {
 
@@ -67,10 +70,10 @@ function App() {
         },
         {
           path: '/tour-details/:id',
+          element: <UpComingTourDetails></UpComingTourDetails>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/upcomingTours/${params.id}`)
-          },
-          element: <UpComingTourDetails></UpComingTourDetails>
+            return fetch(`http://localhost:5000/upcoming-tours/${params.id}`)
+          }
         },
 
         {
@@ -78,8 +81,19 @@ function App() {
           element: <TourAgencies></TourAgencies>
         },
         {
+          path: '/personalize-tour/:id',
+          element: <PersonalizeTour></PersonalizeTour>,
+          loader: async ({ params }) => {
+            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+          }
+        },
+        {
           path: '/recent-event',
           element: <RecentEvents></RecentEvents>
+        },
+        {
+          path: '/personalize-tours',
+          element: <PersonalizeTours></PersonalizeTours>
         },
         {
           path: '/profile',
@@ -137,7 +151,7 @@ function App() {
             }
           ]
         },
-        
+
         {
           path: '/agencyProfile/:id',
           element: <ViewAgencyProfile></ViewAgencyProfile>,
@@ -198,6 +212,10 @@ function App() {
     {
       path: '/payment/success',
       element: <PaymentSuccess></PaymentSuccess>
+    },
+    {
+      path: '/search',
+      element: <Search></Search>
     },
     {
       path: '*',

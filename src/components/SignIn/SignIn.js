@@ -90,7 +90,11 @@ const SignIn = () => {
                     gender: 'N/A',
                     followers: [],
                     following: [],
-                    tours: []
+                    tours: [],
+                    bio: '',
+                    facebook: '',
+                    instagram: '',
+                    twitter: ''
                 }
 
                 console.log(createUser);

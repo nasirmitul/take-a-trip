@@ -30,7 +30,7 @@ const AgencyRatings = () => {
                             typeof totalRating === 'number' &&
                             <h1 className='rating-count'>
                                 {
-                                    (totalRating / reviews.length).toFixed(1)
+                                    reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : '0.0'
                                 }
                             </h1>
                         }
@@ -65,11 +65,6 @@ const AgencyRatings = () => {
                                 <p className="name">{review.reviewerName}</p>
                                 <div className="rating-time">
                                     <ul className='rating-icons'>
-                                        {/* <li><AiFillStar></AiFillStar></li>
-                                        <li><AiFillStar></AiFillStar></li>
-                                        <li><AiFillStar></AiFillStar></li>
-                                        <li><AiFillStar></AiFillStar></li>
-                                        <li><AiFillStar></AiFillStar></li> */}
                                         {
                                             Array.apply(null, { length: review.rating }).map((e, i) => <li key={i} className='orange'><AiFillStar></AiFillStar></li>)
                                         }
@@ -77,13 +72,14 @@ const AgencyRatings = () => {
                                             review.rating < 5 && Array.apply(null, { length: 5 - review.rating }).map((e, i) => <li key={i} className='gray'><AiFillStar></AiFillStar></li>)
                                         }
                                     </ul>
-                                    <p className="time">{review.reviewTime}</p>
+                                    <p className="time">{review.reviewTime.slice(0, 10)}</p>
                                 </div>
                                 <div className="main-review">
                                     <p>{review.review}</p>
                                 </div>
                             </div>
-                        </div>)
+                        </div>
+                        ).reverse()
                 }
             </div>
         </div>
