@@ -3,6 +3,7 @@ import cover from '../../../../images/nature.jpg'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import SingleUserPost from '../../Home/SingleUserPost';
 import { AuthContext } from '../../../../contexts/UserContext';
+import { toast } from 'react-hot-toast';
 
 const ViewUserProfile = () => {
     const [userProfile, setUserProfile] = useState([])
@@ -82,6 +83,7 @@ const ViewUserProfile = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                toast.success('follwed')
             })
     }
 
@@ -104,11 +106,10 @@ const ViewUserProfile = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                toast.error('unfollowed')
             })
     }
-
-
-
+    
 
     return (
 

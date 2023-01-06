@@ -4,6 +4,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { AuthContext } from '../../../contexts/UserContext';
+import { toast } from 'react-hot-toast';
 
 const About = () => {
     const { user } = useContext(AuthContext);
@@ -40,6 +41,7 @@ const About = () => {
                 if (data.acknowledged) {
                     setShowBioField(false)
                     setRefetch(!refetch);
+                    toast.success('bio updated');
                 }
             })
 
@@ -74,6 +76,7 @@ const About = () => {
                 if (data.acknowledged) {
                     setHandleSocial(false)
                     setRefetch(!refetch);
+                    toast.success('social links updated');
                 }
             })
     }

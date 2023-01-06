@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useLoaderData } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { AuthContext } from '../../../../contexts/UserContext';
+import { toast } from 'react-hot-toast';
 
 const colors = {
     orange: "#FFBA5A",
@@ -90,6 +91,7 @@ const ViewAgencyRatings = () => {
                 setCurrentValue(0)
                 console.log(data);
                 setReload(!reload);
+                toast.success('you gave a review');
             })
     }
 

@@ -10,6 +10,9 @@ import { AuthContext } from '../../../contexts/UserContext';
 
 import { RxCross2 } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
+import Processing from '../../LoadingScreen/Processing';
+import Loading from '../../LoadingScreen/Loading';
+import { toast } from 'react-hot-toast';
 
 const Home = () => {
     const [selectedImages, setSelectedImages] = useState([])
@@ -19,7 +22,9 @@ const Home = () => {
     const [notifications, setNotifications] = useState(false);
     const [loadData, setLoadData] = useState(false);
     const [refetch, setRefetch] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const navigate = useNavigate();
+
 
     const handleAddImage = (event) => {
         const selectedImage = event.target.files;
@@ -39,6 +44,8 @@ const Home = () => {
 
 
     const handleNewPostSubmit = (event) => {
+        setUploading(true);
+        setOpenModal(false)
         event.preventDefault();
         const form = event.target;
         const formData = new FormData();
@@ -94,6 +101,9 @@ const Home = () => {
                                         form.reset();
                                         setOpenModal(false)
                                         setLoadData(true)
+                                        setUploading(false);
+                                        setSelectedImages([])
+                                        toast.success('Posted successfully');
                                     }
                                 })
                                 .catch(error => console.log(error))
@@ -135,6 +145,9 @@ const Home = () => {
 
     return (
         <div>
+            {
+                uploading && <Processing></Processing>
+            }
             <section id="middle-section" className="middle-section">
 
                 <div className="search-notification">
@@ -143,14 +156,14 @@ const Home = () => {
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
 
-                    <div className="notification-icon-popup">
+                    {/* <div className="notification-icon-popup">
                         <div className="notification-icon" onClick={() => setNotifications(!notifications)}>
                             <img src={notification} alt="" />
                         </div>
                         <div className="show-notification">
                             {notifications && <Notifications></Notifications>}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="make_post d-flex">

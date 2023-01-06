@@ -55,9 +55,9 @@ const Followers = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="follower-icon">
+                            {/* <div className="follower-icon">
                                 <BsThreeDots className='three-dot-icon'></BsThreeDots>
-                            </div>
+                            </div> */}
                         </div>
                     )
                 }

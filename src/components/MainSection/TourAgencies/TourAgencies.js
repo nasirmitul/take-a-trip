@@ -14,7 +14,7 @@ const TourAgencies = () => {
                 <div className="section-title">
                     <p>Tour Agencies</p>
                 </div>
-                <div className="filter-search">
+                {/* <div className="filter-search">
                     <div className="filter">
                         <select name='filteredData'>
                             <option value="default">Default</option>
@@ -29,7 +29,7 @@ const TourAgencies = () => {
                         <input type="text" placeholder='search by location' />
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
-                </div>
+                </div> */}
             </div>
             {
                 tourAgencies.map(tourAgency => <TourAgency key={tourAgency._id} tourAgency={tourAgency}></TourAgency>)

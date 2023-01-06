@@ -4,6 +4,7 @@ import { AuthContext } from '../../../contexts/UserContext';
 import { BiUser, BiImageAlt } from 'react-icons/bi';
 import profile_preview from '../../../icons/profile-preview.png'
 import cover_preview from '../../../icons/cover_preview.png'
+import { toast } from 'react-hot-toast';
 
 const CreateAgency = () => {
     const navigate = useNavigate();
@@ -195,6 +196,7 @@ const CreateAgency = () => {
                                                                 if (data.acknowledged) {
                                                                     form.reset();
                                                                     navigate('/my-agency/agency-timeline')
+                                                                    toast.success('agency created successfully');
                                                                 }
                                                             })
                                                             .catch(error => console.log(error))

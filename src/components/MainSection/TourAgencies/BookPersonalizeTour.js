@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 
@@ -59,6 +60,7 @@ const BookPersonalizeTour = () => {
                 console.log(data)
                 if (data.acknowledged) {
                     form.reset();
+                    toast.success('personalize tour booked successfully')
                 }
             })
             .catch(error => console.log(error))

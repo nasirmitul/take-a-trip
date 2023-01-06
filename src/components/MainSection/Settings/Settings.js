@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
-import icon from "../../../icons/home.png"
+import icon from "../../../icons/profile.png"
 
 const Settings = () => {
     const { user } = useContext(AuthContext);
@@ -20,6 +20,7 @@ const Settings = () => {
                 }
             })
     }
+    
 
     return (
         <div>

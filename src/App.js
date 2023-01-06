@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Toaster } from 'react-hot-toast';
+
 
 import Main from './layout/Main';
 import Home from './components/MainSection/Home/Home'
@@ -45,6 +47,7 @@ import AdminLayout from './layout/AdminLayout';
 import PendingAgencies from './components/Admin/PendingAgencies';
 import Reports from './components/Admin/Reports';
 import AgencyRevenue from './components/MainSection/MyAgency/AgencyRevenue';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
 
@@ -220,7 +223,7 @@ function App() {
     },
     {
       path: '*',
-      element: <h1>404 not found</h1>
+      element: <ErrorPage></ErrorPage>
     },
     {
       path: '/admin',
@@ -248,6 +251,7 @@ function App() {
     <div>
       {/* <Test></Test> */}
       <RouterProvider router={tripRouter}></RouterProvider>
+      <Toaster />
     </div>
   );
 }

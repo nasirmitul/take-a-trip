@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import { RxCross2 } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const PersonalizeTours = () => {
 
@@ -84,6 +85,7 @@ const PersonalizeTours = () => {
             .then(data => {
                 console.log(data)
                 setRefetch(!refetch)
+                toast.error('tour canceled');
             })
             .catch(error => console.log(error))
     }

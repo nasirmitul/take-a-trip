@@ -10,6 +10,7 @@ import { GrFormNext } from 'react-icons/gr';
 import { VscDebugStackframeDot } from 'react-icons/vsc';
 import { AuthContext } from '../../../contexts/UserContext';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 var twelve = require('twentyfour-to-twelve')
 
@@ -184,6 +185,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
             .then(data => {
                 if (data.acknowledged) {
                     setHandleMenu(false)
+                    toast.success('Post reported');
                 }
                 console.log(data);
             })
@@ -194,6 +196,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
         const url = page.toString().concat('post/').concat(id.toString());
         navigator.clipboard.writeText(url);
         setHandleMenu(false)
+        toast.success('Url copied');
     }
 
     const handlePostDelete = (id) => {
@@ -207,6 +210,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
             .then(data => {
                 console.log(data);
                 handleRefetch();
+                toast.success('Post deleted successfully');
             })
     }
 

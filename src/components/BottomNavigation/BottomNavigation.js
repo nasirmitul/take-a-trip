@@ -29,7 +29,7 @@ const BottomNavigation = () => {
     const { width } = useWindowDimensions();
 
     return (
-        <div className={`${ width<750 ? 'small-device' : 'bottom-navigation-route'}`}>
+        <div className={`${width < 750 ? 'small-device' : 'bottom-navigation-route'}`}>
             <div className="bottom-navigation">
                 <NavLink to='/home'>
                     <img src={home} alt="" />
@@ -37,13 +37,13 @@ const BottomNavigation = () => {
                 <NavLink to='/profile/timeline'>
                     <img src={profile} alt="" />
                 </NavLink>
-                <NavLink to='/notification'>
+                {/* <NavLink to='/notification'>
                     <img src={notification} alt="" />
-                </NavLink>
+                </NavLink> */}
                 <NavLink to='/menu'>
                     <img src={hamburger} alt="" />
                 </NavLink>
-                
+
             </div>
         </div>
     );

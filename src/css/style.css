@@ -143,6 +143,30 @@ input:read-only {
     align-items: center;
 }
 
+.processing{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 99;
+    overflow: hidden;
+    position: relative;
+}
+
+.processing .processing-loader{
+    position: absolute;
+    top: 50px;
+    height: 100px;
+    width: calc(100% - 100px);
+    /* background: var(--white); */
+    /* box-shadow: var(--box-shadow); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ============== Responsive Site Layout ================ */
 .main-content {
     display: grid;
@@ -854,7 +878,8 @@ nav a .logo {
 }
 
 .search-bar {
-    width: calc(100% - 80px);
+    width: 100%;
+    /* width: calc(100% - 80px); */
     display: flex;
     position: relative;
 }
@@ -3564,20 +3589,6 @@ nav a .logo {
     margin-bottom: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* No print */
 @media print {
 
@@ -3602,4 +3613,44 @@ nav a .logo {
     body {
         margin: 1.6cm;
     }
+}
+
+
+/* Error Page */
+.error-page{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-page .error-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.error-page .error-message h1{
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 30px !important;
+}
+
+
+.error-page .error-message p{
+    font-size: .9rem;
+    color: var(--gray);
+    font-weight: 500;
+    margin-bottom: 20px !important;
+}
+
+.error-page .error-message a{
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: underline;
 }
