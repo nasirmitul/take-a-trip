@@ -2,12 +2,33 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { AuthContext } from '../../../contexts/UserContext';
+import Countdown from "react-countdown";
+var twelve = require('twentyfour-to-twelve');
 
 const UpComingTourDetails = () => {
 
-    const { _id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail } = useLoaderData();
+    const { _id, image, locationName, details, agencyName, agencyId, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail } = useLoaderData();
 
-    console.log(_id, image, locationName, details, agencyName, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime, tourTripDay, tourDeparture, tourHotelInformation, leftTravelers, agencyEmail);
+
+    const [agencyDetail, setAgencyDetail] = useState([])
+    const [isLeftTime, setIsLeftTime] = useState(false);
+
+    const [totalAgencyRating, setTotalAgencyRating] = useState(0)
+    useEffect(() => {
+        fetch(`http://localhost:5000/agency-info/${agencyEmail}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setAgencyDetail(data)
+            })
+    }, [])
+
+
+    useEffect(() => {
+        const total = agencyDetail?.reviews?.reduce((acc, row) => acc + row.rating, 0);
+        setTotalAgencyRating(total)
+    }, [agencyDetail?.reviews]);
+
 
     const [showPayment, setShowPayment] = useState(false);
     const [disable, setDisable] = useState(false)
@@ -18,10 +39,7 @@ const UpComingTourDetails = () => {
         }
     }, [leftTravelers])
 
-
     const { user } = useContext(AuthContext)
-
-
 
     const handleCheckout = (event) => {
         event.preventDefault();
@@ -70,6 +88,56 @@ const UpComingTourDetails = () => {
 
 
 
+
+    const tourDate = new Date(tourTripDate);
+
+    const hours = tourTripTime.slice(0, 2)
+    const minutes = tourTripTime.slice(3, 5)
+
+    console.log('time', hours, minutes);
+
+    const leftTime = tourDate.setHours(hours, minutes) - (24 * 60 * 60 * 1000)
+
+    const Completionist = () => {
+        return (
+            <>
+                <span>Times up. You can not book this tour anymore.</span>
+                {
+                    setIsLeftTime(true)
+                }
+            </>
+        );
+    };
+
+    // Renderer callback with condition
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+
+
+            fetch(`http://localhost:5000/update-time/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ timesUp: true })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+
+
+            return <Completionist />;
+        } else {
+            return (
+                <span>
+                    {days} days {hours} hours {minutes} minute {seconds} seconds left
+                </span>
+            );
+        }
+    };
+
+
     return (
         <div className='upcoming-tour-detail'>
             <div className="tour-card">
@@ -77,7 +145,7 @@ const UpComingTourDetails = () => {
                     <img src={image} alt="" />
                 </div>
                 <div className="name-description">
-                    <small className='left-time'>{tourTripDay} days left</small>
+                    <small className='left-time'><Countdown date={leftTime} renderer={renderer} /> </small>
                     <h3>{locationName}</h3>
                     <p>{details}</p>
                 </div>
@@ -88,18 +156,18 @@ const UpComingTourDetails = () => {
                             <div className="row-1">
                                 <p className='info-name'>Name</p>
 
-                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${_id}`}>
+                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${agencyId}`}>
                                     <p className='info-data'>{agencyName}</p>
                                 </Link>
-                                
+
                             </div>
                             <div className="row-1">
-                                <p className='info-name'>Total Ratings</p>
-                                <p className='info-data'>{totalRating ? totalRating : 0} ratings</p>
+                                <p className='info-name'>Total Reviews</p>
+                                <p className='info-data'>{agencyDetail?.reviews ? agencyDetail?.reviews?.length : 0} Reviews</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Rating</p>
-                                <p className='info-data ratings'>{ratings ? ratings : 0}<span>/5</span></p>
+                                <p className='info-data ratings'>{totalAgencyRating > 0 ? (totalAgencyRating / agencyDetail?.reviews?.length).toFixed(1) : 0}<span>/5</span></p>
                             </div>
                         </div>
                     </div>
@@ -114,7 +182,7 @@ const UpComingTourDetails = () => {
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Time</p>
-                                <p className='info-data'>{tourTripDate} at {tourTripTime}</p>
+                                <p className='info-data'>{tourTripDate} at {twelve(tourTripTime)}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Travelers</p>
@@ -125,8 +193,8 @@ const UpComingTourDetails = () => {
                                 <p className='info-data'>{tourTripDate}</p>
                             </div>
                             <div className="row-1">
-                                <p className='info-name'>Journey End</p>
-                                <p className='info-data'>{tourTripDate}</p>
+                                <p className='info-name'>Days</p>
+                                <p className='info-data'>{tourTripDay} days</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Departure</p>
@@ -139,7 +207,7 @@ const UpComingTourDetails = () => {
                         </div>
                     </div>
                 </div>
-                <button className='upcoming-tour-button' onClick={() => { setShowPayment(true) }} disabled={disable}>Going</button>
+                <button className='upcoming-tour-button' onClick={() => { setShowPayment(true) }} disabled={disable || isLeftTime}>Going</button>
             </div>
 
 

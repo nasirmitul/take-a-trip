@@ -111,6 +111,7 @@ const ViewUserProfile = () => {
 
 
     return (
+
         <div className='user-profile'>
             <div className="profile-header">
                 <div className="cover-image">
@@ -132,7 +133,7 @@ const ViewUserProfile = () => {
                             {
                                 follow ?
                                     <div className="follow-button">
-                                        <button className="custom-btn" onClick={handleAddUnFollow}>UnFollow</button>
+                                        <button className="custom-btn unfollow" onClick={handleAddUnFollow}>UnFollow</button>
                                     </div> :
                                     <div className="follow-button">
                                         <button className="custom-btn" onClick={handleAddFollow}>Follow</button>
@@ -157,8 +158,11 @@ const ViewUserProfile = () => {
                     </div>
                 </div> */}
 
-
             </div>
+
+            {
+                posts.length <= 0 && <p className='no-recent-event'>This user didn't post anything yet</p>
+            }
 
             <div>
                 {

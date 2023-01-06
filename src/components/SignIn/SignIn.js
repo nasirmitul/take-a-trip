@@ -91,6 +91,7 @@ const SignIn = () => {
                     followers: [],
                     following: [],
                     tours: [],
+                    interested: [],
                     bio: '',
                     facebook: '',
                     instagram: '',

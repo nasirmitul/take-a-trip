@@ -1,13 +1,39 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
+var twelve = require('twentyfour-to-twelve');
 
 const UpComingTour = ({ upComingTour }) => {
     const { user } = useContext(AuthContext)
 
-    const { _id, image, locationName, details, agencyName, agencyEmail, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime } = upComingTour || {};
+    const { _id, image, locationName, details, agencyName, agencyEmail, agencyId, totalRating, ratings, totalCost, time, totalTravelers, tourTripDate, tourTripTime } = upComingTour || {};
 
-    // console.log('this is id and details', _id, details);
+    const [agencyDetail, setAgencyDetail] = useState([])
+
+    const [totalAgencyRating, setTotalAgencyRating] = useState(0)
+    useEffect(() => {
+        fetch(`http://localhost:5000/agency-info/${agencyEmail}`)
+        .then(res=>res.json())
+        .then(data => {
+            console.log(data);
+            setAgencyDetail(data)
+        })
+    }, [])
+
+
+    useEffect(() => {
+        const total = agencyDetail?.reviews?.reduce((acc, row) => acc + row.rating, 0);
+        setTotalAgencyRating(total)
+    }, [agencyDetail?.reviews]);
+
+
+
+
+
+    
+
+
+
 
     return (
         <div>
@@ -25,18 +51,18 @@ const UpComingTour = ({ upComingTour }) => {
                         <div className="info-row">
                             <div className="row-1">
                                 <p className='info-name'>Name</p>
-                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${_id}`}>
+                                <Link to={agencyEmail === user.email ? '/my-agency/agency-timeline' : `/agencyProfile/${agencyId}`}>
                                     <p className='info-data'>{agencyName}</p>
                                 </Link>
 
                             </div>
                             <div className="row-1">
-                                <p className='info-name'>Total Ratings</p>
-                                <p className='info-data'>{totalRating ? totalRating : 0} ratings</p>
+                                <p className='info-name'>Total Reviews</p>
+                                <p className='info-data'>{agencyDetail?.reviews ? agencyDetail?.reviews?.length : 0} Reviews</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Rating</p>
-                                <p className='info-data ratings'>{ratings ? ratings : 0} <span>/5</span></p>
+                                <p className='info-data ratings'>{totalAgencyRating > 0 ? (totalAgencyRating / agencyDetail?.reviews?.length).toFixed(1) : 0} <span>/5</span></p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +77,7 @@ const UpComingTour = ({ upComingTour }) => {
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Time</p>
-                                <p className='info-data'>{tourTripDate} at {tourTripTime}</p>
+                                <p className='info-data'>{tourTripDate} at {twelve(tourTripTime)}</p>
                             </div>
                             <div className="row-1">
                                 <p className='info-name'>Total Travelers</p>

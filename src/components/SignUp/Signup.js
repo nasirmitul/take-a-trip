@@ -5,7 +5,7 @@ import logo from '../../images/logo.png'
 import show from '../../icons/show.svg'
 import hide from '../../icons/hide.svg'
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
 import { getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
@@ -19,6 +19,7 @@ const Signup = () => {
 
     const { createUser, googleSign } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     /* Signup with Email Password */
     const handleSubmit = (event) => {
@@ -79,12 +80,13 @@ const Signup = () => {
                     followers: [],
                     following: [],
                     tours: [],
+                    interested: [],
                     bio: '',
                     facebook: '',
                     instagram: '',
                     twitter: ''
                 }
-    
+
                 console.log(createUser);
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
@@ -140,13 +142,15 @@ const Signup = () => {
                     followers: [],
                     following: [],
                     tours: [],
+                    interested: [],
                     bio: '',
                     facebook: '',
                     instagram: '',
                     twitter: ''
                 }
-    
+
                 console.log(createUser);
+                <Navigate to='/'></Navigate>
                 fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
@@ -157,19 +161,21 @@ const Signup = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
+                        
                         if (data.acknowledged) {
                             alert("Account Created")
                         }
                     })
                     .catch(error => console.log(error))
 
-                navigate('/');
+                
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 const email = error.customData.email;
                 console.log(`errorcode: ${errorCode}, errorMessage: ${errorMessage}, email: ${email}`);
             });
+            
     }
 
 

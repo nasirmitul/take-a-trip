@@ -644,6 +644,7 @@ nav a .logo {
     padding: 12px 0;
 }
 
+
 #left-part .link.active {
     width: 100%;
     height: min-content;
@@ -652,6 +653,11 @@ nav a .logo {
     border-radius: 0 5px 5px 0;
     /* padding-left: 10px; */
     transition: .4s;
+}
+
+#left-part ul .link .icon {
+    height: 15px;
+    width: 15px;
 }
 
 #left-part .menu-part ul {
@@ -1038,13 +1044,19 @@ nav a .logo {
 
 /* Comment */
 
+.all-comments .single-comment-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .all-comments .single-comment {
     display: flex;
     margin-top: 15px;
     position: relative;
 }
 
-.all-comments .single-comment::after {
+/* .all-comments .single-comment::after {
     content: '';
     position: absolute;
     height: 1px;
@@ -1052,7 +1064,7 @@ nav a .logo {
     background: var(--white-30);
     bottom: -8px;
     right: 0;
-}
+} */
 
 .all-comments .single-comment .commentator-image {
     height: 45px;
@@ -1079,6 +1091,14 @@ nav a .logo {
     font-weight: 300;
     color: var(--text-color);
     margin-left: 10px !important;
+}
+
+.all-comments .single-comment-data .comment-icon {
+    height: 40px;
+    width: 25px;
+    font-size: 1.3rem;
+    color: var(--gray);
+    cursor: pointer;
 }
 
 /* ================================ Post Modal Design ================================ */
@@ -1277,6 +1297,35 @@ nav a .logo {
 
 .post-menu {
     cursor: pointer;
+    position: relative;
+
+}
+
+.post-menu .post-menu-icon {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+}
+
+.post-menu .menu-items {
+    position: absolute;
+    right: 0;
+    top: 25px;
+    background: #f7f7f7;
+    box-shadow: var(--shadow);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.post-menu .menu-items p {
+    background: rgba(51, 216, 125, 0.07);
+    padding: 5px 20px !important;
+    color: var(--primary);
 }
 
 #middle-section .post {
@@ -1993,7 +2042,7 @@ nav a .logo {
     width: 45%;
 }
 
-.tour-agency .agency-info .name-tourArranged .name p{
+.tour-agency .agency-info .name-tourArranged .name p {
     color: var(--text-color);
     font-size: 1rem;
     font-weight: 500;
@@ -2145,6 +2194,203 @@ nav a .logo {
     gap: 10px;
 }
 
+/* ================================ Book Personalize Tour  ================================ */
+.personalize-heading .personalize-title {
+    font-size: 20px;
+    color: var(--text-color);
+    font-weight: 500;
+    background: var(--white);
+    width: 100%;
+    margin-bottom: 10px !important;
+    padding: 15px !important;
+}
+
+.personalize-heading .personalize-title span {
+    color: var(--primary);
+}
+
+.personalize-tour-form {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    width: 100%;
+    padding: 15px !important;
+    gap: 12px;
+}
+
+.personalize-tour-form input,
+.personalize-tour-form textarea {
+    padding: 10px 20px;
+    border: 1px solid var(--gray);
+    outline: none;
+    border-radius: 5px;
+}
+
+.personalize-tour-form input:focus,
+.personalize-tour-form textarea:focus {
+    border: 1px solid var(--primary);
+    outline: none;
+}
+
+.personalize-tour-form input:focus::placeholder,
+.personalize-tour-form textarea:focus::placeholder {
+    color: var(--text-color);
+}
+
+.personalize-tour-form input::placeholder,
+.personalize-tour-form textarea::placeholder {
+    color: var(--white-90);
+}
+
+
+
+/* -------------------------- Agency Dashboard ------------------------------ */
+.dashboard-navigation {
+    padding: 5px;
+    background: var(--white);
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard-navigation a {
+    padding: 6px 12px;
+    color: var(--white);
+    background: var(--gray);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dashboard-navigation a.active {
+    background: var(--primary);
+}
+
+.personalize-tour-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.personalized-tour-agency-dashboard {
+    padding: 10px;
+    background: var(--white);
+    border-radius: 5px;
+}
+
+.personalized-tour-agency-dashboard .actions {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.personalized-tour-agency-dashboard .info-row .description {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: start;
+    align-items: flex-start;
+    background: transparent;
+    padding: 0;
+}
+
+.personalized-tour-agency-dashboard .info-row .description .info-name {
+    background: rgba(51, 216, 125, 0.07);
+    width: 100%;
+    padding: 5px 8px !important;
+}
+
+.personalized-tour-agency-dashboard .info-row .description .info-data {
+    width: 100%;
+    padding: 5px 8px !important;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+
+.personalized-tour-agency-dashboard .actions button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.personalized-tour-agency-dashboard .actions button.pending {
+    background: var(--orange);
+}
+
+.personalized-tour-agency-dashboard .actions button.approved {
+    background: var(--primary);
+}
+
+.personalized-tour-agency-dashboard .actions button.cancel {
+    background: var(--error);
+}
+
+
+
+
+.add-amount-background {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(2.3px);
+    backdrop-filter: blur(2.3px);
+}
+
+.add-amount {
+    position: absolute;
+    width: min(400px, 95%);
+    height: -moz-fit-content;
+    height: fit-content;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: var(--white);
+    border-radius: 8px;
+    border: 2px solid rgba(64, 199, 125, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.add-amount input {
+    margin-bottom: 20px;
+    padding: 8px 20px;
+    border: 1px solid var(--gray);
+    color: var(--text-color);
+    outline: none;
+}
+
+.add-amount input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.add-amount .actions {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+}
+
+.add-amount .actions .custom-btn {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.add-amount .actions .custom-btn.cancel {
+    background: var(--error);
+}
 
 /* ================================ Create Agency  ================================ */
 .create-agency-heading .create-agency-title {
@@ -2215,21 +2461,27 @@ nav a .logo {
     color: var(--white-90);
 }
 
-.create-agency-form .upload-profile-picture.show-profile {
+.create-agency-form .upload-nidFront-picture.show-nidFront,
+.create-agency-form .upload-nidBack-picture.show-nidBack,
+.create-agency-form .upload-profile-picture.show-profile,
+.create-agency-form .upload-cover-picture.show-cover {
     display: block;
 }
 
-.create-agency-form .upload-profile-picture.hide-profile {
+.create-agency-form .upload-nidFront-picture.hide-nidFront,
+.create-agency-form .upload-nidBack-picture.hide-nidBack,
+.create-agency-form .upload-profile-picture.hide-profile,
+.create-agency-form .upload-cover-picture.hide-cover {
     display: none;
 }
 
-.create-agency-form .upload-cover-picture.show-cover {
+/* .create-agency-form .upload-cover-picture.show-cover {
     display: block;
 }
 
 .create-agency-form .upload-cover-picture.hide-cover {
     display: none;
-}
+} */
 
 /* .create-agency-form .upload-profile-background,
 .create-agency-form .upload-cover-background {
@@ -2244,6 +2496,12 @@ nav a .logo {
     backdrop-filter: blur(2.3px);
 } */
 
+
+
+
+
+.create-agency-form .upload-nidFront-picture,
+.create-agency-form .upload-nidBack-picture,
 .create-agency-form .upload-profile-picture,
 .create-agency-form .upload-cover-picture {
     position: absolute;
@@ -2260,8 +2518,10 @@ nav a .logo {
     padding: 20px;
 }
 
+.create-agency-form .upload-nidFront-picture .upload-nidFront-title,
+.create-agency-form .upload-nidBack-picture .upload-nidBack-title,
 .create-agency-form .upload-profile-picture .upload-profile-title,
-.create-agency-form .upload-cover-picture .upload-cover-title{
+.create-agency-form .upload-cover-picture .upload-cover-title {
     font-size: 1rem;
     font-weight: 400;
     color: var(--primary);
@@ -2269,7 +2529,50 @@ nav a .logo {
     margin-bottom: 20px !important;
 }
 
-.create-agency-form .upload-profile-picture .profile-label{
+.create-agency-form .upload-nidFront-picture .nidFront-label,
+.create-agency-form .upload-nidBack-picture .nidBack-label {
+    height: 230px;
+    width: 100%;
+    border: 1px solid var(--white-30);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.create-agency-form .upload-nidFront-picture .nidFront-label img,
+.create-agency-form .upload-nidBack-picture .nidBack-label img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 4;
+}
+
+.create-agency-form .upload-nidFront-picture .nidFront-label .text,
+.create-agency-form .upload-nidBack-picture .nidBack-label .text {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    color: var(--primary);
+    z-index: 2;
+    font-weight: 500;
+}
+
+.create-agency-form .upload-nidFront-picture .nidFront,
+.create-agency-form .upload-nidBack-picture .nidBack {
+    display: none;
+}
+
+.create-agency-form .upload-profile-picture .profile-label {
     height: 100px;
     width: 100px;
     border: 1px solid var(--white-30);
@@ -2283,9 +2586,9 @@ nav a .logo {
     margin-bottom: 40px;
 }
 
-.create-agency-form .upload-cover-picture .cover-label{
+.create-agency-form .upload-cover-picture .cover-label {
     height: 230px;
-    width: 100%px;
+    width: 100%;
     border: 1px solid var(--white-30);
     border-radius: 5px;
     display: flex;
@@ -2297,16 +2600,89 @@ nav a .logo {
     margin-bottom: 40px;
 }
 
-.create-agency-form .upload-profile-picture .profile-label .user-icon,
+/* .create-agency-form .upload-profile-picture .profile-label .user-icon,
 .create-agency-form .upload-cover-picture .cover-label .image-icon{
     font-size: 1.5rem;
     color: var(--primary);
+} */
+
+.create-agency-form .upload-profile-picture .profile-label .user-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.create-agency-form .upload-cover-picture .cover-label .image-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .create-agency-form .upload-profile-picture .profile,
-.create-agency-form .upload-cover-picture .cover{
+.create-agency-form .upload-cover-picture .cover {
     display: none;
 }
+
+/* --------------------- Terms and Conditions ------------------------ */
+.accept-terms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+.accept-terms .terms-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 10px !important;
+    font-weight: 600;
+}
+
+.accept-terms .terms-message {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px !important;
+}
+
+.accept-terms .terms-message span {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.accept-terms .actions {
+    display: flex;
+    gap: 20px;
+}
+
+.accept-terms .actions button {
+    padding: 9px 30px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.accept-terms .actions button.cancel {
+    background: var(--error);
+}
+
+.accept-terms .actions button.accept {
+    background: var(--primary);
+}
+
+
+
+
+
+
 
 /* ================================ My Agency  ================================ */
 .create-tour-popup .modal-body {
@@ -2358,7 +2734,7 @@ nav a .logo {
     display: none;
 }
 
-.create-tour-popup form .create-tour-image-body {
+/* .create-tour-popup form .create-tour-image-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2370,12 +2746,23 @@ nav a .logo {
 }
 
 .create-tour-popup form .create-tour-image-body .add-image-icon {
-    color: var(--primary);
-    font-size: 1.4rem;
+    width:20px ;
+    height: auto;
 }
 
 .create-tour-popup form .create-tour-image-body p {
     color: var(--primary);
+} */
+.create-tour-popup form .create-tour-image-body {
+    width: 100%;
+    border: 1px dashed var(--primary);
+    border-radius: 5px;
+}
+
+.create-tour-popup form .create-tour-image-body .add-image-icon {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
 }
 
 .create-tour-popup form .custom-btn {
@@ -2500,6 +2887,10 @@ nav a .logo {
     color: var(--text-color);
     font-weight: 500;
 
+}
+
+.profile-header .follow-button .unfollow {
+    background: var(--gray);
 }
 
 .profile-header .profile-image-others .profile-others .profile-name-email .profile-email {
@@ -2643,10 +3034,25 @@ nav a .logo {
 }
 
 .profile-about .section-heading {
+    display: flex;
+    justify-content: space-between;
     font-size: 1.2rem;
     color: var(--black);
     margin-bottom: 15px !important;
     font-weight: 600;
+}
+
+.profile-about .section-heading .section-heading-text {
+    font-size: 1.2rem;
+    color: var(--black);
+    font-weight: 600;
+}
+
+.profile-about .section-heading .section-heading-text span {
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .profile-about .check-in .check .see-all {
@@ -2698,12 +3104,45 @@ nav a .logo {
     color: #3b5998;
 }
 
+.profile-about .check-logo .social-icons.instagram {
+    color: #E04F4C;
+}
+
+.profile-about .check-logo .social-icons.twitter {
+    color: #00acee;
+}
+
+.profile-about .check-logo .social-icons.agency-about-icon {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
 .profile-about .check-icon .three-dot-icon {
     color: var(--white-90);
     font-size: 1.5rem;
     cursor: pointer;
 }
 
+/* ---------------------- Add bio -------------------- */
+.add-bio form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add-bio form textarea {
+    border: 1px solid var(--gray);
+    outline: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 100px;
+    padding: 10px 20px;
+}
+
+.add-bio form textarea:focus {
+    border: 1px solid var(--primary);
+    outline: none;
+}
 
 /* -------------------------------- followers/Following --------------------------------- */
 .followers {
@@ -3068,41 +3507,62 @@ nav a .logo {
     cursor: pointer;
 }
 
-
-
-
-
-
-
-/* .settings-title {
-    width: 20%;
-    font-size: 20px;
+/* ==================================== Admin Panel =================================== */
+.admin-routing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(51, 216, 125, 0.07);
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    gap: 20px;
 }
 
-.settings-value {
-    width: 30%;
+.admin-routing a {
+    color: var(--white);
+    background: var(--gray);
+    padding: 10px 25px;
+    border-radius: 5px;
 }
 
-.settings-data {
-    width: 30%;
+.admin-routing a.active {
+    background: var(--primary);
 }
 
-.settings-links {
-    width: 20%;
-    text-align: right;
+.reports .main-title,
+.agency-approval .main-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-top: 20px !important;
+    padding: 6px 15px !important;
+    background: var(--white);
+    margin-bottom: 10px !important;
 }
 
-.dltacc {
-    color: red;
+.reports .no-pending,
+.agency-approval .no-pending {
+    color: var(--gray);
+    font-weight: 500;
+    text-align: center;
+    margin-top: 40px !important;
+
 }
- */
 
+.admin-agency-approve {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 
-
-
-
-
-
+.nidFrontImage,
+.nidBackImage {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    border: 1px solid var(--gray);
+    margin-bottom: 20px;
+}
 
 
 

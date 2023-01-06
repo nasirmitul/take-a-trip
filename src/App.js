@@ -39,6 +39,12 @@ import AgencyDashboard from './components/MainSection/MyAgency/AgencyDashboard';
 import Search from './components/MainSection/Search/Search';
 import PersonalizeTour from './components/MainSection/TourAgencies/BookPersonalizeTour';
 import PersonalizeTours from './components/MainSection/PersonalizeTours/PersonalizeTours';
+import Admin from './components/Admin/Admin';
+import AdminRoute from './routes/AdminRoute';
+import AdminLayout from './layout/AdminLayout';
+import PendingAgencies from './components/Admin/PendingAgencies';
+import Reports from './components/Admin/Reports';
+import AgencyRevenue from './components/MainSection/MyAgency/AgencyRevenue';
 
 function App() {
 
@@ -49,23 +55,14 @@ function App() {
       children: [
         {
           path: '/',
-          /* loader: async () => {
-            return fetch('http://localhost:5000/posts');
-          }, */
           element: <Home></Home>
         },
         {
           path: '/home',
-          /* loader: async () => {
-            return fetch('http://localhost:5000/posts');
-          }, */
           element: <Home></Home>
         },
         {
           path: '/upcoming-tours',
-          /* loader: async () => {
-            return fetch('http://localhost:5000/upcomingTours');
-          }, */
           element: <UpComingTours></UpComingTours>
         },
         {
@@ -148,6 +145,10 @@ function App() {
             {
               path: '/my-agency/agency-dashboard',
               element: <AgencyDashboard></AgencyDashboard>
+            },
+            {
+              path: '/my-agency/agency-dashboard/revenue',
+              element: <AgencyRevenue></AgencyRevenue>
             }
           ]
         },
@@ -221,7 +222,20 @@ function App() {
       path: '*',
       element: <h1>404 not found</h1>
     },
-
+    {
+      path: '/admin',
+      element: <AdminRoute><AdminLayout></AdminLayout></AdminRoute>,
+      children: [
+        {
+          path: '/admin',
+          element: <PendingAgencies></PendingAgencies>
+        },
+        {
+          path: '/admin/pending-reports',
+          element: <Reports></Reports>
+        }
+      ]
+    },
     {
       path: '/test',
       element: <CarouselTest></CarouselTest>

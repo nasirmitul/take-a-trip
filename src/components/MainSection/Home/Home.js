@@ -134,7 +134,6 @@ const Home = () => {
     }
 
     return (
-
         <div>
             <section id="middle-section" className="middle-section">
 

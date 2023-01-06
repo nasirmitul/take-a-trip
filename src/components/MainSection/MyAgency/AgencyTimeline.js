@@ -5,6 +5,8 @@ import SingleAgencyPost from '../Home/SingleAgencyPost';
 const AgencyTimeline = () => {
 
     const { user } = useContext(AuthContext);
+    const [agency, setAgency] = useState({});
+    const [refetch, setRefetch] = useState(false);
     const [posts, setPost] = useState([])
     useEffect(() => {
         fetch(`http://localhost:5000/agency/${user.email}`)
@@ -13,18 +15,38 @@ const AgencyTimeline = () => {
                 setPost(data)
                 console.log(data);
             })
+    }, [refetch])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/createAgency?agencyEmail=${user.email}`)
+            .then(res => {
+                return res.json()
+            })
+            .then(data => setAgency(data))
     }, [])
 
+    const handleRefetch = () => {
+        setRefetch(!refetch);
+    }
     return (
         <div>
+
             {
-                posts.length < 1 ? <div><p className='no-post'>No post yet from your agency</p></div>
-                :
-                Array.isArray(posts) && posts?.map(post => <SingleAgencyPost
-                    key={post._id}
-                    post={post}
-                ></SingleAgencyPost>).reverse()
+                agency[0]?.verified &&
+                <>
+                    {
+                        posts.length < 1 ? <div><p className='no-post'>No post yet from your agency</p></div>
+                            :
+                            Array.isArray(posts) && posts?.map(post => <SingleAgencyPost
+                                key={post._id}
+                                post={post}
+                                handleRefetch={handleRefetch}
+                            ></SingleAgencyPost>).reverse()
+                    }
+                </>
+
             }
+
         </div>
     );
 };

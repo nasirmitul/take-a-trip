@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/UserContext';
 import icon from "../../../icons/home.png"
 
 const Settings = () => {
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleAgencyDelete = () => {
+        fetch(`http://localhost:5000/deleteAgency/${user.email}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    console.log(data.deletedCount);
+                    navigate('/home');
+                }
+            })
+    }
+
     return (
         <div>
             <div>
@@ -62,7 +81,7 @@ const Settings = () => {
                             </div>
                         </div>
 
-                        <div className="setting-section">
+                        {/* <div className="setting-section">
                             <div className="setting-section-title">
                                 <h5 className="section-title">Others Accounts</h5>
                             </div>
@@ -95,7 +114,7 @@ const Settings = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="setting-section">
                             <div className="setting-section-title">
@@ -110,7 +129,6 @@ const Settings = () => {
                         </div>
                     </div>
                 </div>
-
 
 
                 <div className="account-settings">
@@ -165,7 +183,7 @@ const Settings = () => {
                             <div className="section-contents">
                                 <div className="delete-account">
                                     <p>Delete Account</p>
-                                    <p className='delete'>Delete</p>
+                                    <p className='delete' onClick={handleAgencyDelete}>Delete</p>
                                 </div>
                             </div>
                         </div>

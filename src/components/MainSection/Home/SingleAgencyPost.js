@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 import man from '../../../images/man.jpg'
 import travel from '../../../images/space-travel.jpg'
@@ -7,9 +7,28 @@ import interested from '../../../icons/interested.png'
 import going from '../../../icons/going.png'
 import moreInfo from '../../../icons/more info.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/UserContext';
 
-const SingleAgencyPost = ({post}) => {
-    const {_id, agencyName, agencyProfile, time, image, tourTripDate, tourTripTime, locationName, details} = post;
+const SingleAgencyPost = ({ post, handleRefetch }) => {
+    const {user} = useContext(AuthContext);
+    const { _id, agencyName,agencyEmail, agencyProfile, time, image, tourTripDate, tourTripTime, locationName, details } = post;
+    const [handleMenu, setHandleMenu] = useState(false)
+
+    const handlePostDelete = (id) => {
+        fetch(`http://localhost:5000/agency-post/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                handleRefetch();
+                setHandleMenu(false)
+            })
+    }
+
     return (
         <div>
             <div className="agency-post">
@@ -24,9 +43,25 @@ const SingleAgencyPost = ({post}) => {
                                 <p>{time || 'posted time here'}</p>
                             </div>
                         </div>
-                        <div className="post-menu">
-                            <img src={menu} alt="menu" />
+
+
+                        <div className="post-menu" >
+
+                            <div className="post-menu-icon" onClick={() => setHandleMenu(!handleMenu)}>
+                                <img src={menu} alt="menu" />
+                            </div>
+
+
+                            {handleMenu &&
+                                <div className="menu-items">
+                                    {
+                                        user.email === agencyEmail && <p onClick={() => handlePostDelete(_id)}>Delete</p>
+                                    }
+                                </div>
+                            }
                         </div>
+
+
                     </div>
 
                     <div className="upload-img">
@@ -51,9 +86,9 @@ const SingleAgencyPost = ({post}) => {
                     </div>
 
                     <div className="agency-icons d-flex justify-content-around mt-3">
-                        <div className="interested">
+                        {/* <div className="interested">
                             <p><Link><img src={interested} alt="" /><span>interested</span></Link></p>
-                        </div>
+                        </div> */}
 
                         <div className="info">
                             <p><Link to={`/tour-details/${_id}`}><img src={moreInfo} alt="" /><span>More info</span></Link></p>

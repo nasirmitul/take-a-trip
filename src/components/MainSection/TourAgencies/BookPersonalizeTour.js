@@ -66,10 +66,9 @@ const BookPersonalizeTour = () => {
 
     return (
         <div>
-            <div className="recent-event-heading">
-                <h1 className='recent-event-title'>Book a personalize tour from {agencyDetail.agencyName}</h1>
+            <div className="personalize-heading">
+                <h1 className='personalize-title'>Book a personalize tour from <span>{agencyDetail.agencyName}</span></h1>
             </div>
-
             <form className='personalize-tour-form' onSubmit={handlePersonalizeTour}>
                 <input type="text" name='name' placeholder='Enter your Name' defaultValue={user.displayName} required />
                 <input type="email" name='email' placeholder='Enter your Email' defaultValue={user.email} required />
@@ -81,7 +80,7 @@ const BookPersonalizeTour = () => {
                 <input type="text" name='tourDeparture' placeholder='Departure From' required />
                 <input type="text" name='location' placeholder='Where do you want to go' required />
                 <textarea name="description" id="" rows="4" placeholder='others'></textarea>
-                <button type='submit' className='custom-btn'>Personalize Tour</button>
+                <button type='submit' className='custom-btn'>Apply for Tour</button>
             </form>
         </div>
     );

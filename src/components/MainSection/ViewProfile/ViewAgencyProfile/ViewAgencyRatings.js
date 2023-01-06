@@ -74,7 +74,7 @@ const ViewAgencyRatings = () => {
 
         console.log(userReview);
         if (rating < 1) {
-            alert('you need to rate the agency to give a review');
+            return alert('you need to rate the agency to give a review');
         }
 
         fetch(`http://localhost:5000/review/${_id}`, {

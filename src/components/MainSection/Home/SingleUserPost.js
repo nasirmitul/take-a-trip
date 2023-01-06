@@ -11,6 +11,7 @@ import { VscDebugStackframeDot } from 'react-icons/vsc';
 import { AuthContext } from '../../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
+var twelve = require('twentyfour-to-twelve')
 
 const SingleUserPost = ({ post, handleRefetch }) => {
     const { user } = useContext(AuthContext);
@@ -22,6 +23,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
     const [reactCount, setReactCount] = useState(reacts)
     const [checkReact, setCheckReact] = useState(false);
     const [reactActive, setReactActive] = useState(false);
+    const [handleMenu, setHandleMenu] = useState(false)
 
 
     useEffect(() => {
@@ -131,7 +133,8 @@ const SingleUserPost = ({ post, handleRefetch }) => {
             commentator,
             commentatorEmail,
             date: new Date().toUTCString(),
-            time: new Date().toLocaleString()
+            time: new Date().toLocaleString(),
+            commentTime: new Date()
         }
 
         // console.log(commentData);
@@ -154,6 +157,58 @@ const SingleUserPost = ({ post, handleRefetch }) => {
             })
     }
 
+    const handleReport = (id, name, email) => {
+
+        const page = window.location.href;
+        const url = page.toString().concat('post/').concat(id.toString());
+
+        const report = {
+            reportedId: id,
+            name: name,
+            email: email,
+            reportBy: user.displayName,
+            reportByEmail: user.email,
+            reportPostUrl: url,
+            reportCount: 1
+        }
+
+
+        fetch(`http://localhost:5000/post-report`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(report)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    setHandleMenu(false)
+                }
+                console.log(data);
+            })
+    }
+
+    const handleCopyUrl = (id) => {
+        const page = window.location.href;
+        const url = page.toString().concat('post/').concat(id.toString());
+        navigator.clipboard.writeText(url);
+        setHandleMenu(false)
+    }
+
+    const handlePostDelete = (id) => {
+        fetch(`http://localhost:5000/posts/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                handleRefetch();
+            })
+    }
 
     return (
         <div>
@@ -165,12 +220,30 @@ const SingleUserPost = ({ post, handleRefetch }) => {
                         </div>
                         <div className="id-text ms-4">
                             <Link to={`${user?.email === email ? `/profile/timeline` : `/user/${email}`}`}><h6>{name}</h6></Link>
-                            <p>{time.slice(11, 16)}, {time.slice(0, 10)}</p>
+                            <p>{twelve(time.slice(11, 16))}, {time.slice(0, 10)}</p>
                         </div>
                     </div>
-                    <div className="post-menu">
-                        <img src={menu} alt="menu" />
+
+                    <div className="post-menu" >
+
+                        <div className="post-menu-icon" onClick={() => setHandleMenu(!handleMenu)}>
+                            <img src={menu} alt="menu" />
+                        </div>
+
+
+                        {handleMenu &&
+                            <div className="menu-items">
+                                <p onClick={() => handleReport(_id, name, email)}>Report</p>
+                                <p onClick={() => handleCopyUrl(_id)}>Copy Url</p>
+                                {
+                                    user.email === email && <p onClick={() => handlePostDelete(_id)}>Delete</p>
+                                }
+
+                            </div>
+                        }
                     </div>
+
+
                 </div>
 
                 <div className="caption-text" onClick={captionCharCount}>
@@ -178,7 +251,6 @@ const SingleUserPost = ({ post, handleRefetch }) => {
                         captionLength ? caption : `${caption.slice(0, 200)} ...see more`
                     }
                 </div>
-
 
                 <div className="image-slider">
                     <div className='main-slider'>
@@ -202,10 +274,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
                     </div>
                 </div>
 
-
-
                 <div className="react-comment d-flex justify-content-between">
-
 
                     <div className="react">
                         <div className="react-icon" onClick={() => setReactActive(!reactActive)}>
@@ -242,7 +311,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
                                     <Link to={`${user?.email === comment?.commentatorEmail ? `/profile/timeline` : `/user/${comment?.commentatorEmail}`}`}>
                                         <p className="name">{comment?.commentator}
                                             <span className="comment-time">
-                                                {comment?.date?.slice(5, 17)}, {comment?.time?.slice(12, 16)} {comment?.time?.slice(20, 22)}
+                                                {comment?.date?.slice(5, 17)}{/* , {comment?.commentTime && twelve(comment?.commentTime.slice(11, 16))} */}
                                             </span>
                                         </p>
                                     </Link>

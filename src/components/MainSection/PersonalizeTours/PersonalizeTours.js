@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/UserContext';
 import { RxCross2 } from 'react-icons/rx';
+import { Link } from 'react-router-dom';
 
 const PersonalizeTours = () => {
 
@@ -9,6 +10,7 @@ const PersonalizeTours = () => {
 
     const [tourDetail, setTourDetail] = useState(null);
 
+    const [refetch, setRefetch] = useState(false)
     const [cancelTour, setCancelTour] = useState(null)
     const { user } = useContext(AuthContext)
 
@@ -24,7 +26,7 @@ const PersonalizeTours = () => {
                 console.log(data);
                 setPersonalizeTours(data)
             })
-    }, [])
+    }, [refetch])
 
     const handleCheckout = (event) => {
         event.preventDefault();
@@ -53,7 +55,7 @@ const PersonalizeTours = () => {
         }
 
         console.log(makePayment);
-        fetch('http://localhost:5000/payment', {
+        fetch('http://localhost:5000/payment/personalize', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -81,6 +83,7 @@ const PersonalizeTours = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                setRefetch(!refetch)
             })
             .catch(error => console.log(error))
     }
@@ -95,15 +98,81 @@ const PersonalizeTours = () => {
                 personalizeTours.length <= 0 && <p className='no-recent-event'>Looks like you haven't been on any tours yet</p>
             }
 
-            {
-                personalizeTours.map(tour =>
-                    <div key={tour._id}>
-                        <p>{tour._id}</p>
-                        {tour.status && <button onClick={() => { handlePayment(tour) }}>{`pay ${tour.amount}`}</button>}
-                        <button onClick={() => handleCancel(tour)}>Cancel</button>
-                    </div>
-                )
-            }
+            <div className="personalize-tour-dashboard">
+                {
+                    personalizeTours.map(
+                        personalizeTour =>
+                            <div className='personalized-tour-agency-dashboard' key={personalizeTour._id}>
+                                <div className="info-part">
+                                    <div className="info-title">
+                                        <h4>Tour Information</h4>
+                                        <div className="info-row">
+                                            <div className="row-1">
+                                                <p className='info-name'>Agency Name</p>
+                                                <p className='info-data'>{personalizeTour.agencyName}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Agency Email</p>
+                                                <p className='info-data'>{personalizeTour.agencyEmail}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Agency Phone</p>
+                                                <p className='info-data'>{personalizeTour.agencyPhone}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Person</p>
+                                                <p className='info-data'>{personalizeTour.person}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Journey Start</p>
+                                                <p className='info-data'>{personalizeTour.which_day}, {personalizeTour.which_time}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Days</p>
+                                                <p className='info-data'>{personalizeTour.days} days</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Departure</p>
+                                                <p className='info-data'>{personalizeTour.tourDeparture}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Location</p>
+                                                <p className='info-data'>{personalizeTour.location}</p>
+                                            </div>
+                                            <div className="row-1">
+                                                <p className='info-name'>Amount</p>
+                                                <p className='info-data'>{personalizeTour.amount <= 0 ? 'pending' : personalizeTour.amount}</p>
+                                            </div>
+                                        </div>
+                                        <div className="actions">
+                                            {
+                                                personalizeTour.payment ||
+                                                (personalizeTour.status &&
+                                                    <button className="pending" onClick={() => { handlePayment(personalizeTour) }}>{`pay ${personalizeTour.amount}`}</button>)
+                                            }
+                                            {
+                                                personalizeTour.payment || <button onClick={() => handleCancel(personalizeTour)} className='cancel'>cancel</button>
+                                            }
+                                            {
+                                                personalizeTour.payment && <button className="approved">paid</button>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        /* tour =>
+                        <div key={tour._id}>
+                            <p>{tour._id}</p>
+                            {tour.status && <button onClick={() => { handlePayment(tour) }}>{`pay ${tour.amount}`}</button>}
+                            <button onClick={() => handleCancel(tour)}>Cancel</button>
+                        </div> */
+                    ).reverse()
+                }
+            </div>
+
 
 
             <div className={`tour-payment p-3 ${showPayment ? 'show-tour-payment' : 'hide-tour-payment'}`}>

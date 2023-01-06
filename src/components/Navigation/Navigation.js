@@ -8,6 +8,7 @@ import home from '../../icons/home.png'
 import upcomingTours from '../../icons/upcoming tours.png'
 import tourAgencies from '../../icons/tour agencies.png'
 import RecentEvents from '../../icons/recent event.png'
+import personalize from '../../icons/personalize.png'
 import profile from '../../icons/profile.png'
 import createAgency from '../../icons/create agency.png'
 import myAgency from '../../icons/my agency.png'
@@ -54,23 +55,23 @@ const Navigation = () => {
                     <div className="main-menu">
                         <h5 className="menu-heading menu">Menu</h5>
                         <ul>
-                            <NavLink className='link' to='/home'><li><img src={home} alt="" /><p >Home</p></li></NavLink>
-                            <NavLink className='link' to='/upcoming-tours'><li><img src={upcomingTours} alt="" /><p >Upcoming Tours</p></li></NavLink>
-                            <NavLink className='link' to='/tour-agencies'><li><img src={tourAgencies} alt="" /><p >Tour Agencies</p></li></NavLink>
-                            <NavLink className='link' to='/recent-event'><li><img src={RecentEvents} alt="" /><p >My Tours</p></li></NavLink>
+                            <NavLink className='link' to='/home'><li><img className='icon' src={home} alt="" /><p >Home</p></li></NavLink>
+                            <NavLink className='link' to='/upcoming-tours'><li><img className='icon' src={upcomingTours} alt="" /><p >Upcoming Tours</p></li></NavLink>
+                            <NavLink className='link' to='/tour-agencies'><li><img className='icon' src={tourAgencies} alt="" /><p >Tour Agencies</p></li></NavLink>
+                            <NavLink className='link' to='/recent-event'><li><img className='icon' src={RecentEvents} alt="" /><p >My Tours</p></li></NavLink>
 
-                            <NavLink className='link' to='/personalize-tours'><li><img src={RecentEvents} alt="" /><p >Personalize Tours</p></li></NavLink>
+                            <NavLink className='link' to='/personalize-tours'><li><img className='icon' src={personalize} alt="" /><p >Personalize Tours</p></li></NavLink>
 
-                            <NavLink className='link' to='/profile/timeline'><li><img src={profile} alt="" /><p >profile</p></li></NavLink>
+                            <NavLink className='link' to='/profile/timeline'><li><img className='icon' src={profile} alt="" /><p >profile</p></li></NavLink>
                             {
-                                (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
+                                (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img className='icon' src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img className='icon' src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
                             }
                         </ul>
 
                         <h5 className="menu-heading other">Other</h5>
                         <ul>
-                            <NavLink className='link' to='/settings'><li><img src={settings} alt="" /><p  >Settings</p></li></NavLink>
-                            <button onClick={handleSignOut} className='logout-button link' ><li id="logout"><img src={logout} alt="" /><p className='logout-button-color'>Log Out</p></li></button>
+                            <NavLink className='link' to='/settings'><li><img className='icon' src={settings} alt="" /><p  >Settings</p></li></NavLink>
+                            <button onClick={handleSignOut} className='logout-button link' ><li id="logout"><img className='icon' src={logout} alt="" /><p className='logout-button-color'>Log Out</p></li></button>
                         </ul>
 
                         <div className="log-profile d-flex">

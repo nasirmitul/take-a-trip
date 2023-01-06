@@ -23,7 +23,7 @@ const RecentEvents = () => {
             </div>
 
             {
-                recentEvents.length <=0 && <p className='no-recent-event'>Looks like you haven't been on any tours yet</p>
+                recentEvents.length <= 0 && <p className='no-recent-event'>Looks like you haven't been on any tours yet</p>
             }
 
             <div className="all-recent-event">
