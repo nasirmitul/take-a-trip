@@ -11,7 +11,7 @@ const AgencyAbout = () => {
     const { user } = useContext(AuthContext);
     const [agency, setAgency] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/agency-details/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency-details/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

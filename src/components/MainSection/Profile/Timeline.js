@@ -10,7 +10,7 @@ const Timeline = () => {
 
     const [posts, setPost] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/posts/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setPost(data)

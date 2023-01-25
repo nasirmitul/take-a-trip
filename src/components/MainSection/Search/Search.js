@@ -17,7 +17,7 @@ const Search = () => {
         const form = event.target;
         const search = form.search.value;
 
-        fetch(`http://localhost:5000/search?searchData=${search}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/search?searchData=${search}`, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json'

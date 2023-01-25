@@ -18,12 +18,14 @@ const ViewUserProfile = () => {
     const emailLength = location.pathname.length;
     const email = userEmail.slice(6, emailLength)
 
+    window.scrollTo(0, 0);
+
     if (user.email === email) {
         navigate('/profile/timeline')
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user/${email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/user/${email}`)
             .then(res => res.json())
             .then(data => {
                 console.log('user data', data)
@@ -32,7 +34,7 @@ const ViewUserProfile = () => {
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/posts/${email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${email}`)
             .then(res => res.json())
             .then(data => {
                 setPost(data)
@@ -41,7 +43,7 @@ const ViewUserProfile = () => {
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/following/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/following/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log('following data', data);
@@ -73,7 +75,7 @@ const ViewUserProfile = () => {
         }
 
 
-        fetch(`http://localhost:5000/follow/${email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/follow/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -96,7 +98,7 @@ const ViewUserProfile = () => {
             byFollowEmail: email,
         }
 
-        fetch(`http://localhost:5000/unfollow/${email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/unfollow/${email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

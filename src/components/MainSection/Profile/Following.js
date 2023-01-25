@@ -10,7 +10,7 @@ const Following = () => {
 
     const [followings, setFollowings] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/following/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/following/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log('following', data);

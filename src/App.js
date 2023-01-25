@@ -48,13 +48,17 @@ import PendingAgencies from './components/Admin/PendingAgencies';
 import Reports from './components/Admin/Reports';
 import AgencyRevenue from './components/MainSection/MyAgency/AgencyRevenue';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import MyPersonalizeBookedTour from './components/MainSection/RecentEvents/MyPersonalizeBookedTour';
+import RequestTour from './components/MainSection/RequestTour/RequestTour';
+import BidForTour from './components/MainSection/BidForTour/BidForTour';
+import AcceptedTour from './components/MainSection/AcceptedTour/AcceptedTour';
 
 function App() {
 
   const tripRouter = createBrowserRouter([
     {
       path: '/',
-      element: <PrivateRoute><Main></Main></PrivateRoute>,
+      element: <Main></Main>,
       children: [
         {
           path: '/',
@@ -66,38 +70,47 @@ function App() {
         },
         {
           path: '/upcoming-tours',
-          element: <UpComingTours></UpComingTours>
+          element: <PrivateRoute><UpComingTours></UpComingTours></PrivateRoute>
         },
         {
           path: '/tour-details/:id',
-          element: <UpComingTourDetails></UpComingTourDetails>,
+          element: <PrivateRoute><UpComingTourDetails></UpComingTourDetails></PrivateRoute>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/upcoming-tours/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/upcoming-tours/${params.id}`)
           }
         },
 
         {
           path: '/tour-agencies',
-          element: <TourAgencies></TourAgencies>
+          element: <PrivateRoute><TourAgencies></TourAgencies></PrivateRoute>
         },
         {
           path: '/personalize-tour/:id',
-          element: <PersonalizeTour></PersonalizeTour>,
+          element: <PrivateRoute><PersonalizeTour></PersonalizeTour></PrivateRoute>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
           }
         },
         {
           path: '/recent-event',
-          element: <RecentEvents></RecentEvents>
+          element: <PrivateRoute><RecentEvents></RecentEvents></PrivateRoute>
         },
         {
-          path: '/personalize-tours',
-          element: <PersonalizeTours></PersonalizeTours>
+          path: '/personalize-booked-tour',
+          element: <PrivateRoute><MyPersonalizeBookedTour></MyPersonalizeBookedTour></PrivateRoute>
         },
+        {
+          path: '/request-tour',
+          element: <PrivateRoute><RequestTour></RequestTour></PrivateRoute>
+        },
+        {
+          path: '/accepted-tour',
+          element: <PrivateRoute><AcceptedTour></AcceptedTour></PrivateRoute>
+        },
+
         {
           path: '/profile',
-          element: <ProfileLayout></ProfileLayout>,
+          element: <PrivateRoute><ProfileLayout></ProfileLayout></PrivateRoute>,
           children: [
             {
               path: '/profile/timeline',
@@ -119,19 +132,23 @@ function App() {
         },
         {
           path: '/user/:email',
-          element: <ViewUserProfileLayout></ViewUserProfileLayout>
+          element: <PrivateRoute><ViewUserProfileLayout></ViewUserProfileLayout></PrivateRoute>
         },
         {
           path: '/user/:email/about',
-          element: <ViewUserAbout></ViewUserAbout>
+          element: <PrivateRoute><ViewUserAbout></ViewUserAbout></PrivateRoute>
         },
         {
           path: '/create-agency',
-          element: <CreateAgency></CreateAgency>
+          element: <PrivateRoute><CreateAgency></CreateAgency></PrivateRoute>
+        },
+        {
+          path: '/bid-for-tour',
+          element: <PrivateRoute><BidForTour></BidForTour></PrivateRoute>
         },
         {
           path: '/my-agency',
-          element: <AgencyLayout></AgencyLayout>,
+          element: <PrivateRoute><AgencyLayout></AgencyLayout></PrivateRoute>,
           children: [
             {
               path: '/my-agency/agency-timeline',
@@ -158,44 +175,44 @@ function App() {
 
         {
           path: '/agencyProfile/:id',
-          element: <ViewAgencyProfile></ViewAgencyProfile>,
+          element: <PrivateRoute><ViewAgencyProfile></ViewAgencyProfile></PrivateRoute>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
           }
         },
         {
           path: '/agencyProfile/:id/about',
-          element: <ViewAgencyAbout></ViewAgencyAbout>,
+          element: <PrivateRoute><ViewAgencyAbout></ViewAgencyAbout></PrivateRoute>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
           }
         },
         {
           path: '/agencyProfile/:id/ratings',
-          element: <ViewAgencyRatings></ViewAgencyRatings>,
+          element: <PrivateRoute><ViewAgencyRatings></ViewAgencyRatings></PrivateRoute>,
           loader: async ({ params }) => {
-            return fetch(`http://localhost:5000/agencyProfile/${params.id}`)
+            return fetch(`https://take-a-trip-server-sigma.vercel.app/agencyProfile/${params.id}`)
           }
         },
         {
           path: '/settings',
-          element: <Settings></Settings>
+          element: <PrivateRoute><Settings></Settings></PrivateRoute>
         },
         {
           path: '/profile-settings',
-          element: <ProfileSettings></ProfileSettings>
+          element: <PrivateRoute><ProfileSettings></ProfileSettings></PrivateRoute>
         },
         {
           path: '/agency-settings',
-          element: <AgencySettings></AgencySettings>
+          element: <PrivateRoute><AgencySettings></AgencySettings></PrivateRoute>
         },
         {
           path: '/menu',
-          element: <Navigation></Navigation>
+          element: <PrivateRoute><Navigation></Navigation></PrivateRoute>
         },
         {
           path: '/notification',
-          element: <Notifications></Notifications>
+          element: <PrivateRoute><Notifications></Notifications></PrivateRoute>
         }
 
       ]

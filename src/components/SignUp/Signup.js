@@ -9,6 +9,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 
 import { getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
+import { toast } from 'react-hot-toast';
 const auth = getAuth();
 
 const Signup = () => {
@@ -88,7 +89,7 @@ const Signup = () => {
                 }
 
                 console.log(createUser);
-                fetch('http://localhost:5000/users', {
+                fetch('https://take-a-trip-server-sigma.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -99,10 +100,11 @@ const Signup = () => {
                     .then(data => {
                         console.log(data)
                         if (data.acknowledged) {
-                            alert("Account Created")
+                            toast.success("Account Created")
                         }
                     })
                     .catch(error => console.log(error))
+                    
                 emailVerify();
             })
             .catch(error => {
@@ -151,7 +153,7 @@ const Signup = () => {
 
                 console.log(createUser);
                 <Navigate to='/'></Navigate>
-                fetch('http://localhost:5000/users', {
+                fetch('https://take-a-trip-server-sigma.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -163,10 +165,11 @@ const Signup = () => {
                         console.log(data)
                         
                         if (data.acknowledged) {
-                            alert("Account Created")
+                            toast.success("Account Created")
                         }
                     })
                     .catch(error => console.log(error))
+                    navigate('/');
 
                 
             }).catch((error) => {

@@ -18,7 +18,7 @@ const ViewUserAbout = () => {
 
     const [userAbout, setUserAbout] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/user-profile/${email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/user-profile/${email}`)
             .then(res => res.json())
             .then(data => {
                 console.log('data', data);

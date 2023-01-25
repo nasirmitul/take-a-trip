@@ -9,7 +9,7 @@ const Followers = () => {
 
     const [followers, setFollowers] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/follower/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/follower/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log('followers', data);

@@ -9,7 +9,7 @@ const AgencyTimeline = () => {
     const [refetch, setRefetch] = useState(false);
     const [posts, setPost] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/agency/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setPost(data)
@@ -18,7 +18,7 @@ const AgencyTimeline = () => {
     }, [refetch])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/createAgency?agencyEmail=${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user.email}`)
             .then(res => {
                 return res.json()
             })

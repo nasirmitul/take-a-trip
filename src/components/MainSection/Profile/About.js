@@ -13,7 +13,7 @@ const About = () => {
     const [handleSocial, setHandleSocial] = useState(false);
     const [refetch, setRefetch] = useState(false)
     useEffect(() => {
-        fetch(`http://localhost:5000/user-profile/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/user-profile/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -28,7 +28,7 @@ const About = () => {
 
         const bio = form.bio.value;
 
-        fetch(`http://localhost:5000/addbio/${user.email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/addbio/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -63,7 +63,7 @@ const About = () => {
             twitter
         }
 
-        fetch(`http://localhost:5000/addsocial/${user.email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/addsocial/${user.email}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

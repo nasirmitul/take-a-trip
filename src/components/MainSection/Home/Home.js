@@ -25,6 +25,7 @@ const Home = () => {
     const [uploading, setUploading] = useState(false);
     const navigate = useNavigate();
 
+    
 
     const handleAddImage = (event) => {
         const selectedImage = event.target.files;
@@ -87,7 +88,7 @@ const Home = () => {
                             }
 
                             console.log(createPost);
-                            fetch('http://localhost:5000/posts', {
+                            fetch('https://take-a-trip-server-sigma.vercel.app/posts', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'
@@ -123,7 +124,7 @@ const Home = () => {
     /* const { data: posts = [], refetch } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/posts');
+            const res = await fetch('https://take-a-trip-server-sigma.vercel.app/posts');
             const data = await res.json();
             return data;
         }
@@ -131,7 +132,7 @@ const Home = () => {
 
     const [posts, setPosts] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/posts')
+        fetch('https://take-a-trip-server-sigma.vercel.app/posts')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -141,6 +142,10 @@ const Home = () => {
 
     const handleRefetch = () => {
         setRefetch(!refetch);
+    }
+
+    if(!user){
+        return navigate('/signin')
     }
 
     return (

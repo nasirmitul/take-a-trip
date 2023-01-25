@@ -8,14 +8,15 @@ import going from '../../../icons/going.png'
 import moreInfo from '../../../icons/more info.png'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
+var twelve = require('twentyfour-to-twelve');
 
 const SingleAgencyPost = ({ post, handleRefetch }) => {
-    const {user} = useContext(AuthContext);
-    const { _id, agencyName,agencyEmail, agencyProfile, time, image, tourTripDate, tourTripTime, locationName, details } = post;
+    const { user } = useContext(AuthContext);
+    const { _id, agencyName, agencyEmail, agencyProfile, time, image, tourTripDate, tourTripTime, locationName, details } = post;
     const [handleMenu, setHandleMenu] = useState(false)
 
     const handlePostDelete = (id) => {
-        fetch(`http://localhost:5000/agency-post/${id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency-post/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -80,7 +81,7 @@ const SingleAgencyPost = ({ post, handleRefetch }) => {
                         </div>
                     </div>
                     <div className="agency-text">
-                        <p id="time">{tourTripDate} at {tourTripTime}</p>
+                        <p id="time">{tourTripDate} at {twelve(tourTripTime)}</p>
                         <h4>{locationName}</h4>
                         <p>{details}</p>
                     </div>

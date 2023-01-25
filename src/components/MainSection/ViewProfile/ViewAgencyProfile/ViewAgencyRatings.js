@@ -23,7 +23,7 @@ const ViewAgencyRatings = () => {
     const { _id, agencyEmail } = agencyRatingsData;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user/tours/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/user/tours/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -75,10 +75,10 @@ const ViewAgencyRatings = () => {
 
         console.log(userReview);
         if (rating < 1) {
-            return alert('you need to rate the agency to give a review');
+            return toast.error('you need to rate the agency to give a review');
         }
 
-        fetch(`http://localhost:5000/review/${_id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/review/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -97,7 +97,7 @@ const ViewAgencyRatings = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/agency/reviews/${agencyEmail}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency/reviews/${agencyEmail}`)
             .then(res => res.json())
             .then(data => {
                 setReviews(data)

@@ -113,6 +113,20 @@ input:read-only {
     font-weight: 500;
 }
 
+.cancel-button {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 2px solid var(--error);
+    background: transparent;
+    color: var(--error);
+    transition: .4s !important;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* ============== Scrollbar Design ================ */
 
 ::-webkit-scrollbar {
@@ -143,7 +157,7 @@ input:read-only {
     align-items: center;
 }
 
-.processing{
+.processing {
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -155,7 +169,7 @@ input:read-only {
     position: relative;
 }
 
-.processing .processing-loader{
+.processing .processing-loader {
     position: absolute;
     top: 50px;
     height: 100px;
@@ -704,7 +718,7 @@ nav a .logo {
 #left-part .menu-part .menu-heading {
     font-size: 1.2rem;
     font-weight: 500;
-    margin-bottom: 20px !important;
+    margin-bottom: 10px !important;
     color: var(--text-color);
 }
 
@@ -739,7 +753,7 @@ nav a .logo {
 }
 
 #left-part .other {
-    margin-top: 48px !important;
+    margin-top: 25px !important;
 }
 
 .logout-button {
@@ -2862,6 +2876,127 @@ nav a .logo {
     }
 }
 
+/* ================================ Request tour  ================================ */
+.add-request {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: var(--primary);
+    color: var(--white);
+    transition: .4s !important;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    gap: 10px;
+    width: 100%;
+}
+
+.add-request .plus-icon {
+    font-size: 1.3rem;
+}
+
+.all-bids {
+    position: absolute;
+    left: 50%;
+    top: 140px;
+    transform: translateX(-50%);
+    background: var(--white);
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid var(--white-30);
+    box-shadow: var(--box-shadow);
+    width: min(700px, 90%);
+    height: fit-content;
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
+}
+
+.all-bids .bid-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px !important;
+}
+
+.all-bids .bid-heading p{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.all-bids .bid-heading .cancel{
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.all-bids .bids {
+    padding: 10px;
+    border: 1px solid var(--green);
+    margin-bottom: -1px !important;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+.all-bids .bids .agency-profile img {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.all-bids .bids .agency-name-email .name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.all-bids .bids .agency-name-email .email {
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.all-bids .bids .amount .number {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 10px;
+    color: var(--primary);
+}
+
+.all-bids .bids .amount{
+    position: absolute;
+    right: 125px;
+}
+
+.all-bids .bids .actions {
+    position: absolute;
+    right: 10px;
+}
+
+.all-bids .bids .actions .approve-button {
+    background: var(--primary);
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: var(--white);
+    border: none;
+    outline: none;
+}
+
+.countDown{
+    color: var(--error);
+    margin-bottom: 10px !important;
+    font-size: .8rem;
+}
+
 /* ================================ User Profile Part  ================================ */
 .user-profile .profile-header {
     background: var(--white);
@@ -3617,7 +3752,7 @@ nav a .logo {
 
 
 /* Error Page */
-.error-page{
+.error-page {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -3625,7 +3760,7 @@ nav a .logo {
     align-items: center;
 }
 
-.error-page .error-message{
+.error-page .error-message {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3633,7 +3768,7 @@ nav a .logo {
 }
 
 
-.error-page .error-message h1{
+.error-page .error-message h1 {
     font-size: 4rem;
     font-weight: 700;
     color: var(--text-color);
@@ -3641,16 +3776,28 @@ nav a .logo {
 }
 
 
-.error-page .error-message p{
+.error-page .error-message p {
     font-size: .9rem;
     color: var(--gray);
     font-weight: 500;
     margin-bottom: 20px !important;
 }
 
-.error-page .error-message a{
+.error-page .error-message a {
     color: var(--primary);
     font-weight: 500;
     font-size: 1rem;
     text-decoration: underline;
+}
+
+
+
+
+
+/* input type time and date */
+
+#timepicker:before {
+    content: 'Time:';
+    margin-right: .6em;
+    color: #9d9d9d;
 }

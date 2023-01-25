@@ -41,7 +41,7 @@ const AgencyDetailModal = ({ agencyDetail, closeAgencyModal }) => {
                 </div>
 
                 <div className="reviews">
-                    <AiFillStar className='star'></AiFillStar><p>4.2<span>/5</span></p>
+                    <AiFillStar className='star'></AiFillStar><p>0<span>/5</span></p>
                 </div>
 
                 <div className="actions">

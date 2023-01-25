@@ -8,7 +8,7 @@ const AgencyRatings = () => {
     const [reviews, setReviews] = useState([])
     const [totalRating, setTotalRating] = useState(0)
     useEffect(() => {
-        fetch(`http://localhost:5000/agency/reviews/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency/reviews/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setReviews(data)

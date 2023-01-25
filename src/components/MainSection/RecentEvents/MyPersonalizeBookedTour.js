@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/UserContext';
 import { RxCross2 } from 'react-icons/rx';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
 
-const PersonalizeTours = () => {
+const MyPersonalizeBookedTour = () => {
 
     const [personalizeTours, setPersonalizeTours] = useState([])
     const [showPayment, setShowPayment] = useState(false);
@@ -93,7 +93,12 @@ const PersonalizeTours = () => {
     return (
         <div>
             <div className="recent-event-heading">
-                <h1 className='recent-event-title'>Personalize Tours</h1>
+                <h1 className='recent-event-title'>My Tours</h1>
+            </div>
+
+            <div className="dashboard-navigation">
+                <Link to='/recent-event'>My Tours</Link>
+                <Link className='active' to='/personalize-booked-tour'>Personalize Booked Tours</Link>
             </div>
 
             {
@@ -255,4 +260,4 @@ const PersonalizeTours = () => {
     );
 };
 
-export default PersonalizeTours;
+export default MyPersonalizeBookedTour;

@@ -48,7 +48,7 @@ const BookPersonalizeTour = () => {
             amount: 0
         }
 
-        fetch(`http://localhost:5000/personalized-tours`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/personalized-tours`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

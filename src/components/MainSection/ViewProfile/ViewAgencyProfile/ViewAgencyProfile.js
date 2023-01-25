@@ -9,7 +9,7 @@ const ViewAgencyProfile = () => {
 
     const [posts, setPost] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/agency/${agencyEmail}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency/${agencyEmail}`)
             .then(res => res.json())
             .then(data => {
                 setPost(data)

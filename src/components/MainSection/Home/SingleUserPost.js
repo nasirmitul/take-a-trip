@@ -46,7 +46,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
     const addReact = () => {
         setReactCount(reactCount + 1);
 
-        fetch(`http://localhost:5000/post_react_add/${_id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react_add/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -62,7 +62,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
     const removeReact = () => {
         setReactCount(reactCount - 1);
 
-        fetch(`http://localhost:5000/post_react_remove/${_id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/post_react_remove/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -140,7 +140,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
 
         // console.log(commentData);
 
-        fetch(`http://localhost:5000/posts/${_id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -174,7 +174,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
         }
 
 
-        fetch(`http://localhost:5000/post-report`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/post-report`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -200,7 +200,7 @@ const SingleUserPost = ({ post, handleRefetch }) => {
     }
 
     const handlePostDelete = (id) => {
-        fetch(`http://localhost:5000/posts/${id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/posts/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'

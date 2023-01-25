@@ -12,7 +12,7 @@ const UpComingTour = ({ upComingTour }) => {
 
     const [totalAgencyRating, setTotalAgencyRating] = useState(0)
     useEffect(() => {
-        fetch(`http://localhost:5000/agency-info/${agencyEmail}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency-info/${agencyEmail}`)
         .then(res=>res.json())
         .then(data => {
             console.log(data);

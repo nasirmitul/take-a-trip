@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCheckCircle } from "react-icons/fa";
+import { toast } from 'react-hot-toast';
 
 const PaymentSuccess = () => {
     const location = useLocation();
@@ -15,7 +16,7 @@ const PaymentSuccess = () => {
     const [paySuccess, setPaySuccess] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/payment/success/${transactionId}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/payment/success/${transactionId}`)
             .then(res => res.json())
             .then(data => {
                 console.log('data', data);
@@ -28,7 +29,7 @@ const PaymentSuccess = () => {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(id);
-        alert('id copied');
+        toast.success('id copied');
     }
     
     const handlePrint = () =>{

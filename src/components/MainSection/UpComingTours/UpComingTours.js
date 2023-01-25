@@ -6,7 +6,7 @@ const UpComingTours = () => {
     const [upComingTourData, setUpComingTourData] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/upcomingTours`
+        const url = `https://take-a-trip-server-sigma.vercel.app/upcomingTours`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -101,6 +101,9 @@ const UpComingTours = () => {
                     <p>Upcoming Tours for you</p>
                 </div>
                 <div className="filter-search">
+                    <div className="filter-data">
+                        <button>filter</button>
+                    </div>
                     <div className="filter">
                         <select name='filteredData' onChange={e => setSort(e.target.value)}>
                             <option value="default">Default</option>

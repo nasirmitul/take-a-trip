@@ -7,6 +7,7 @@ import hide from '../../icons/hide.svg'
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
+import { toast } from 'react-hot-toast';
 
 const SignIn = () => {
     /* getting data while navigation from forget pass to this component*/
@@ -43,7 +44,7 @@ const SignIn = () => {
                 }
                 console.log("currentUser", currentUser);
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://take-a-trip-server-sigma.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -88,6 +89,7 @@ const SignIn = () => {
                     profile: user.photoURL,
                     time: new Date(),
                     gender: 'N/A',
+                    role: 'user',
                     followers: [],
                     following: [],
                     tours: [],
@@ -99,7 +101,7 @@ const SignIn = () => {
                 }
 
                 console.log(createUser);
-                fetch('http://localhost:5000/users', {
+                fetch('https://take-a-trip-server-sigma.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -110,7 +112,7 @@ const SignIn = () => {
                     .then(data => {
                         console.log(data)
                         if (data.acknowledged) {
-                            alert("Account Created")
+                            toast.success("Account Created")
                         }
                     })
                     .catch(error => console.log(error))

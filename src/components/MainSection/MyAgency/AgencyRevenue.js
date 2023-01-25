@@ -6,7 +6,7 @@ const AgencyRevenue = () => {
     const { user } = useContext(AuthContext)
     const [agencyRevenues, setAgencyRevenue] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/agency-revenue/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency-revenue/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setAgencyRevenue(data)

@@ -15,7 +15,7 @@ const UpComingTourDetails = () => {
 
     const [totalAgencyRating, setTotalAgencyRating] = useState(0)
     useEffect(() => {
-        fetch(`http://localhost:5000/agency-info/${agencyEmail}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/agency-info/${agencyEmail}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -68,7 +68,7 @@ const UpComingTourDetails = () => {
         }
 
         console.log(makePayment);
-        fetch('http://localhost:5000/payment', {
+        fetch('https://take-a-trip-server-sigma.vercel.app/payment', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -114,7 +114,7 @@ const UpComingTourDetails = () => {
         if (completed) {
 
 
-            fetch(`http://localhost:5000/update-time/${_id}`, {
+            fetch(`https://take-a-trip-server-sigma.vercel.app/update-time/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -131,7 +131,7 @@ const UpComingTourDetails = () => {
         } else {
             return (
                 <span>
-                    {days} days {hours} hours {minutes} minute {seconds} seconds left
+                    {days} d {hours} h {minutes} m {seconds} s left
                 </span>
             );
         }

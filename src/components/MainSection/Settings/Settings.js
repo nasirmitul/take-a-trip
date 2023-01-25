@@ -8,7 +8,7 @@ const Settings = () => {
     const navigate = useNavigate();
 
     const handleAgencyDelete = () => {
-        fetch(`http://localhost:5000/deleteAgency/${user.email}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/deleteAgency/${user.email}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

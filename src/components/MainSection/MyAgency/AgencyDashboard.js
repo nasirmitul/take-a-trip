@@ -10,7 +10,7 @@ const AgencyDashboard = () => {
     const [refetch, setRefetch] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/personalized-tours/agency/${user.email}`)
+        fetch(`https://take-a-trip-server-sigma.vercel.app/personalized-tours/agency/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -31,7 +31,7 @@ const AgencyDashboard = () => {
         const form = e.target;
         const amount = form.amount.value;
 
-        fetch(`http://localhost:5000/personalized-tours/${tourData._id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/personalized-tours/${tourData._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

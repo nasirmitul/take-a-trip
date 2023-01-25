@@ -22,6 +22,10 @@ const Navigation = () => {
     const navigate = useNavigate();
     const { userSignOut, user } = useContext(AuthContext);
 
+    const [agencyActive, setAgencyActive] = useState(false);
+    const [refetch, setRefetch] = useState(false);
+    const [refetch2, setRefetch2] = useState(false);
+
     const handleSignOut = () => {
         userSignOut()
             .then(() => {
@@ -32,13 +36,45 @@ const Navigation = () => {
             })
     }
 
+    console.log('uu', user.email);
+
+    useEffect(() => {
+        if(user.email){
+            setRefetch2(!refetch2)
+        }
+    }, [])
+
 
     const [agency, setAgency] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/createAgency?agencyEmail=${user?.email}`)
+        console.log('in effect', user.email);
+        fetch(`https://take-a-trip-server-sigma.vercel.app/createAgency?agencyEmail=${user.email}`)
             .then(res => res.json())
-            .then(data => setAgency(data))
+            .then(data => {
+                console.log('logging', data[0]);
+                setAgency(data)
+            })
+    }, [user])
+
+    console.log('agency email up', agency[0]?.agencyEmail);
+
+    useEffect(() => {
+        if (agency[0]?.agencyEmail === user?.email) {
+            console.log('agency email', agency[0]?.agencyEmail);
+            setAgencyActive(true)
+        }
+        else {
+            setAgencyActive(false)
+        }
+    })
+
+    useEffect(() => {
+        if (user.email === undefined) {
+            setRefetch(!refetch)
+        }
     }, [])
+
+
 
     // console.log("agency from navigation", agency[0]?.agencyEmail);
 
@@ -60,13 +96,32 @@ const Navigation = () => {
                             <NavLink className='link' to='/tour-agencies'><li><img className='icon' src={tourAgencies} alt="" /><p >Tour Agencies</p></li></NavLink>
                             <NavLink className='link' to='/recent-event'><li><img className='icon' src={RecentEvents} alt="" /><p >My Tours</p></li></NavLink>
 
-                            <NavLink className='link' to='/personalize-tours'><li><img className='icon' src={personalize} alt="" /><p >Personalize Tours</p></li></NavLink>
+                            <NavLink className='link' to='/request-tour'><li><img className='icon' src={personalize} alt="" /><p >Request Tour</p></li></NavLink>
 
                             <NavLink className='link' to='/profile/timeline'><li><img className='icon' src={profile} alt="" /><p >profile</p></li></NavLink>
+
+
                             {
-                                (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img className='icon' src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img className='icon' src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
+                                agencyActive || <NavLink className='link' to='/create-agency'><li><img className='icon' src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
                             }
+
+                            {/* {
+                                (agency[0]?.agencyEmail === user?.email) ? <NavLink className='link' to='/my-agency/agency-timeline'><li><img className='icon' src={myAgency} alt="" /><p >My Agency</p></li></NavLink> : <NavLink className='link' to='/create-agency'><li><img className='icon' src={createAgency} alt="" /><p >Create Agency</p></li></NavLink>
+                            } */}
+
                         </ul>
+
+                        {
+                            agencyActive && <>
+                                <h5 className="menu-heading other">Agency</h5>
+                                <ul>
+                                    <NavLink className='link' to='/my-agency/agency-timeline'><li><img className='icon' src={myAgency} alt="" /><p >My Agency</p></li></NavLink>
+                                    <NavLink className='link' to='/bid-for-tour'><li><img className='icon' src={personalize} alt="" /><p >Bid For Tour</p></li></NavLink>
+                                </ul>
+                            </>
+                        }
+
+
 
                         <h5 className="menu-heading other">Other</h5>
                         <ul>

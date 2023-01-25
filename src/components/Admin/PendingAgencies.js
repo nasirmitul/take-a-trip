@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
 const PendingAgencies = () => {
@@ -7,7 +8,7 @@ const PendingAgencies = () => {
     const [refetch, setRefetch] = useState(false);
     const { user } = useContext(AuthContext)
     useEffect(() => {
-        fetch('http://localhost:5000/all-agency')
+        fetch('https://take-a-trip-server-sigma.vercel.app/all-agency')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -16,7 +17,7 @@ const PendingAgencies = () => {
     }, [refetch])
 
     const handleCancel = (id) => {
-        fetch(`http://localhost:5000/delete-agency/${id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/delete-agency/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -25,12 +26,13 @@ const PendingAgencies = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                toast.error('agency Removed')
                 setRefetch(!refetch)
             })
     }
 
     const handleApprove = (id) => {
-        fetch(`http://localhost:5000/approve-agency/${id}`, {
+        fetch(`https://take-a-trip-server-sigma.vercel.app/approve-agency/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -40,6 +42,7 @@ const PendingAgencies = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                toast.success('agency approved')
                 setRefetch(!refetch);
             })
     }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const Reports = () => {
     const [reports, setReports] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/all-reports')
+        fetch('https://take-a-trip-server-sigma.vercel.app/all-reports')
             .then(res => res.json())
             .then(data => {
                 setReports(data)
